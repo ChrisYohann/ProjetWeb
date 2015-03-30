@@ -1,0 +1,29 @@
+body {
+    padding-top: 80px;
+}
+
+section {
+    padding-left: 80px;
+}
+
+aside {
+    margin-right: 80px;
+    border-style:solid;
+    margin-bottom: 100px;
+    padding-bottom: 10px;
+}
+
+footer {
+    margin-top:35px;
+    text-align: center;
+}
+
+footer img {
+    margin-top:20px;
+    margin-right: 10px;
+    position: relative;
+}
+
+h1.Spect {
+    margin-top: -10px;
+}
