@@ -44,3 +44,7 @@ article artSpect {
 article img {
     border-style:solid;
 }
+
+label {
+    margin-top: 40px;
+}
