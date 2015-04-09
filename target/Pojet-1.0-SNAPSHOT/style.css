@@ -26,4 +26,30 @@ footer img {
 
 h1.Spect {
     margin-top: -10px;
+    margin-left: 70px;
+}
+
+article{
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+article artSpect {
+    padding-bottom: 15px;
+    padding-top:  15px;
+    border-top-style:ridge;
+    border-top-color:#31708f;
+}
+
+article img {
+    border-style:solid;
+}
+
+label {
+    margin-top: 20px;
+}
+
+
+#seCo {
+    padding-top: 40px;
 }
