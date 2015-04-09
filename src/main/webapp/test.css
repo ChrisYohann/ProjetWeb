@@ -1,0 +1,5 @@
+.TPL_AGENDATHEATRELISTE ul {margin:0;}
+.TPL_AGENDATHEATRELISTE li {padding:0; background:none;}
+.TPL_AGENDATHEATRELISTE li.case {float:left; width:22%; padding:1%; height:270px; margin-top:10px; font-size:90%; border-right:none;}
+.TPL_AGENDATHEATRELISTE h3 a {color:#000; text-decoration:none;}
+.TPL_AGENDATHEATRELISTE li li {color:#cf0039; font-weight:bold;}
