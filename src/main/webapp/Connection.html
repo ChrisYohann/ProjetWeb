@@ -31,13 +31,13 @@ and open the template in the editor.
             
             <div class="col-md-offset-1 col-md-4">
                 <div id="seCo">
-                <form class="well" method="post" action="customerCo">
+                <form class="well" method="post" action="CustomerCo">
                 
                     <legend>Bonjour, comment allez vous?</legend>
                     <div class="form-group">
                     
-                    <label  for="mail">e-mail</label> : 
-                    <input class="form-control" type="email" name="mail" id="mail" size="25" 
+                    <label  for="login">Login</label> : 
+                    <input class="form-control" type="text" name="login" id="login" size="25" 
                            maxlength="20" required/>
                     
                     <label  for="mdp">Mot de passe</label> : 
@@ -45,10 +45,12 @@ and open the template in the editor.
                            maxlength="20" required/>
                     
                     <br>
-                    <div class="col-md-offset-5">
-                    <input class="btn btn-primary" type="submit" value="Se Connecter" />
+                    <div class="col-md-offset-3">
+                    <input id="bout" class="btn btn-primary" type="submit" value="Se Connecter" />
                     <br>
                     </div>
+                    <br>
+                    <a href="MotDePasseOublie.html">Mot de passe oublié</a>
                     </div>
             </form>
             </div>
@@ -67,13 +69,17 @@ and open the template in the editor.
                     <input class="form-control" type="text" name="prenom" id="prenom" size="25" 
                            maxlength="20" required/>
                     
+                    <label  for="login">Login</label> : 
+                    <input class="form-control" type="text" name="login" id="login" size="25" 
+                           maxlength="20" required/>
+                    
                     <label  for="mdp">Mot de passe</label> : 
                     <input  class="form-control" type="password" name="mdp" id="mdp" size="25" 
                            maxlength="20" required/>
                     
                     <label  for="mail">e-mail</label> : 
                     <input class="form-control" type="email" name="mail" id="mail" size="25" 
-                           maxlength="20" required/>
+                           maxlength="20"/>
                     <br>
                     <div class="col-md-offset-5">
                     <input class="btn btn-primary" type="submit" value="Envoyer" />
