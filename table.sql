@@ -15,32 +15,34 @@ CREATE TABLE utilisateur (
 	login varchar(30) primary key, 
 	nomUt varchar(30) NOT NULL, 
 	prenomUt varchar(30) NOT NULL, 
-	@Ut varchar(50), 
+	AdresseUt varchar(50), 
 	mdpUt varchar(20) NOT NULL);
 
 CREATE TABLE programmeur( 
 	login varchar(30) primary key, 
 	nomUt varchar(30) NOT NULL, 
 	prenomUt varchar(30) NOT NULL, 
-	@Ut varchar(50), 
+	AdresseUt varchar(50), 
 	mdpUt varchar(20) NOT NULL);
 
 CREATE TABLE client( 
 	login varchar(30) primary key, 
 	nomUt varchar(30) NOT NULL, 
 	prenomUt varchar(30) NOT NULL, 
-	@Ut varchar(50), 
+	AdresseUt varchar(50), 
 	mdpUt varchar(20) NOT NULL);
 
 CREATE TABLE dossier ( 
 	numDossier int primary key check(numDossier>0));
 	
 CREATE TABLE ticket( 
-	numTicket int primary key check(numTicket>0), 
-	numDossier int references dossier ON DELETE CASCADE check(numDossier>0));
+	numTicket int primary key check(numTicket>0),
+        numDossier int check(numDossier>0), 
+	foreign key (numDossier) references dossier(numDossier) ON DELETE CASCADE );
 
 CREATE TABLE rang ( 
-	numSalle int references salle ON DELETE CASCADE check(0<numSalle and numSalle<4),
-	numRang int check(0<numRang and numRang<11),
-	PRIMARY KEY (numSalle, numRang));
+	numSalle int references salle(numSalle) ON DELETE CASCADE,
+	numRang int,
+	PRIMARY KEY (numSalle, numRang),
+        CONSTRAINT chk_salle CHECK (0<numSalle and numSalle<4 and numRang>0 and numRang<11));
 	
