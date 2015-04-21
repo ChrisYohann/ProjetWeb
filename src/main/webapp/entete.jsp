@@ -18,7 +18,7 @@
             </div>
             <ul class="nav navbar-nav">
                 <li ><a href="index.html">Accueil</a></li>
-                <li><a href="Spectacle.html">Spectacle</a></li>
+                <li><a href="Spectacle.jsp">Spectacle</a></li>
                 <li><a href="Calendrier.html">Calendrier</a></li>
                 <li><a href="Information.html">Information</a></li>
                 <li><img src="image/gestion-du-panier.jpg"/>
