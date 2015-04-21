@@ -47,3 +47,4 @@ CREATE TABLE rang (
         CONSTRAINT chk_salle CHECK (0<numSalle and numSalle<4 and numRang>0 and numRang<11));
 	
 INSERT INTO utilisateur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES ('root', 'root',  'root', '', 'root');
+INSERT INTO utilisateur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES ('yohann', 'hako',  'root', '', 'root');

@@ -23,11 +23,18 @@
                 <li><a href="Information.html">Information</a></li>
                 <li><img src="image/gestion-du-panier.jpg"/>
             </ul>
-          
-            <%--${empty utilisateur.login ? "<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Connection.html\">Se Connecter</a></p>" : "Bonjour, ${utilisateur.login}"}--%>
-           
             
-           <p class="navbar-text navbar-right"><a class="navbar-link " href="Connection.jsp">Se Connecter</a></p>
+            <%-- Elle a le même effet que le code Java suivant : --%>
+        <% 
+        beans.UtilisateurCoBean utilisateur = (beans.UtilisateurCoBean) request.getAttribute( "utilisateur" ); 
+           if(utilisateur != null){
+            out.print("<p class=\"navbar-text navbar-right\">Bonjour, "+utilisateur.getLogin()+"</p>");
+            out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Logout.jsp\">Deconnexion</a></p>"); 
+           }else
+            out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Connection.jsp\">Se Connecter</a></p>");                 
+        %>
+            
+            
         </nav>
     </body>
 </html>

@@ -24,6 +24,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(urlPatterns = {"/CustomerCo"})
 public class ControleurCo extends HttpServlet {
+   
     
         private static final String ATT_DAO_MANAGER = "daomanager";
         public static final String USER         = "utilisateur";
@@ -37,7 +38,7 @@ public class ControleurCo extends HttpServlet {
       @Override
     public void init(){
         this.utilisateur = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getUtilisateurCoDao();
-      
+        
      }
     
     
@@ -63,9 +64,10 @@ public class ControleurCo extends HttpServlet {
                 request.getServletContext().getRequestDispatcher(VUE_FAILED).forward(request, response);
                  
            }
-            session1 = request.getSession(true);
+            else {session1 = request.getSession(true);
             session1.setAttribute(USER, user);
-            request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+            request.setAttribute("pseudo", user.getLogin());
+           request.getServletContext().getRequestDispatcher(VUE).forward(request, response);}
      
      
      

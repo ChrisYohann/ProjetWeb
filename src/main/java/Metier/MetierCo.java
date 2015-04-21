@@ -31,7 +31,7 @@ public class MetierCo {
 
     UtilisateurCoBean utilisateur = new UtilisateurCoBean();
     try {
-        this.utilisateurdao.trouver(user, pass);
+        utilisateur = this.utilisateurdao.trouver(user, pass);
         }
      catch ( DAOException e ) {
         String resultat = "Échec de connexion. Mot de passe incorrect.";

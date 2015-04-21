@@ -39,6 +39,8 @@ public class DAOManager {
     }
     
     public static DAOManager getInstance() throws DAOConfigurationException{
+        
+       /* 
         Properties properties = new Properties();
         String url ;
         String driver ;
@@ -61,18 +63,29 @@ public class DAOManager {
         }
         catch(IOException e){
             throw new DAOConfigurationException("Le fichier de configuration est impossible à charger. Erreur de syntaxe");
+        }*/
+        
+        try{ 
+            Class.forName("com.mysql.jdbc.Driver");
+           
         }
+        catch ( ClassNotFoundException e ) {
+    /* Gérer les éventuelles erreurs ici. */
+}      
+        String url = "jdbc:mysql://127.0.0.1:3306/bdd_projet";
+        String utilisateur = "root" ;
+        String password = "190692";
         
         //Chargement du Driver
         
-        try{
+       /* try{
             Class.forName(driver) ;
         }
         catch(ClassNotFoundException e){
             throw new DAOConfigurationException("Le driver est introuvable");
-        }
+        }*/
         
-        DAOManager manager = new DAOManager(url,identifiant,motdepasse);
+        DAOManager manager = new DAOManager(url,utilisateur,password);
         return manager ;
               
     }

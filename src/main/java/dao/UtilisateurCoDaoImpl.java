@@ -43,7 +43,7 @@ public class UtilisateurCoDaoImpl implements UtilisateurCoDao {
         preparedStatement = initRequete( connexion, SQL_FIND_LOGIN, false, login,password );
         resultSet = preparedStatement.executeQuery();//On recherche le login dans la table 
         if ( resultSet.next() ) { //Si l'utilisateur est dans la table avec le bon mot de passe, on lui crée le Bean associé 
-            utilisateur = link( resultSet );
+            utilisateur = this.link( resultSet );
         }
     } catch ( SQLException e ) {
         throw new DAOException( e );
@@ -58,7 +58,7 @@ public class UtilisateurCoDaoImpl implements UtilisateurCoDao {
     
     UtilisateurCoBean utilisateur = new UtilisateurCoBean();
     utilisateur.setLogin( resultSet.getString( "login" ) );
-    utilisateur.setPassword( resultSet.getString( "password" ) );
+    utilisateur.setPassword( resultSet.getString( "mdpUt" ) );
   
     return utilisateur;
     }
