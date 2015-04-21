@@ -24,7 +24,7 @@ public class InitDAOManager implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext servletContext = sce.getServletContext();
         /* Instanciation du Manager*/
-        this.manager = manager.getInstance();
+        this.manager = DAOManager.getInstance();
         /* Enregistrement dans un attribut ayant pour portée toute l'application */
         servletContext.setAttribute( ATT_DAO_MANAGER, this.manager);
     }

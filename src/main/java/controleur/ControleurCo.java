@@ -36,8 +36,8 @@ public class ControleurCo extends HttpServlet {
     
       @Override
     public void init(){
-         this.utilisateur = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getUtilisateurCoDao();
-         
+        this.utilisateur = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getUtilisateurCoDao();
+      
      }
     
     
