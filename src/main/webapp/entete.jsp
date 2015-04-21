@@ -27,7 +27,7 @@
             <%--${empty utilisateur.login ? "<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Connection.html\">Se Connecter</a></p>" : "Bonjour, ${utilisateur.login}"}--%>
            
             
-           <p class="navbar-text navbar-right"><a class="navbar-link " href="../resources/Vue/Connection.jsp">Se Connecter</a></p>
+           <p class="navbar-text navbar-right"><a class="navbar-link " href="Connection.jsp">Se Connecter</a></p>
         </nav>
     </body>
 </html>
