@@ -5,6 +5,9 @@
  */
 package controleur;
 
+import Metier.MetierCo;
+import beans.UtilisateurCoBean;
+import dao.UtilisateurCoDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +15,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import dao.DAOManager ;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -19,7 +24,23 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(urlPatterns = {"/CustomerCo"})
 public class ControleurCo extends HttpServlet {
-
+    
+        private static final String ATT_DAO_MANAGER = "daomanager";
+        public static final String USER         = "utilisateur";
+        public static final String VUE              = "/index.jsp";
+        public static final String VUE_FAILED   = "/IdFailed.jsp" ;
+        
+        
+        private UtilisateurCoDao utilisateur ;
+    
+    
+      @Override
+    public void init(){
+         this.utilisateur = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getUtilisateurCoDao();
+         
+     }
+    
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -29,11 +50,22 @@ public class ControleurCo extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
+            HttpSession session1 ;
+            MetierCo metier = new MetierCo(this.utilisateur) ;
+            UtilisateurCoBean user = new UtilisateurCoBean();
+            user = metier.connectUser(request);
             
-              
-     
+            request.setAttribute(USER,user);
+            if(user == null){
+                request.getServletContext().getRequestDispatcher(VUE_FAILED).forward(request, response);
+                 
+           }
+            session1 = request.getSession(true);
+            session1.setAttribute(USER, user);
+            request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
      
      
      

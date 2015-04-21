@@ -15,8 +15,7 @@ public class UtilisateurCoBean {
         private String password ;
         
         public UtilisateurCoBean(){
-            this.login = null ;
-            this.password = null ;
+            
         }
     
         public void setLogin(String pseudo){

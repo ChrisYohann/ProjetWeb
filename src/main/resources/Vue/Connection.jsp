@@ -19,7 +19,7 @@
             
             <div class="col-md-offset-1 col-md-4">
                 <div id="seCo">
-                <form class="well" method="post" action="CustomerCo">
+                <form class="well" method="post" action="ControleurCo">
                 
                     <legend>Bonjour, comment allez vous?</legend>
                     <div class="form-group">
