@@ -13,6 +13,12 @@
         <title>Panier</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1 class="panier">Votre panier:</h1>
+        
+        <div class="row">
+            
+            <div class="col-md-offset-1 col-md-5">
+                
+                    </div>
     </body>
 </html>
