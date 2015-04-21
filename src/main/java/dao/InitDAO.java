@@ -5,18 +5,17 @@
  */
 package dao;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import dao.DAOManager;
-import javax.servlet.ServletContext;
 
 /**
+ * Web application lifecycle listener.
  *
  * @author chris
  */
-public class InitDAOManager implements ServletContextListener {
-    
-    private static final String ATT_DAO_MANAGER = "daomanager";
+public class InitDAO implements ServletContextListener {
+private static final String ATT_DAO_MANAGER = "daomanager";
 
     private DAOManager manager;
 
@@ -35,3 +34,5 @@ public class InitDAOManager implements ServletContextListener {
     }
     
 }
+
+
