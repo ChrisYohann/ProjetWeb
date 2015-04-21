@@ -14,14 +14,14 @@
     </head>
     <body><nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-header">
-                <a class=navbar-brand href="index.html">JMYM-theatre</a>
+                <a class=navbar-brand href="index.jsp">JMYM-theatre</a>
             </div>
             <ul class="nav navbar-nav">
-                <li ><a href="index.html">Accueil</a></li>
+                <li ><a href="index.jsp">Accueil</a></li>
                 <li><a href="Spectacle.jsp">Spectacle</a></li>
-                <li><a href="Calendrier.html">Calendrier</a></li>
-                <li><a href="Information.html">Information</a></li>
-                <li><img src="image/gestion-du-panier.jpg"/>
+                <li><a href="Calendrier.jsp">Calendrier</a></li>
+                <li><a href="Information.jsp">Information</a></li>
+                <li><a href="Panier.jsp"><img src="image/gestion-du-panier.jpg"/></a></li>
             </ul>
             
             <%-- Elle a le même effet que le code Java suivant : --%>

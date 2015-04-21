@@ -51,6 +51,11 @@ article img {
     border-style:solid;
 }
 
+#barre {
+    margin-left: 440px;
+    margin-top: 20px;
+}
+
 label {
     margin-top: 20px;
 }
@@ -67,6 +72,6 @@ label {
 nav img {
     height:35px;
     width:35px;
-    margin-top: 8px;
+    margin-top: -5px;
     margin-left: 5px;
 }
