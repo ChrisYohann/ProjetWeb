@@ -23,6 +23,13 @@
                 
                     <legend>Bonjour, comment allez vous?</legend>
                     <div class="form-group">
+                    <% 
+                    if(request.getSession().getAttribute("message_erreur") != null)
+                    {out.print(request.getSession().getAttribute("message_erreur")+"<br>");
+                     request.getSession().removeAttribute("message_erreur");
+                    }
+                    %>
+                    
                     
                     <label  for="login">Login</label> : 
                     <input class="form-control" type="text" name="login" id="login" size="25" 
@@ -49,6 +56,14 @@
                 <p>
                     <legend>Vous n'étes pas encore inscrit?</legend>
                     <div class="form-group">
+                        
+                    <% 
+                    if(request.getSession().getAttribute("signup") != null)
+                    {out.print(request.getSession().getAttribute("signup")+"<br>");
+                     request.getSession().removeAttribute("signup");
+                    }
+                    %>
+                        
                     <label for="nom">Nom</label> : 
                     <input class="form-control" type="text" name="nom" id="nom" size="25" 
                            maxlength="20" required/>

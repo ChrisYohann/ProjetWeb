@@ -28,8 +28,8 @@ public class ControleurCo extends HttpServlet {
     
         private static final String ATT_DAO_MANAGER = "daomanager";
         public static final String USER         = "utilisateur";
-        public static final String VUE              = "/index.jsp";
-        public static final String VUE_FAILED   = "/IdFailed.jsp" ;
+        public static final String VUE              = "/LogSuccessful.jsp";
+        public static final String VUE_FAILED   = "/Connection.jsp" ;
         
         
         private UtilisateurCoDao utilisateur ;
@@ -61,11 +61,16 @@ public class ControleurCo extends HttpServlet {
             
             request.setAttribute(USER,user);
             if(user == null){
+                session1 = request.getSession(true) ;
+                session1.setAttribute("message_erreur","<FONT COLOR=\"red\" >Login et/ou Mot de passe incorrect</FONT>");
                 request.getServletContext().getRequestDispatcher(VUE_FAILED).forward(request, response);
                  
            }
             else {session1 = request.getSession(true);
             session1.setAttribute(USER, user);
+            if(request.getSession().getAttribute("message_erreur") != null){
+                session1.removeAttribute("message_erreur");
+            }
            request.getServletContext().getRequestDispatcher(VUE).forward(request, response);}
      
      

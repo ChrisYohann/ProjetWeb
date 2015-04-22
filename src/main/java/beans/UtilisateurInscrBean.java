@@ -16,6 +16,7 @@ public class UtilisateurInscrBean {
         private String login ;
         private String password ;
         private String email ;
+        private String message_erreur ;
         private boolean inscrit ;
         
         public UtilisateurInscrBean(){
@@ -46,6 +47,9 @@ public class UtilisateurInscrBean {
             this.inscrit = value ;
         }
         
+        public void setErreur(String erreur){
+            this.message_erreur = erreur ;
+        }
         
         public String getNom(){
             return this.nom ;
@@ -65,6 +69,10 @@ public class UtilisateurInscrBean {
         
         public String getPassword(){
             return this.password ;
+        }
+        
+        public String getErreur(){
+            return this.message_erreur ;
         }
         
         public boolean getInscrit(){

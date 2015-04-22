@@ -39,12 +39,16 @@ public class UtilisateurInscrDaoImpl implements UtilisateurInscrDao {
         preparedStatement = initRequete( connexion, SQL_CHECK_IN, false,new_user.getLogin());
         resultSet = preparedStatement.executeQuery();//On recherche le login dans la table 
         if ( resultSet.next()) { //Si un tel pseudo est déjà dans la table, ou ça bug pour une erreur quelconque
+            
+            new_user.setErreur("<FONT COLOR=\"red\" >Le pseudo existe déjà.</FONT>");
             throw new DAOException("Echec de l'inscription L'utilisateur existe déjà") ;
         }
         preparedStatement = initRequete( connexion, SQL_SIGN_UP, true,new_user.getLogin(),new_user.getNom(),new_user.getPrenom(),new_user.getEmail(),new_user.getPassword());
         int success = preparedStatement.executeUpdate();
         if(success == 0){
+           new_user.setErreur("Erreur survenue. Veuillez réessayer dans quelques instants.");
             throw new DAOException("Echec d'ajout de l'utilisateur dans la table");
+            
         }
         new_user.setInscrit(true);
         

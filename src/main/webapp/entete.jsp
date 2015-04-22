@@ -25,15 +25,15 @@
             </ul>
                         
         <% 
-        beans.UtilisateurCoBean utilisateur = (beans.UtilisateurCoBean) request.getSession().getAttribute("utilisateur"); 
-        beans.UtilisateurInscrBean nouveaumembre = (beans.UtilisateurInscrBean) request.getSession().getAttribute("newuser");
+        beans.UtilisateurCoBean utilisateur = (beans.UtilisateurCoBean) request.getSession(true).getAttribute("utilisateur"); 
+        beans.UtilisateurInscrBean nouveaumembre = (beans.UtilisateurInscrBean) request.getSession(true).getAttribute("newuser");
         if(utilisateur != null){   
-            out.print("<p class=\"navbar-text navbar-right\">"+utilisateur.getLogin()+"</p>");
-            out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Logout.jsp\">Deconnexion</a></p>"); 
+            out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"MonCompte.jsp\">Mon Compte</a></p>");
+            out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Logout\">Deconnexion ("+utilisateur.getLogin()+")</a></p>");
            }
         else if(nouveaumembre != null){
-            out.print("<p class=\"navbar-text navbar-right\">"+nouveaumembre.getLogin()+"</p>");
-            out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Logout.jsp\">Deconnexion</a></p>");
+            out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"MonCompte.jsp\">Mon Compte</a></p>");
+            out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Logout\">Deconnexion ("+nouveaumembre.getLogin()+")</a></p>");
         }
         else{
             out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Connection.jsp\">Se Connecter</a></p>");}                 

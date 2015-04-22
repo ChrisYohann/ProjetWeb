@@ -29,6 +29,7 @@ public class ControleurInscr extends HttpServlet {
         public static final String USER         = "newuser";
         public static final String VUE              = "/index.jsp";
         public static final String VUE_FAILED   = "/Connection.jsp" ;
+        public static final String SIGNUP = "signup";
     
     private UtilisateurInscrDao utilisateur ;
     
@@ -55,11 +56,16 @@ public class ControleurInscr extends HttpServlet {
         membre = objet_metier.inscrireUtilisateur(request) ;
              request.setAttribute(USER,membre);
             if(!membre.getInscrit()){
+                session1 = request.getSession(true);
+                session1.setAttribute(SIGNUP, membre.getErreur());
                 request.getServletContext().getRequestDispatcher(VUE_FAILED).forward(request, response);
                  
            }
             else {session1 = request.getSession(true);
             session1.setAttribute(USER, membre);
+            if(request.getSession().getAttribute(SIGNUP) != null){
+                session1.removeAttribute(SIGNUP);
+            }
            request.getServletContext().getRequestDispatcher(VUE).forward(request, response);}
             
         /*response.setContentType("text/html;charset=UTF-8");
