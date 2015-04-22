@@ -66,7 +66,6 @@ public class ControleurCo extends HttpServlet {
            }
             else {session1 = request.getSession(true);
             session1.setAttribute(USER, user);
-            request.setAttribute("pseudo", user.getLogin());
            request.getServletContext().getRequestDispatcher(VUE).forward(request, response);}
      
      

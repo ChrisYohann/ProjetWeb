@@ -24,14 +24,19 @@
                 <li><a href="Panier.jsp"><img src="image/gestion-du-panier.jpg"/></a></li>
             </ul>
             
-            <%-- Elle a le même effet que le code Java suivant : --%>
         <% 
-        beans.UtilisateurCoBean utilisateur = (beans.UtilisateurCoBean) request.getAttribute( "utilisateur" ); 
-           if(utilisateur != null){
-            out.print("<p class=\"navbar-text navbar-right\">Bonjour, "+utilisateur.getLogin()+"</p>");
+        beans.UtilisateurCoBean utilisateur = (beans.UtilisateurCoBean) request.getSession().getAttribute("utilisateur"); 
+        beans.UtilisateurInscrBean nouveaumembre = (beans.UtilisateurInscrBean) request.getSession().getAttribute("newuser");
+        if(utilisateur != null){   
+            out.print("<p class=\"navbar-text navbar-right\">"+utilisateur.getLogin()+"</p>");
             out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Logout.jsp\">Deconnexion</a></p>"); 
-           }else
-            out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Connection.jsp\">Se Connecter</a></p>");                 
+           }
+        else if(nouveaumembre != null){
+            out.print("<p class=\"navbar-text navbar-right\">"+nouveaumembre.getLogin()+"</p>");
+            out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Logout.jsp\">Deconnexion</a></p>");
+        }
+        else{
+            out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Connection.jsp\">Se Connecter</a></p>");}                 
         %>
             
             

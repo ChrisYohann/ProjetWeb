@@ -21,13 +21,13 @@
                 <li><a href="../Spectacle.jsp">Spectacle</a></li>
                 <li><a href="../Calendrier.jsp">Calendrier</a></li>
                 <li><a href="../Information.jsp">Information</a></li>
-                <li><a href="Panier.jsp"><img src="image/gestion-du-panier.jpg"/>
+                <li><a href="../Panier.jsp"><img src="../image/gestion-du-panier.jpg"/>
             </ul>
           
             <%--${empty utilisateur.login ? "<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Connection.html\">Se Connecter</a></p>" : "Bonjour, ${utilisateur.login}"}--%>
            
             
-           <p class="navbar-text navbar-right"><a class="navbar-link " href="Connection.jsp">Se Connecter</a></p>
+           <p class="navbar-text navbar-right"><a class="navbar-link " href="../Connection.jsp">Se Connecter</a></p>
         </nav>
     </body>
 </html>

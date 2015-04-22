@@ -45,7 +45,7 @@
             </div>
             <div class="col-md-offset-1 col-md-5">
                 <div class="row">
-                <form class="well" method="post" action="AddCustomer">
+                <form class="well" method="post" action="ControleurInscr">
                 <p>
                     <legend>Vous n'étes pas encore inscrit?</legend>
                     <div class="form-group">

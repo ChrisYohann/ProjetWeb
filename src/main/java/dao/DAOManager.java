@@ -99,4 +99,8 @@ public class DAOManager {
         return new UtilisateurCoDaoImpl(this);
     }
     
-}
+    public UtilisateurInscrDao getUtilisateurInscrDao(){
+        return new UtilisateurInscrDaoImpl(this);
+    }
+    
+} 

@@ -16,6 +16,11 @@ public class UtilisateurInscrBean {
         private String login ;
         private String password ;
         private String email ;
+        private boolean inscrit ;
+        
+        public UtilisateurInscrBean(){
+            this.inscrit = false ;
+        }
          
         public void setNom(String name){
             this.nom = name ;
@@ -37,6 +42,10 @@ public class UtilisateurInscrBean {
             this.password = motdepasse ;
         }
         
+        public void setInscrit(boolean value){
+            this.inscrit = value ;
+        }
+        
         
         public String getNom(){
             return this.nom ;
@@ -56,6 +65,10 @@ public class UtilisateurInscrBean {
         
         public String getPassword(){
             return this.password ;
+        }
+        
+        public boolean getInscrit(){
+            return this.inscrit ;
         }
     
 }
