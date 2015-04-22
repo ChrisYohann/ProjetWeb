@@ -23,7 +23,7 @@
                 <li><a href="Information.jsp">Information</a></li>
                 <li><a href="Panier.jsp"><img src="image/gestion-du-panier.jpg"/></a></li>
             </ul>
-            
+                        
         <% 
         beans.UtilisateurCoBean utilisateur = (beans.UtilisateurCoBean) request.getSession().getAttribute("utilisateur"); 
         beans.UtilisateurInscrBean nouveaumembre = (beans.UtilisateurInscrBean) request.getSession().getAttribute("newuser");
