@@ -5,7 +5,7 @@ CREATE TABLE spectacle (
 
 CREATE TABLE dateT ( 
 	jour DATE, 
-	heure int  check(13<heure and heure<22),
+	heure TIME,
 	primary key(jour, heure));
 
 CREATE TABLE salle ( 
@@ -38,6 +38,13 @@ CREATE TABLE rang (
 	numRang int,
 	PRIMARY KEY (numSalle, numRang),
         CONSTRAINT chk_salle CHECK (0<numSalle and numSalle<4 and numRang>0 and numRang<11));
+
+CREATE TABLE place ( 
+	numSalle int check(0<numSalle and numSalle<4),
+	numRang int check(0<numRang and numRang<11),
+	numPlace int check(0<numPlace and numPlace<21),
+	PRIMARY KEY (numSalle, numRang, numPlace),
+	Foreign KEY(numSalle, numRang) references rang(numSalle, numRang) ON DELETE CASCADE);
 	
 INSERT INTO utilisateur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES ('root', 'root',  'root', '', 'root'); 
 INSERT INTO utilisateur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES ('yohann', 'hako',  'root', '', 'root');
