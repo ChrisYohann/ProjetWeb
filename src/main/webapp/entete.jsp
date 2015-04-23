@@ -4,6 +4,7 @@
     Author     : chris
 --%>
 
+<%@page import="beans.Spectacle"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

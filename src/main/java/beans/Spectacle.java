@@ -15,12 +15,17 @@ public class Spectacle {
     private String  name;
     private int numero;
     private String description;
+    private String horaire;
     private int numSalle;
     private Image affiche;
     
     public String getName() {
         return this.name;
     }
+    public String getHoraire() {
+        return this.horaire;
+    }
+    
     public int getNumero() {
         return this.numero;
     }
@@ -37,7 +42,9 @@ public class Spectacle {
     public void setName(String name) {
         this.name=name;
     }
-    
+    public void setHoraire(String horaire) {
+        this.horaire=horaire;
+    }
     public void setNumero(int numero) {
         this.numero=numero;
     }
