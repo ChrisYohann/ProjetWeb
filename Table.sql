@@ -66,13 +66,9 @@ CREATE TABLE achat(
 	numRang int,
 	numPlace int,
 	Foreign KEY(numSalle, numRang) references rang(numSalle, numRang) ON DELETE CASCADE,
-<<<<<<< HEAD
-	Foreign Key(numSalle, numRang, numPlace) references place(numSalle, numRang, numPlace) ON DELETE CASCADE,
-	CONSTRAINT chk_achat CHECK (numTicket >0 and numDossier>0 and 0<numSalle and numSalle<4 and 13<heure and heure<22 and numRang>0 and numRang<11 and 0<numPlace and numPlace<21));
-=======
 	Foreign Key(numSalle, numRang, numPlace) references place(numSalle, numRang, numPlace) ON DELETE 		CASCADE,
 	CONSTRAINT chk_achat CHECK (numTicket>0 and numDossier>0 and 0<numSalle and numSalle<4 and 13<heure and heure<22 and 		numRang>0 and numRang<11 and 0<numPlace and numPlace<21));
->>>>>>> b72fbb09ea248cabd03dbbfc831e9036057a26ab
+
 	
 CREATE TABLE representation(
 	numSpect int REFERENCES spectacle(numSpect) ON DELETE CASCADE,
