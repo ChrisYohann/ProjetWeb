@@ -4,6 +4,7 @@
     Author     : igierm
 --%>
 
+<%@page import="beans.UtilisateurCoBean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file="entete.jsp" %>
 <!DOCTYPE html>
@@ -26,6 +27,12 @@
                     <form  class="col-md-5" method="post" action="addCart">
                     <input class="btn btn-primary" type="submit" value="Ajouter au panier" />
                     </form>
+                    <% if (request.getSession(true).getAttribute("utilisateur") != null){
+                        if(((UtilisateurCoBean)request.getSession(true).getAttribute("utilisateur")).isAdmin()){
+                    out.print("<form  class=\"col-md-5\" method=\"post\" action=\"SpectacleManagementCo\">");
+                    out.print("<input class=\"btn btn-primary\" type=\"submit\" value=\"Modifier\" />");
+                    out.print("</form>");}}
+                    %>
                 </artSpect>
                 <artSpect class="row">
                     <img class="col-md-5" height=500px src="image/Scoop.jpg"/>

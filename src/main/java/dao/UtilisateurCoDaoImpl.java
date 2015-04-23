@@ -46,13 +46,13 @@ public class UtilisateurCoDaoImpl implements UtilisateurCoDao {
         resultSet = preparedStatement.executeQuery();//On recherche le login dans la table des admins 
         
         if ( resultSet.next() ) 
-           { utilisateur = (ProgrammeurCoBean)this.link( resultSet );}            
+           { utilisateur = this.link( resultSet,false );}            
         
         
         else{  preparedStatement = initRequete( connexion, SQL_FIND_LOGIN, false, login,password );
                 resultSet = preparedStatement.executeQuery();//On recherche le login dans la table des clients
                 if ( resultSet.next() )  
-                 { utilisateur = this.link( resultSet );}  
+                 { utilisateur = this.link( resultSet,true );}  
                     
             }    
             
@@ -65,12 +65,14 @@ public class UtilisateurCoDaoImpl implements UtilisateurCoDao {
     return utilisateur;
     }
     
-    private static UtilisateurCoBean link( ResultSet resultSet ) throws SQLException {
-    
-    UtilisateurCoBean utilisateur = new UtilisateurCoBean();
+    private static UtilisateurCoBean link( ResultSet resultSet,boolean value ) throws SQLException {
+        UtilisateurCoBean utilisateur = null ;
+    if(value)
+     utilisateur = new UtilisateurCoBean();
+    else{ utilisateur = new ProgrammeurCoBean();}
     utilisateur.setLogin( resultSet.getString( "login" ) );
     utilisateur.setPassword( resultSet.getString( "mdpUt" ) );
-  
+   
     return utilisateur;
     }
     
