@@ -87,7 +87,7 @@ public class UtilisateurInscrDaoImpl implements UtilisateurInscrDao {
     }
 
     
-   private UtilisateurInscrBean link( ResultSet resultSet ) throws SQLException {
+    public UtilisateurInscrBean link( ResultSet resultSet ) throws SQLException {
     
     UtilisateurInscrBean utilisateur = new UtilisateurInscrBean();
     utilisateur.setLogin( resultSet.getString( "login" ) );

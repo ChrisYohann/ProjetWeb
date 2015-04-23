@@ -9,9 +9,13 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <h2>Liste des Membres :</h2> 
+        <h2>Liste des Membres :</h2>
+        <c:out value="${deroulement}"/>
+        <c:set var="deroulement" scope="session" value=""/>
+        <br>
         <c:forEach items="${liste_membres}" var="membres">
-            <c:out value="${membres.getLogin()}"/> 
+            <c:out value="${membres.getLogin()}"/>            
+            <c:if test = "${utilisateur.getLogin() ne membres.getLogin()}">
             <form method="post" action="SetRole">
             <input type="hidden" name="login" value ="${membres.getLogin()}"/>
             <input type="hidden" name="password" value ="${membres.getPassword()}"/>
@@ -24,6 +28,8 @@
             <input type="hidden" name="role" value="admin"/>                
             <input type="submit" value="Passer Admin" />
             </form>
+            </c:if>
+            <br>
             <br>
         </c:forEach>
     </body>
