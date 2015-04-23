@@ -11,13 +11,9 @@ package beans;
  */
 public class UtilisateurCoBean {
     
-        private String login ;
-        private String password ;
-        
-        public UtilisateurCoBean(){
+        protected String login ;
+        protected String password ;
             
-        }
-    
         public void setLogin(String pseudo){
             this.login = pseudo ;
         }
@@ -26,7 +22,6 @@ public class UtilisateurCoBean {
             this.password = password ;
         }
         
-        
         public String getLogin(){
             return this.login ;
         }
@@ -34,4 +29,9 @@ public class UtilisateurCoBean {
         public String getPassword(){
             return this.password ;
         }
+        
+        public boolean isAdmin(){
+            return false ;
+        }
+        
 }

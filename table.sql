@@ -25,13 +25,6 @@ CREATE TABLE programmeur(
 	AdresseUt varchar(50), 
 	mdpUt varchar(20) NOT NULL);
 
-CREATE TABLE client( 
-	login varchar(30) primary key, 
-	nomUt varchar(30) NOT NULL, 
-	prenomUt varchar(30) NOT NULL, 
-	AdresseUt varchar(50), 
-	mdpUt varchar(20) NOT NULL);
-
 CREATE TABLE dossier ( 
 	numDossier int primary key check(numDossier>0));
 	
@@ -46,5 +39,6 @@ CREATE TABLE rang (
 	PRIMARY KEY (numSalle, numRang),
         CONSTRAINT chk_salle CHECK (0<numSalle and numSalle<4 and numRang>0 and numRang<11));
 	
-INSERT INTO utilisateur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES ('root', 'root',  'root', '', 'root');
+INSERT INTO utilisateur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES ('root', 'root',  'root', '', 'root'); 
 INSERT INTO utilisateur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES ('yohann', 'hako',  'root', '', 'root');
+INSERT INTO programmeur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES ('root', 'root',  'root', '', 'root'); 

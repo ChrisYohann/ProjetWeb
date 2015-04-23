@@ -30,6 +30,10 @@
         if(utilisateur != null){   
             out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"MonCompte.jsp\">Mon Compte</a></p>");
             out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Logout\">Deconnexion ("+utilisateur.getLogin()+")</a></p>");
+                if(utilisateur.isAdmin())
+                {
+                    out.print("<p class=\"navbar-text navbar-right\">Admin de merde</p>");
+                }
            }
         else if(nouveaumembre != null){
             out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"MonCompte.jsp\">Mon Compte</a></p>");

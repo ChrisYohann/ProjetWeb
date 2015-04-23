@@ -5,6 +5,7 @@
  */
 package dao;
 
+import beans.ProgrammeurCoBean;
 import beans.UtilisateurCoBean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,6 +20,7 @@ import static dao.DAOUtil.* ;
  */
 public class UtilisateurCoDaoImpl implements UtilisateurCoDao {
             private static final String SQL_FIND_LOGIN = "SELECT * FROM utilisateur WHERE login=? and mdpUt=?";
+            private static final String SQL_FIND_ADMIN = "SELECT * FROM programmeur WHERE login=? and mdpUt=?";
             private DAOManager manager ;
             
     public UtilisateurCoDaoImpl(DAOManager gerant){
@@ -40,11 +42,20 @@ public class UtilisateurCoDaoImpl implements UtilisateurCoDao {
 
     try {
         connexion = manager.getConnection();
-        preparedStatement = initRequete( connexion, SQL_FIND_LOGIN, false, login,password );
-        resultSet = preparedStatement.executeQuery();//On recherche le login dans la table 
-        if ( resultSet.next() ) { //Si l'utilisateur est dans la table avec le bon mot de passe, on lui crée le Bean associé 
-            utilisateur = this.link( resultSet );
-        }
+        preparedStatement = initRequete( connexion, SQL_FIND_ADMIN, false, login,password );
+        resultSet = preparedStatement.executeQuery();//On recherche le login dans la table des admins 
+        
+        if ( resultSet.next() ) 
+           { utilisateur = (ProgrammeurCoBean)this.link( resultSet );}            
+        
+        
+        else{  preparedStatement = initRequete( connexion, SQL_FIND_LOGIN, false, login,password );
+                resultSet = preparedStatement.executeQuery();//On recherche le login dans la table des clients
+                if ( resultSet.next() )  
+                 { utilisateur = this.link( resultSet );}  
+                    
+            }    
+            
     } catch ( SQLException e ) {
         throw new DAOException( e );
     } finally {
