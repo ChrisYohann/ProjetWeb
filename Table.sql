@@ -15,14 +15,14 @@ CREATE TABLE utilisateur (
 	login varchar(30) primary key, 
 	nomUt varchar(30) NOT NULL, 
 	prenomUt varchar(30) NOT NULL, 
-	@Ut varchar(50), 
+	AdresseUt varchar(50), 
 	mdpUt varchar(20) NOT NULL);
 
 CREATE TABLE programmeur( 
 	login varchar(30) primary key, 
 	nomUt varchar(30) NOT NULL, 
 	prenomUt varchar(30) NOT NULL, 
-	@Ut varchar(50), 
+	AdresseUt varchar(50), 
 	mdpUt varchar(20) NOT NULL);
 
 CREATE TABLE dossier ( 
