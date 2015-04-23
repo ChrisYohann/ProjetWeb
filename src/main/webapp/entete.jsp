@@ -3,8 +3,9 @@
     Created on : 20 avr. 2015, 23:10:49
     Author     : chris
 --%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,7 +33,7 @@
             out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Logout\">Deconnexion ("+utilisateur.getLogin()+")</a></p>");
                 if(utilisateur.isAdmin())
                 {
-                    out.print("<p class=\"navbar-text navbar-right\">Admin de merde</p>");
+                    out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"GestionMembre\">Groupes</a></p>");
                 }
            }
         else if(nouveaumembre != null){

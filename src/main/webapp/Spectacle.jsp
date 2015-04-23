@@ -27,11 +27,14 @@
                     <form  class="col-md-5" method="post" action="addCart">
                     <input class="btn btn-primary" type="submit" value="Ajouter au panier" />
                     </form>
-                    <% if (request.getSession(true).getAttribute("utilisateur") != null){
-                        if(((UtilisateurCoBean)request.getSession(true).getAttribute("utilisateur")).isAdmin()){
+                     <% if (request.getSession(true).getAttribute("utilisateur") != null && ((UtilisateurCoBean)request.getSession(true).getAttribute("utilisateur")).isAdmin())
+                        {
                     out.print("<form  class=\"col-md-5\" method=\"post\" action=\"SpectacleManagementCo\">");
                     out.print("<input class=\"btn btn-primary\" type=\"submit\" value=\"Modifier\" />");
-                    out.print("</form>");}}
+                    out.print("</form>");
+                    out.print("<form  class=\"col-md-5\" method=\"post\" action=\"GestionBookings\">");
+                    out.print("<input class=\"btn btn-primary\" type=\"submit\" value=\"Voir les Réservations\" />");
+                    out.print("</form>");}
                     %>
                 </artSpect>
                 <artSpect class="row">
@@ -41,6 +44,15 @@
                     <br><br>Salle 2</p>
                     <form  class="col-md-5" method="post" action="addCart">
                     <input class="btn btn-primary" type="submit" value="Ajouter au panier" />
+                 <% if (request.getSession(true).getAttribute("utilisateur") != null && ((UtilisateurCoBean)request.getSession(true).getAttribute("utilisateur")).isAdmin())
+                        {
+                    out.print("<form  class=\"col-md-5\" method=\"post\" action=\"SpectacleManagementCo\">");
+                    out.print("<input class=\"btn btn-primary\" type=\"submit\" value=\"Modifier\" />");
+                    out.print("</form>");
+                    out.print("<form  class=\"col-md-5\" method=\"post\" action=\"GestionBookings\">");
+                    out.print("<input class=\"btn btn-primary\" type=\"submit\" value=\"Voir les Réservations\" />");
+                    out.print("</form>");}
+                    %>
                     </form>
                 </artSpect>
                 <artSpect class="row">
@@ -51,6 +63,15 @@
                     <form  class="col-md-5" method="post" action="addCart">
                     <input class="btn btn-primary" type="submit" value="Ajouter au panier" />
                     </form>
+                    <% if (request.getSession(true).getAttribute("utilisateur") != null && ((UtilisateurCoBean)request.getSession(true).getAttribute("utilisateur")).isAdmin())
+                        {
+                    out.print("<form  class=\"col-md-5\" method=\"post\" action=\"SpectacleManagementCo\">");
+                    out.print("<input class=\"btn btn-primary\" type=\"submit\" value=\"Modifier\" />");
+                    out.print("</form>");
+                    out.print("<form  class=\"col-md-5\" method=\"post\" action=\"GestionBookings\">");
+                    out.print("<input class=\"btn btn-primary\" type=\"submit\" value=\"Voir les Réservations\" />");
+                    out.print("</form>");}
+                    %>
                 </artSpect>
             </article>
         </div>

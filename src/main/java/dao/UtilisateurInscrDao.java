@@ -6,6 +6,7 @@
 package dao;
 
 import beans.UtilisateurInscrBean;
+import java.util.* ;
 
 /**
  *
@@ -15,5 +16,6 @@ public interface UtilisateurInscrDao {
     
      void creer( UtilisateurInscrBean utilisateur ) throws DAOException;
 
+     public List<UtilisateurInscrBean> trouver() throws DAOException ;
     
 }
