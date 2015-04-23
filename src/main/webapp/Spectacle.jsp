@@ -24,6 +24,8 @@
                         <br><br>Salle 1
                         </p>
                     <form  class="col-md-5" method="post" action="addCart">
+                        <label for="nbrplace"></label><br>
+                        <input type="number" name="nbrplace" id="nbrplace" min="1" max="10" value="1">
                     <input class="btn btn-primary" type="submit" value="Ajouter au panier" />
                     </form>
                 </artSpect>
@@ -33,6 +35,7 @@
                         cette charmante piéce de théatre<br><br>Horaire: 14h30 17h00 19h15
                     <br><br>Salle 2</p>
                     <form  class="col-md-5" method="post" action="addCart">
+                        <input type="number" name="nbrplace" id="nbrplace" min="1" max="10" value="1">
                     <input class="btn btn-primary" type="submit" value="Ajouter au panier" />
                     </form>
                 </artSpect>
@@ -42,6 +45,7 @@
                         cette charmante piéce de théatre<br><br>Horaire: 14h30 17h00 19h15
                     <br><br>Salle 1</p>
                     <form  class="col-md-5" method="post" action="addCart">
+                        <input type="number" name="nbrplace" id="nbrplace" min="1" max="10" value="1">
                     <input class="btn btn-primary" type="submit" value="Ajouter au panier" />
                     </form>
                 </artSpect>
