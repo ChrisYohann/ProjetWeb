@@ -7,6 +7,7 @@ package beans;
 
 import java.awt.Image;
 import java.beans.*;
+import java.util.ArrayList;
 
 
 /**
@@ -15,60 +16,44 @@ import java.beans.*;
  */
 public class Reservation {
     private String  login;
-    private int numSpect;
-    private String jour;
-    private int heure;
-    private int numSalle;
-    private int numRang;
-    private int numPlace;
+    private Representation repres;
+    private int nbrPlace;
+    private ArrayList<Rang> numRang;
+    private ArrayList<Place> numPlace;
     
     public String getLogin() {
         return this.login;
     }
-    public String getJour() {
-        return this.jour;
+    public Representation getrespres() {
+        return this.repres;
     }
     
-    public int getNumSpect() {
-        return this.numSpect;
+    public int getNbrPlace() {
+        return this.nbrPlace;
     }
     
-    public int getHeure() {
-        return this.heure;
-    }
-    
-    public int getNumSalle() {
-        return this.numSalle;
-    } 
-    
-    public int getNumRang() {
+    public ArrayList<Rang> getNumRang() {
         return this.numRang;
+    }
+    
+    public ArrayList<Place> getNumPlace() {
+        return this.numPlace;
     } 
     
-    public int getNumPlace() {
-        return this.numPlace;
-    }
     public void setLogin(String login) {
         this.login=login;
     }
-    public void setJour(String jour) {
-        this.jour=jour;
+    public void setRepres(Representation repres) {
+        this.repres=repres;
     }
-    public void setNumSpect(int numSpect) {
-        this.numSpect=numSpect;
-    }
-    
-    public void setHeure(int heure) {
-        this.heure=heure;
+    public void setNbrPlace(int nubrPlace) {
+        this.nbrPlace=nbrPlace;
     }
     
-    public void setNumSalle(int numSalle) {
-        this.numSalle=numSalle;
-    }
-    public void setNumRang(int numRang) {
+    public void setNumRang(ArrayList<Rang> numRang) {
         this.numRang=numRang;
     }
-    public void setNumPlace(int numPlace) {
+    public void setNumPlace(ArrayList<Place> numPlace) {
         this.numPlace=numPlace;
     }
     

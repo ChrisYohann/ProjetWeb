@@ -57,11 +57,11 @@
                     <form  class="col-md-5" method="post" action="addCart">
                         <label for="nbrplace"></label><br>
                         <input type="number" name="nbrplace" id="nbrplace" min="1" max="10" value="1">
-                    <input class="btn btn-primary" type="submit" value="Ajouter au panier" />
+                    <input class="btn btn-primary" type="submit" name=${spectacle.get(i).getNumero()} value="Ajouter au panier" />
                     <br>
                     </form>    
                 </artSpect>
-                        <%}%>
+                        <% }%>
                         <%--
                 <artSpect class="row">
                     <img class="col-md-5" height=500px src="image/Scoop.jpg"/>
