@@ -55,25 +55,27 @@ CREATE TABLE place (
 	
 CREATE TABLE achat(
 	login varchar(30) REFERENCES utilisateur(login) ON DELETE CASCADE,
-	numDossier int check(numDossier>0), 
+	numDossier int, 
 	numTicket int,
 	FOREIGN KEY(numTicket, numDossier) REFERENCES ticket(numTicket, numDossier) ON DELETE CASCADE,
 	numSpect int REFERENCES spectacle(numSpect) ON DELETE CASCADE,
 	jour DATE,
-	heure int  check(13<heure and heure<22),
+	heure int,
 	FOREIGN KEY(jour, heure) references dateT(jour, heure) ON DELETE CASCADE,
-	numSalle int check(0<numSalle and numSalle<4),
-	numRang int check(0<numRang and numRang<11),
-	numPlace int check(0<numPlace and numPlace<21),
+	numSalle int,
+	numRang int,
+	numPlace int,
 	Foreign KEY(numSalle, numRang) references rang(numSalle, numRang) ON DELETE CASCADE,
-	Foreign Key(numSalle, numRang, numPlace) references place(numSalle, numRang, numPlace) ON DELETE 	 CASCADE);
+	Foreign Key(numSalle, numRang, numPlace) references place(numSalle, numRang, numPlace) ON DELETE 		CASCADE,
+	CONSTRAINT chk_achat CHECK (numDossier>0 and 0<numSalle and numSalle<4 and 13<heure and heure<22 and 		numRang>0 and numRang<11 and 0<numPlace and numPlace<21));
 	
 CREATE TABLE representation(
 	numSpect int REFERENCES spectacle(numSpect) ON DELETE CASCADE,
 	jour DATE,
-	heure int  check(13<heure and heure<22),
+	heure int,
 	FOREIGN KEY(jour, heure) references dateT(jour, heure) ON DELETE CASCADE,
-	numSalle int references salle(numSalle) check(0<numSalle and numSalle<4));
+	numSalle int references salle(numSalle),
+	CONSTRAINT chk_repres CHECK (0<numSalle and numSalle<4 and 13<heure and heure<22));
 	
 CREATE TABLE reservation(
 	login varchar(30) REFERENCES utilisateur(login) ON DELETE CASCADE,
