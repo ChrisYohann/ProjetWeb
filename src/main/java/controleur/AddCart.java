@@ -32,6 +32,10 @@ public class AddCart extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        String nbrPlace = request.getParameter("nbrplace");
+        
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -40,7 +44,14 @@ public class AddCart extends HttpServlet {
             out.println("<title>Servlet AddCart</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddCart at " + request.getContextPath() + "</h1>");
+            for (int i=1; i<101; i++) {
+                String si= String.valueOf(i);
+                String name=request.getParameter(si);
+            if(name!=null){
+            out.println("<h1>Servlet donne:" + nbrPlace + "et" +name+"</h1>");
+            //ajouter ce spect à la BD
+                }
+            }out.println("<h1>rien n'est réservé</h1>");
             out.println("</body>");
             out.println("</html>");
         }

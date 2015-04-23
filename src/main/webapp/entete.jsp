@@ -3,7 +3,9 @@
     Created on : 20 avr. 2015, 23:10:49
     Author     : chris
 --%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="beans.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <!DOCTYPE html>
