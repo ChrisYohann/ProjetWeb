@@ -25,13 +25,6 @@ CREATE TABLE programmeur(
 	@Ut varchar(50), 
 	mdpUt varchar(20) NOT NULL);
 
-CREATE TABLE client( 
-	login varchar(30) primary key, 
-	nomUt varchar(30) NOT NULL, 
-	prenomUt varchar(30) NOT NULL, 
-	@Ut varchar(50), 
-	mdpUt varchar(20) NOT NULL);
-
 CREATE TABLE dossier ( 
 	numDossier int primary key check(numDossier>0));
 
