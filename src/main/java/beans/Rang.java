@@ -6,40 +6,41 @@
 package beans;
 
 import java.beans.*;
-import java.io.Serializable;
+
 
 /**
  *
  * @author igierm
  */
-public class Rang implements Serializable {
-    
-    public static final String PROP_SAMPLE_PROPERTY = "sampleProperty";
-    
-    private String sampleProperty;
-    
-    private PropertyChangeSupport propertySupport;
-    
-    public Rang() {
-        propertySupport = new PropertyChangeSupport(this);
+public class Rang{
+
+    private int numRang;
+    private int numSalle;
+    private String catTarif;
+
+  
+    public int getNumRang() {
+        return this.numRang;
     }
     
-    public String getSampleProperty() {
-        return sampleProperty;
+    public String getCatTarif() {
+        return this.catTarif;
     }
     
-    public void setSampleProperty(String value) {
-        String oldValue = sampleProperty;
-        sampleProperty = value;
-        propertySupport.firePropertyChange(PROP_SAMPLE_PROPERTY, oldValue, sampleProperty);
+    public int getNumSalle() {
+        return this.numSalle;
     }
     
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        propertySupport.addPropertyChangeListener(listener);
+     
+    public void setNumSalle(int numSalle) {
+        this.numSalle=numSalle;
     }
-    
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        propertySupport.removePropertyChangeListener(listener);
+    public void setNumRang(int numRang) {
+        this.numRang=numRang;
     }
-    
+
+public void setCatTarif(String catTarif) {
+        this.catTarif=catTarif;
+    }
 }
+
