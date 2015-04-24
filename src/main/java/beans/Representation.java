@@ -12,14 +12,14 @@ import java.awt.Image;
  * @author igierm
  */
 public class Representation {
-    private int numSpect;
+    private Spectacle spect;
     private String jour;
     private int heure;
     private int numSalle;
 
     
-    public int getNumSpect() {
-        return this.numSpect;
+    public Spectacle getSpect() {
+        return this.spect;
     }
     public String getJour() {
         return this.jour;
@@ -33,8 +33,8 @@ public class Representation {
         return this.numSalle;
     }
     
-    public void setNumSpect(int numSpect) {
-        this.numSpect=numSpect;
+    public void setSpect(Spectacle spect) {
+        this.spect=spect;
     }
     public void setJour(String jour) {
         this.jour=jour;
