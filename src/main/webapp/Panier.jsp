@@ -29,25 +29,25 @@
                 spect2.setName("Je suis un autre super spectacle");
                 spect2.setNumero(2);
                 repres1.setSpect(spect1);
-                repres1.setJour("mardi 30 mai");
+                repres1.setJour(new Date());
                 repres1.setHeure(14);
                 repres1.setNumSalle(3);
                 //spect1.setAffiche()
                 Representation repres2= new Representation();
                 repres2.setSpect(spect1);
-                repres2.setJour("jeudi 31 decembre");
+                repres2.setJour(new Date());
                 repres2.setHeure(17);
                 repres2.setNumSalle(1);
                 Representation repres3= new Representation();
                 repres3.setSpect(spect1);
-                repres3.setJour("mardi 30 mai");
+                repres3.setJour(new Date());
                 repres3.setHeure(14);
                 repres3.setNumSalle(3);
                 representation.add(repres1);
                 representation.add(repres2);
                 representation.add(repres3);
-                spect1.setRepres(representation);
-                spect2.setRepres(representation);
+                spect1.setRepresentation(representation);
+                spect2.setRepresentation(representation);
                 spectacle.add(spect1);
                 spectacle.add(spect2);
                 request.setAttribute("representation", representation);
@@ -64,12 +64,12 @@
                 <artSpect class="row">
                     <input type="checkbox" name="${spectvar.getName()}" id="${spectvar.getName()}" checked>
                     <label for="${spectvar.getName()}">${spectvar.getName()}</label>
-                    <p>Veuillez choisir la representation qui vous convients (et le nbr de place souhaité?)<br>
+                    <p>Veuillez choisir la representation qui vous convient (et le nbr de place souhaité?)<br>
                         </p>
                         <label for="jour">Date:</label>
                         <select name="jour" id="jour">
-                            <c:forEach items="${spectvar.getRepres()}" var="represvar">
-                                <option value="${represvar.getJour()}">${represvar.getJour()}, à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}</option>
+                            <c:forEach items="${spectvar.getRepresentation()}" var="represvar">
+                                <option value="${represvar.getJour()}">${represvar.afficherDate()}, à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}</option>
                             </c:forEach>
                         </select>
                         

@@ -6,7 +6,9 @@
 package beans;
 
 import java.awt.Image;
+import java.text.DateFormat;
 import java.util.* ;
+
 /**
  *
  * @author igierm
@@ -23,6 +25,15 @@ public class Representation {
     }
     public Date getJour() {
         return this.jour;
+    }
+    
+    public String afficherDate(){
+        String belle_date = null ;
+        DateFormat dateformatFR = DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL, new Locale("FR","fr"));
+        belle_date = dateformatFR.format(jour);
+        belle_date = belle_date.substring(0,belle_date.length()-12);
+        return belle_date ;
+
     }
     
     public int getHeure() {

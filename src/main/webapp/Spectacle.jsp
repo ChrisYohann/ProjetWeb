@@ -57,7 +57,7 @@
                         <br><br>${spectvar.getName()}
                         <br><br>Representations :
                         <c:forEach items="${spectvar.getRepresentation()}" var="representation">
-                                  ${representation.getJour()} ${"à"} ${representation.getHeure()} ${"heures"} 
+                                  ${representation.afficherDate()} ${"à"} ${representation.getHeure()} ${"heures"} 
                                   <br>
                        </c:forEach>    
                         </p>
