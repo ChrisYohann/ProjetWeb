@@ -26,7 +26,7 @@ public class MetierSetRole {
            String deroulement ;
            
            
-           if(request.getParameter("role").equals("membre")){
+           if(request.getParameter("role").equals("Passer Membre")){
                deroulement = maitre.update_role(user, pass, false) ;
            }
           

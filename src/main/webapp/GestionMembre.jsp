@@ -16,18 +16,14 @@
         <c:forEach items="${liste_membres}" var="membres">
             <c:out value="${membres.getLogin()}"/>            
             <c:if test = "${utilisateur.getLogin() ne membres.getLogin()}">
+            <c:if test = "${utilisateur.getLogin() ne root}">    
             <form method="post" action="SetRole">
             <input type="hidden" name="login" value ="${membres.getLogin()}"/>
             <input type="hidden" name="password" value ="${membres.getPassword()}"/>
-            <input type="hidden" name="role" value="membre"/>
-            <input type="submit" value="Passer Membre" />
+            <input type="submit" name="role" value="Passer Membre" />             
+            <input type="submit" name="role"  value="Passer Admin" />
             </form>
-            <form method="post" action="SetRole">
-            <input type="hidden" name="login" value ="${membres.getLogin()}"/>
-            <input type="hidden" name="password" value ="${membres.getPassword()}"/>
-            <input type="hidden" name="role" value="admin"/>                
-            <input type="submit" value="Passer Admin" />
-            </form>
+            </c:if>
             </c:if>
             <br>
             <br>
