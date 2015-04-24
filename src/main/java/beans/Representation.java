@@ -6,14 +6,14 @@
 package beans;
 
 import java.awt.Image;
-
+import java.util.* ;
 /**
  *
  * @author igierm
  */
 public class Representation {
     private Spectacle spect;
-    private String jour;
+    private Date jour;
     private int heure;
     private int numSalle;
 
@@ -21,7 +21,7 @@ public class Representation {
     public Spectacle getSpect() {
         return this.spect;
     }
-    public String getJour() {
+    public Date getJour() {
         return this.jour;
     }
     
@@ -36,7 +36,7 @@ public class Representation {
     public void setSpect(Spectacle spect) {
         this.spect=spect;
     }
-    public void setJour(String jour) {
+    public void setJour(Date jour) {
         this.jour=jour;
     }
     public void setHeure(int heure) {

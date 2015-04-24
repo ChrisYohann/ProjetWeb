@@ -53,9 +53,15 @@
                 <c:forEach items="${liste_spectacles}" var="spectvar" >
                 <artSpect class="row">
                     <img class="col-md-5" height=500px src="image/romeo.jpg"/>
-                    <p class="col-md-5">${spectvar.getDescription()}<br><br>${spectvar.getHoraire()}
-                        <br><br>Salle ${spectvar.getName()}
+                    <p class="col-md-5">${spectvar.getDescription()}<br><br>
+                        <br><br>${spectvar.getName()}
+                        <br><br>Representations :
+                        <c:forEach items="${spectvar.getRepresentation()}" var="representation">
+                                  ${representation.getJour()} ${"à"} ${representation.getHeure()} ${"heures"} 
+                                  <br>
+                       </c:forEach>    
                         </p>
+                        
                     <form  class="col-md-5" method="post" action="addCart">
 
                         <label for="nbrplace"></label><br>

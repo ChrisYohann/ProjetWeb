@@ -8,6 +8,7 @@ package beans;
 import java.awt.Image;
 import java.util.* ;
 
+
 /**
  *
  * @author igierm
@@ -18,6 +19,7 @@ public class Spectacle {
     private String description;
     private Image affiche;
     private List<Representation> representations ;
+
     
     public String getName() {
         return this.name;

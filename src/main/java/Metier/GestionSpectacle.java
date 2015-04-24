@@ -24,7 +24,8 @@ public class GestionSpectacle {
    }
     
     public List<Spectacle> AfficherSpectacle(HttpServletRequest request){
-        return spectacle.trouver() ;
+        return spectacle.afficher_spectacles() ;
+        
     }
     
 }
