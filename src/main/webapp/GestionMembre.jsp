@@ -13,20 +13,29 @@
         <c:out value="${deroulement}"/>
         <c:set var="deroulement" scope="session" value=""/>
         <br>
+        <div class="row">
+            <gestion class="col-md-offset-1 col-md-10">
         <c:forEach items="${liste_membres}" var="membres">
-            <c:out value="${membres.getLogin()}"/>            
+            <div id="blocgestion">
+            <artGestion class="row">
+                <p class="col-md-4">L'utilisateur ${membres.getLogin()}</p>          
             <c:if test = "${utilisateur.getLogin() ne membres.getLogin()}">
             <c:if test = "${utilisateur.getLogin() ne root}">    
             <form method="post" action="SetRole">
-            <input type="hidden" name="login" value ="${membres.getLogin()}"/>
-            <input type="hidden" name="password" value ="${membres.getPassword()}"/>
+            <input  type="hidden" name="login" value ="${membres.getLogin()}"/>
+            <input  type="hidden" name="password" value ="${membres.getPassword()}"/>
             <input type="submit" name="role" value="Passer Membre" />             
             <input type="submit" name="role"  value="Passer Admin" />
             </form>
             </c:if>
             </c:if>
+            <p></p>
             <br>
             <br>
+            </artgestion>
+            </div>
         </c:forEach>
+            </gestion>
+         </div>
     </body>
 </html>
