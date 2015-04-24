@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 
@@ -40,7 +41,7 @@ public class DAOManager {
     
     public static DAOManager getInstance() throws DAOConfigurationException{
         
-        
+        /*
         Properties properties = new Properties();
         String url ;
         String driver ;
@@ -67,28 +68,34 @@ public class DAOManager {
             throw new DAOConfigurationException("Le fichier de configuration est impossible à charger. Erreur de syntaxe");
         }
 
-        
-       // try{ 
-        //    Class.forName("com.mysql.jdbc.Driver");
+        */
+        try{ 
+            Class.forName("oracle.jdbc.OracleDriver");
            
-       // }
-       // catch ( ClassNotFoundException e ) {
+        }
+        catch ( ClassNotFoundException e ) {
     /* Gérer les éventuelles erreurs ici. */
-     
-        //String url = "jdbc:mysql://127.0.0.1:3306/bdd_projet";
-        //String utilisateur = "root" ;
-        //String password = "190692";
+        }
+        String url = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
+        String utilisateur = "igierm" ;
+        String password = "igierm";
+        try{
+        Connection connexion = DriverManager.getConnection(url, utilisateur, password);
+        Statement statement = connexion.createStatement();
+        int statut = statement.executeUpdate("INSERT INTO utilisateur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES (root,root,root,root,root@root);");
         
+        }
+        catch (SQLException e) {}
         //Chargement du Driver
         
-        try{
-            Class.forName(driver) ;
-        }
-        catch(ClassNotFoundException e){
-            throw new DAOConfigurationException("Le driver est introuvable");
-        }
+        //try{
+        //    Class.forName(driver) ;
+        //}
+        //catch(ClassNotFoundException e){
+          //  throw new DAOConfigurationException("Le driver est introuvable");
+        //}
         
-        DAOManager manager = new DAOManager(url,identifiant,motdepasse);
+        DAOManager manager = new DAOManager(url,utilisateur,password);
         return manager ;
               
 }
