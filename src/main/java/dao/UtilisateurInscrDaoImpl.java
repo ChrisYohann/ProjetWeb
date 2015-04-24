@@ -18,9 +18,9 @@ import static dao.DAOUtil.* ;
  * @author chris
  */
 public class UtilisateurInscrDaoImpl implements UtilisateurInscrDao {
-            private static final String SQL_SIGN_UP = "INSERT INTO utilisateur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES (?,?,?,?,?);";
+            private static final String SQL_SIGN_UP = "INSERT INTO utilisateur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES (?,?,?,?,?)";
             private static final String SQL_CHECK_IN = "SELECT * FROM utilisateur where login=?" ;
-            private static final String SQL_ALL_MEMBERS = "SELECT * FROM utilisateur ;";
+            private static final String SQL_ALL_MEMBERS = "SELECT * FROM utilisateur ";
             private DAOManager manager ;
             
     public UtilisateurInscrDaoImpl(DAOManager gerant){

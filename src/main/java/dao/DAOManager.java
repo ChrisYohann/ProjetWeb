@@ -41,7 +41,7 @@ public class DAOManager {
     
     public static DAOManager getInstance() throws DAOConfigurationException{
         
-        /*
+        
         Properties properties = new Properties();
         String url ;
         String driver ;
@@ -68,34 +68,30 @@ public class DAOManager {
             throw new DAOConfigurationException("Le fichier de configuration est impossible à charger. Erreur de syntaxe");
         }
 
-        */
-        try{ 
-            Class.forName("oracle.jdbc.OracleDriver");
-           
-        }
-        catch ( ClassNotFoundException e ) {
-    /* Gérer les éventuelles erreurs ici. */
-        }
-        String url = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
-        String utilisateur = "igierm" ;
-        String password = "igierm";
-        try{
-        Connection connexion = DriverManager.getConnection(url, utilisateur, password);
-        Statement statement = connexion.createStatement();
-        int statut = statement.executeUpdate("INSERT INTO utilisateur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES (root,root,root,root,root@root);");
         
-        }
-        catch (SQLException e) {}
+        //try{ 
+        //    Class.forName("oracle.jdbc.OracleDriver");
+           
+       // }
+      //  catch ( ClassNotFoundException e ) {
+    /* Gérer les éventuelles erreurs ici. */
+       // }
+       // String url = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
+       // String utilisateur = "igierm" ;
+       // String password = "igierm";
+        
+        
+        
         //Chargement du Driver
         
-        //try{
-        //    Class.forName(driver) ;
-        //}
-        //catch(ClassNotFoundException e){
-          //  throw new DAOConfigurationException("Le driver est introuvable");
-        //}
+        try{
+           Class.forName(driver) ;
+        }
+        catch(ClassNotFoundException e){
+            throw new DAOConfigurationException("Le driver est introuvable");
+        }
         
-        DAOManager manager = new DAOManager(url,utilisateur,password);
+        DAOManager manager = new DAOManager(url,identifiant,motdepasse);
         return manager ;
               
 }
