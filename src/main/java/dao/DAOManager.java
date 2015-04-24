@@ -22,7 +22,7 @@ import java.util.Properties;
 public class DAOManager {
     
     //Classe qui va gérer la connexion à la BD via le JDBC
-    private static final String FICHIER_CONFIG       = "/dao/dao.properties";
+    private static final String FICHIER_CONFIG       = "dao/dao.properties";
     private static final String PROPERTY_URL         = "url";
     private static final String PROPERTY_DRIVER      = "driver";
     private static final String PROPERTY_LOGIN       = "login";
@@ -40,7 +40,7 @@ public class DAOManager {
     
     public static DAOManager getInstance() throws DAOConfigurationException{
         
-       /* 
+        
         Properties properties = new Properties();
         String url ;
         String driver ;
@@ -50,9 +50,11 @@ public class DAOManager {
         ClassLoader chargeur = Thread.currentThread().getContextClassLoader();
         InputStream fichier_config = chargeur.getResourceAsStream(FICHIER_CONFIG);
         
+        
         if(fichier_config == null){
             throw new DAOConfigurationException("Le fichier properties "+FICHIER_CONFIG+" est introuvable");
         }
+        
         
         try{ //A tester avec un fichier mal écrit
             properties.load(fichier_config);
@@ -63,14 +65,15 @@ public class DAOManager {
         }
         catch(IOException e){
             throw new DAOConfigurationException("Le fichier de configuration est impossible à charger. Erreur de syntaxe");
-        }*/
+        }
+        //throw new DAOConfigurationException("Le fichier propedzadaties "+FICHIER_CONFIG+" est introuvable");
         
-        try{ 
+        /*try{ 
             Class.forName("com.mysql.jdbc.Driver");
            
         }
         catch ( ClassNotFoundException e ) {
-    /* Gérer les éventuelles erreurs ici. */
+    /* Gérer les éventuelles erreurs ici. 
 }      
         String url = "jdbc:mysql://127.0.0.1:3306/bdd_projet";
         String utilisateur = "root" ;
@@ -85,7 +88,7 @@ public class DAOManager {
             throw new DAOConfigurationException("Le driver est introuvable");
         }*/
         
-        DAOManager manager = new DAOManager(url,utilisateur,password);
+        DAOManager manager = new DAOManager(url,identifiant,motdepasse);
         return manager ;
               
     }
