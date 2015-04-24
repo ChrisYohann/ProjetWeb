@@ -6,6 +6,7 @@
 package beans;
 
 import java.awt.Image;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,6 +19,7 @@ public class Spectacle {
     private String horaire;
     private int numSalle;
     private Image affiche;
+    private ArrayList<Representation> repres;
     
     public String getName() {
         return this.name;
@@ -25,7 +27,9 @@ public class Spectacle {
     public String getHoraire() {
         return this.horaire;
     }
-    
+    public ArrayList<Representation> getRepres() {
+            return this.repres;
+    }
     public int getNumero() {
         return this.numero;
     }
@@ -38,7 +42,9 @@ public class Spectacle {
     public Image getAffiche() {
         return this.affiche;
     }
-    
+    public void setRepres(ArrayList<Representation> repres) {
+        this.repres=repres;
+    }
     public void setName(String name) {
         this.name=name;
     }
