@@ -53,7 +53,7 @@
                     <c:forEach items="${representation}" var="represvar" >
                         
                 <artSpect class="row">
-                    <input type="checkbox" name="${represvar.getSpect().getName()}" id="${represvar.getSpect().getName()}">
+                    <input type="checkbox" name="${represvar.getSpect().getName()}" id="${represvar.getSpect().getName()}" checked>
                     <label for="${represvar.getSpect().getName()}">${represvar.getSpect().getName()}</label>
                     <p>Vous avez reservé la representation du ${represvar.getJour()} à ${represvar.getHeure()} dans la salle ${represvar.getNumSalle()}<br>
                         
