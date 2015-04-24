@@ -29,7 +29,7 @@
                 spect2.setName("Je suis un autre super spectacle");
                 spect2.setNumero(2);
                 repres1.setSpect(spect1);
-                repres1.setJour("mardi 30 mais");
+                repres1.setJour("mardi 30 mai");
                 repres1.setHeure(14);
                 repres1.setNumSalle(3);
                 //spect1.setAffiche()
@@ -40,7 +40,7 @@
                 repres2.setNumSalle(1);
                 Representation repres3= new Representation();
                 repres3.setSpect(spect1);
-                repres3.setJour("mardi 30 mais");
+                repres3.setJour("mardi 30 mai");
                 repres3.setHeure(14);
                 repres3.setNumSalle(3);
                 representation.add(repres1);
@@ -69,21 +69,10 @@
                         <label for="jour">Date:</label>
                         <select name="jour" id="jour">
                             <c:forEach items="${spectvar.getRepres()}" var="represvar">
-                                <option value="${represvar.getJour()}">${represvar.getJour()}</option>
+                                <option value="${represvar.getJour()}">${represvar.getJour()}, à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}</option>
                             </c:forEach>
                         </select>
-                        <label for="heure">Heure:</label>
-                        <select name="heure" id="heure">
-                            <c:forEach items="${spectvar.getRepres()}" var="represvar">
-                                <option value="${represvar.getHeure()}">${represvar.getHeure()}</option>
-                            </c:forEach>
-                        </select>
-                        <label for="salle">Salle:</label>
-                        <select name="jour" id="jour">
-                            <c:forEach items="${spectvar.getRepres()}" var="represvar">
-                                <option value="${represvar.getNumSalle()}">${represvar.getNumSalle()}</option>
-                            </c:forEach>
-                        </select>
+                        
                     <br> 
                 </artSpect>
                 </c:forEach>
