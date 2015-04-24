@@ -22,7 +22,7 @@ import java.util.Properties;
 public class DAOManager {
     
     //Classe qui va gérer la connexion à la BD via le JDBC
-    private static final String FICHIER_CONFIG       = "dao/dao.properties";
+    private static final String FICHIER_CONFIG       = "dao/dab.properties";
     private static final String PROPERTY_URL         = "url";
     private static final String PROPERTY_DRIVER      = "driver";
     private static final String PROPERTY_LOGIN       = "login";
@@ -40,7 +40,7 @@ public class DAOManager {
     
     public static DAOManager getInstance() throws DAOConfigurationException{
         
-        
+       
         Properties properties = new Properties();
         String url ;
         String driver ;
