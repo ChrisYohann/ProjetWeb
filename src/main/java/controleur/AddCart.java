@@ -50,10 +50,11 @@ public class AddCart extends HttpServlet {
             if(name!=null){
             out.println("<h1>Servlet donne:" + nbrPlace + "et" +name+"</h1>");
             //ajouter ce spect à la BD
-                }
-            }out.println("<h1>rien n'est réservé</h1>");
-            out.println("</body>");
+                }else {
+            out.println("<h1>rien n'est réservé</h1>");
+            }out.println("</body>");
             out.println("</html>");
+        }
         }
     }
 
