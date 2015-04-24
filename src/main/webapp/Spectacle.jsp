@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="beans.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file="entete.jsp" %>
 <!DOCTYPE html>
@@ -56,6 +57,7 @@
                         <br><br>Salle ${spectvar.getNumSalle()}
                         </p>
                     <form  class="col-md-5" method="post" action="addCart">
+
                         <label for="nbrplace"></label><br>
                         <input type="number" name="nbrplace" id="nbrplace" min="1" max="10" value="1">
                     <input class="btn btn-primary" type="submit" name=${spectvar.getNumero()} value="Ajouter au panier" />
@@ -72,6 +74,15 @@
                     <form  class="col-md-5" method="post" action="addCart">
                         <input type="number" name="nbrplace" id="nbrplace" min="1" max="10" value="1">
                     <input class="btn btn-primary" type="submit" value="Ajouter au panier" />
+                 <% if (request.getSession(true).getAttribute("utilisateur") != null && ((UtilisateurCoBean)request.getSession(true).getAttribute("utilisateur")).isAdmin())
+                        {
+                    out.print("<form  class=\"col-md-5\" method=\"post\" action=\"SpectacleManagementCo\">");
+                    out.print("<input class=\"btn btn-primary\" type=\"submit\" value=\"Modifier\" />");
+                    out.print("</form>");
+                    out.print("<form  class=\"col-md-5\" method=\"post\" action=\"GestionBookings\">");
+                    out.print("<input class=\"btn btn-primary\" type=\"submit\" value=\"Voir les Réservations\" />");
+                    out.print("</form>");}
+                    %>
                     </form>
                 </artSpect>
                 <artSpect class="row">
@@ -83,6 +94,15 @@
                         <input type="number" name="nbrplace" id="nbrplace" min="1" max="10" value="1">
                     <input class="btn btn-primary" type="submit" value="Ajouter au panier" />
                     </form>
+                    <% if (request.getSession(true).getAttribute("utilisateur") != null && ((UtilisateurCoBean)request.getSession(true).getAttribute("utilisateur")).isAdmin())
+                        {
+                    out.print("<form  class=\"col-md-5\" method=\"post\" action=\"SpectacleManagementCo\">");
+                    out.print("<input class=\"btn btn-primary\" type=\"submit\" value=\"Modifier\" />");
+                    out.print("</form>");
+                    out.print("<form  class=\"col-md-5\" method=\"post\" action=\"GestionBookings\">");
+                    out.print("<input class=\"btn btn-primary\" type=\"submit\" value=\"Voir les Réservations\" />");
+                    out.print("</form>");}
+                    %>
                 </artSpect>
                         --%>
             </article>

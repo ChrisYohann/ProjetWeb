@@ -4,8 +4,10 @@
     Author     : chris
 --%>
 
-<%@page import="beans.Spectacle"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="beans.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,6 +33,10 @@
         if(utilisateur != null){   
             out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"MonCompte.jsp\">Mon Compte</a></p>");
             out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Logout\">Deconnexion ("+utilisateur.getLogin()+")</a></p>");
+                if(utilisateur.isAdmin())
+                {
+                    out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"GestionMembre\">Groupes</a></p>");
+                }
            }
         else if(nouveaumembre != null){
             out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"MonCompte.jsp\">Mon Compte</a></p>");

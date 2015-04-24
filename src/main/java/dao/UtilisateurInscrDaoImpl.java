@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.* ;
 import static dao.DAOUtil.* ;
 
 /**
@@ -19,6 +20,7 @@ import static dao.DAOUtil.* ;
 public class UtilisateurInscrDaoImpl implements UtilisateurInscrDao {
             private static final String SQL_SIGN_UP = "INSERT INTO utilisateur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES (?,?,?,?,?);";
             private static final String SQL_CHECK_IN = "SELECT * FROM utilisateur where login=?" ;
+            private static final String SQL_ALL_MEMBERS = "SELECT * FROM utilisateur ;";
             private DAOManager manager ;
             
     public UtilisateurInscrDaoImpl(DAOManager gerant){
@@ -60,9 +62,32 @@ public class UtilisateurInscrDaoImpl implements UtilisateurInscrDao {
 
        
     }
+    
+    public List<UtilisateurInscrBean> trouver() throws DAOException{
+        List<UtilisateurInscrBean> members_list = new ArrayList();
+                Connection connexion = null;
+                PreparedStatement preparedStatement = null;
+                ResultSet resultSet = null;
+                UtilisateurInscrBean utilisateur = null;
+                
+                  try {
+        connexion = manager.getConnection();
+        preparedStatement = initRequete( connexion, SQL_ALL_MEMBERS,false);
+        resultSet = preparedStatement.executeQuery();
+        while ( resultSet.next()) { 
+            members_list.add(this.link(resultSet));
+        }
+        
+    } catch ( SQLException e ) {
+        throw new DAOException( e );
+    } finally {
+        closeAll( resultSet, preparedStatement, connexion );
+    }
+        return members_list ;
+    }
 
     
-   /* private static UtilisateurInscrBean link( ResultSet resultSet ) throws SQLException {
+    public UtilisateurInscrBean link( ResultSet resultSet ) throws SQLException {
     
     UtilisateurInscrBean utilisateur = new UtilisateurInscrBean();
     utilisateur.setLogin( resultSet.getString( "login" ) );
@@ -70,9 +95,10 @@ public class UtilisateurInscrDaoImpl implements UtilisateurInscrDao {
     utilisateur.setNom(resultSet.getString("nomUt"));
     utilisateur.setPrenom(resultSet.getString("prenomUt"));
     utilisateur.setEmail(resultSet.getString("AdresseUt"));
+    utilisateur.setInscrit(true);
   
     return utilisateur;
-    }*/
+    }
     
     
 }

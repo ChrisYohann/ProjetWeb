@@ -5,17 +5,16 @@
  */
 package dao;
 
-import beans.UtilisateurInscrBean;
-import java.util.* ;
+import beans.Spectacle;
 
 /**
  *
  * @author chris
  */
-public interface UtilisateurInscrDao {
+public interface SpectacleDao {
     
-     void creer( UtilisateurInscrBean utilisateur ) throws DAOException;
-
-     public List<UtilisateurInscrBean> trouver() throws DAOException ;
+    public void creer(Spectacle spectacle) throws DAOException ;
+    
+    public Spectacle trouver(int numSpect) throws DAOException ;
     
 }
