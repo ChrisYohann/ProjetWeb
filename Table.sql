@@ -1,7 +1,8 @@
 CREATE TABLE spectacle (
 	numSpect int  primary key check(numSpect>0), 
-	nomSpect varchar(30) NOT NULL, 
-	nbrPlace int  check(nbrPlace>71));
+	nomSpect varchar(30) NOT NULL,
+        description varchar(200)); 
+	
 
 CREATE TABLE dateT ( 
 	jour DATE, 
@@ -72,6 +73,7 @@ CREATE TABLE achat(
 	
 CREATE TABLE representation(
 	numSpect int REFERENCES spectacle(numSpect) ON DELETE CASCADE,
+        nbrPlace int  check(nbrPlace>71),
 	jour DATE,
 	heure int,
 	FOREIGN KEY(jour, heure) references dateT(jour, heure) ON DELETE CASCADE,

@@ -5,10 +5,28 @@
  */
 package Metier;
 
+import beans.Spectacle;
+import dao.SpectacleDao;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+
 /**
  *
  * @author chris
  */
 public class GestionSpectacle {
     
+        
+    private SpectacleDao spectacle ;
+    
+    public GestionSpectacle(SpectacleDao scene){
+       this.spectacle = scene ;
+   }
+    
+    public List<Spectacle> AfficherSpectacle(HttpServletRequest request){
+        return spectacle.trouver() ;
+    }
+    
 }
+    
+

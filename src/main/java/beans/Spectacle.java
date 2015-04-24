@@ -6,6 +6,7 @@
 package beans;
 
 import java.awt.Image;
+import java.util.* ;
 
 /**
  *
@@ -15,15 +16,11 @@ public class Spectacle {
     private String  name;
     private int numero;
     private String description;
-    private String horaire;
-    private int numSalle;
     private Image affiche;
+    private List<Representation> representations ;
     
     public String getName() {
         return this.name;
-    }
-    public String getHoraire() {
-        return this.horaire;
     }
     
     public int getNumero() {
@@ -32,19 +29,19 @@ public class Spectacle {
     public String getDescription() {
         return this.description;
     }
-    public int getNumSalle() {
-        return this.numSalle;
-    }
+    
     public Image getAffiche() {
         return this.affiche;
+    }
+    
+    public List<Representation> getRepresentation(){
+        return this.representations ;
     }
     
     public void setName(String name) {
         this.name=name;
     }
-    public void setHoraire(String horaire) {
-        this.horaire=horaire;
-    }
+    
     public void setNumero(int numero) {
         this.numero=numero;
     }
@@ -53,14 +50,13 @@ public class Spectacle {
         this.description=description;
     }
     
-    public void setNumSalle(int numSalle) {
-        this.numSalle=numSalle;
-    }
-    
     public void setAffiche(Image affiche) {
         this.affiche=affiche;
     }
     
+    public void setRepresentation(List<Representation> scenes){
+        this.representations = scenes ;
+    }
     
-   
+     
 }

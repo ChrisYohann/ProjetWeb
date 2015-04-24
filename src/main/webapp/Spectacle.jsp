@@ -16,7 +16,7 @@
         <title>Spectacle</title>
     </head>
     <body>
-        <%
+       <%-- <%
                 java.util.List<Spectacle> spectacle = new java.util.ArrayList<Spectacle>();
                 Spectacle spect1= new Spectacle();
                 int i=0;
@@ -45,16 +45,16 @@
                 spectacle.add(spect2);
                 spectacle.add(spect3);
                 request.setAttribute("spectacle", spectacle);
-        %>
+        %>--%>
         <h1 class="Spect">Spectacle</h1>
         
         <div class="row">
             <article class="col-md-offset-1 col-md-10">
-                <c:forEach items="${spectacle}" var="spectvar" >
+                <c:forEach items="${liste_spectacles}" var="spectvar" >
                 <artSpect class="row">
                     <img class="col-md-5" height=500px src="image/romeo.jpg"/>
                     <p class="col-md-5">${spectvar.getDescription()}<br><br>${spectvar.getHoraire()}
-                        <br><br>Salle ${spectvar.getNumSalle()}
+                        <br><br>Salle ${spectvar.getName()}
                         </p>
                     <form  class="col-md-5" method="post" action="addCart">
 

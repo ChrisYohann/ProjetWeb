@@ -5,6 +5,7 @@
  */
 package dao;
 
+import java.util.* ;
 import beans.Spectacle;
 
 /**
@@ -16,5 +17,7 @@ public interface SpectacleDao {
     public void creer(Spectacle spectacle) throws DAOException ;
     
     public Spectacle trouver(int numSpect) throws DAOException ;
+    
+    public List<Spectacle> trouver() throws DAOException ;
     
 }
