@@ -66,32 +66,32 @@ public class DAOManager {
         catch(IOException e){
             throw new DAOConfigurationException("Le fichier de configuration est impossible à charger. Erreur de syntaxe");
         }
-        //throw new DAOConfigurationException("Le fichier propedzadaties "+FICHIER_CONFIG+" est introuvable");
+
         
-        /*try{ 
-            Class.forName("com.mysql.jdbc.Driver");
+       // try{ 
+        //    Class.forName("com.mysql.jdbc.Driver");
            
-        }
-        catch ( ClassNotFoundException e ) {
-    /* Gérer les éventuelles erreurs ici. 
-}      
-        String url = "jdbc:mysql://127.0.0.1:3306/bdd_projet";
-        String utilisateur = "root" ;
-        String password = "190692";
+       // }
+       // catch ( ClassNotFoundException e ) {
+    /* Gérer les éventuelles erreurs ici. */
+     
+        //String url = "jdbc:mysql://127.0.0.1:3306/bdd_projet";
+        //String utilisateur = "root" ;
+        //String password = "190692";
         
         //Chargement du Driver
         
-       /* try{
+        try{
             Class.forName(driver) ;
         }
         catch(ClassNotFoundException e){
             throw new DAOConfigurationException("Le driver est introuvable");
-        }*/
+        }
         
         DAOManager manager = new DAOManager(url,identifiant,motdepasse);
         return manager ;
               
-    }
+}
 
     //On se connecte à la BDD
     public Connection getConnection() throws SQLException{

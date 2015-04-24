@@ -4,7 +4,8 @@
     Author     : igierm
 --%>
 
-<%@page import="beans.UtilisateurCoBean"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="beans.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file="entete.jsp" %>
 <!DOCTYPE html>
@@ -36,7 +37,7 @@
                 Spectacle spect3= new Spectacle();
                 spect3.setName("Je suis le meilleur spectacle");
                 spect3.setNumero(3);
-                spect3.setDescription("Ceci est un petit paragraphe "
+                spect3.setDescription("bla bla Ceci est un petit paragraphe "
                         + "destiné à decrire brievement cette charmante piéce de théatre");
                 spect3.setHoraire("Horaire: 14h30 17h00 19h15");
                 spect3.setNumSalle(1);
@@ -49,21 +50,21 @@
         
         <div class="row">
             <article class="col-md-offset-1 col-md-10">
-                <% for ( i=0; i<spectacle.size(); i++) {%>
+                <c:forEach items="${spectacle}" var="spectvar" >
                 <artSpect class="row">
                     <img class="col-md-5" height=500px src="image/romeo.jpg"/>
-                    <p class="col-md-5">${spectacle.get(i).getDescription()}<br><br>${spectacle.get(i).getHoraire()}
-                        <br><br>Salle ${spectacle.get(i).getNumSalle()}
+                    <p class="col-md-5">${spectvar.getDescription()}<br><br>${spectvar.getHoraire()}
+                        <br><br>Salle ${spectvar.getNumSalle()}
                         </p>
                     <form  class="col-md-5" method="post" action="addCart">
 
                         <label for="nbrplace"></label><br>
                         <input type="number" name="nbrplace" id="nbrplace" min="1" max="10" value="1">
-                    <input class="btn btn-primary" type="submit" name=${spectacle.get(i).getNumero()} value="Ajouter au panier" />
+                    <input class="btn btn-primary" type="submit" name=${spectvar.getNumero()} value="Ajouter au panier" />
                     <br>
                     </form>    
                 </artSpect>
-                        <% }%>
+                </c:forEach>
                         <%--
                 <artSpect class="row">
                     <img class="col-md-5" height=500px src="image/Scoop.jpg"/>
