@@ -68,6 +68,7 @@
                                   <br></c:forEach> 
                        
                         </p>
+
                         <label for="nbrplace"> Nombre de Place: </label>
                         <input type="number" name="nbrplace ${spectvar.getName()}" id="nbrplace" min="1" max="10" value="1"><SELECT name="categorie de ${spectvar.getName()}"  size="1">
 <OPTION>orchestre
@@ -78,6 +79,16 @@
                         <br><br>
    
                     <input class="btn btn-primary" type="submit" name="ajout de ${spectvar.getName()}" value="Ajouter au panier" />
+
+                     <% if (request.getSession(true).getAttribute("utilisateur") != null && ((UtilisateurCoBean)request.getSession(true).getAttribute("utilisateur")).isAdmin())
+                        {
+                    out.print("<form  class=\"col-md-5\" method=\"post\" action=\"SpectacleManagementCo\">");
+                    out.print("<input class=\"btn btn-primary\" type=\"submit\" value=\"Modifier\" />");
+                    out.print("</form>");
+                    out.print("<form  class=\"col-md-5\" method=\"post\" action=\"GestionBookings\">");
+                    out.print("<input class=\"btn btn-primary\" type=\"submit\" value=\"Voir les Réservations\" />");
+                    out.print("</form>");}
+                    %>
                     <br>
                     </form>    
                 </artSpect>

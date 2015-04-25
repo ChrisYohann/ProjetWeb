@@ -5,7 +5,7 @@
  */
 package beans;
 
-import java.awt.Image;
+
 import java.util.* ;
 
 
@@ -17,7 +17,7 @@ public class Spectacle {
     private String  name;
     private int numero;
     private String description;
-    private Image affiche;
+    private String affiche;
     private List<Representation> representations ;
 
     
@@ -32,7 +32,7 @@ public class Spectacle {
         return this.description;
     }
     
-    public Image getAffiche() {
+    public String getAffiche() {
         return this.affiche;
     }
     
@@ -52,7 +52,7 @@ public class Spectacle {
         this.description=description;
     }
     
-    public void setAffiche(Image affiche) {
+    public void setAffiche(String affiche) {
         this.affiche=affiche;
     }
     
