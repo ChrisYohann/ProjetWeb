@@ -81,6 +81,7 @@ CREATE TABLE representation(
 	CONSTRAINT chk_repres CHECK (0<numSalle and numSalle<4 and 13<heure and heure<22));
 	
 CREATE TABLE reservation(
+        idPanier int primary key,
 	login varchar(30) REFERENCES utilisateur(login) ON DELETE CASCADE,
 	numSpect int REFERENCES spectacle(numSpect) ON DELETE CASCADE,
 	jour DATE,
@@ -93,6 +94,7 @@ CREATE TABLE reservation(
 	Foreign Key(numSalle, numRang, numPlace) references place(numSalle, numRang, numPlace) ON DELETE CASCADE);
 
 CREATE TABLE panier(
+        idPanier int primary key,
 	login varchar(30) REFERENCES utilisateur(login) ON DELETE CASCADE,
 	numSpect int REFERENCES spectacle(numSpect) ON DELETE CASCADE,
 	jour DATE,

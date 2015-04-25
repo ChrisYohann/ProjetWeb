@@ -15,12 +15,16 @@ import java.util.ArrayList;
  * @author igierm
  */
 public class Reservation {
+    private int id;
     private String  login;
     private Representation repres;
     private int nbrPlace;
     private ArrayList<Rang> numRang;
     private ArrayList<Place> numPlace;
     
+    public int getId(){
+        return this.id;
+    }
     public String getLogin() {
         return this.login;
     }
@@ -56,8 +60,12 @@ public class Reservation {
     public void setNumPlace(ArrayList<Place> numPlace) {
         this.numPlace=numPlace;
     }
-    
-    
+    public void setId(int id) {
+        this.id=id;
+    }
+    public boolean isPanier(){
+        return false;
+    }
     
    
 }
