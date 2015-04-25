@@ -14,12 +14,15 @@ import java.util.* ;
  * @author igierm
  */
 public class Representation {
+    private int idRepres;
     private Spectacle spect;
     private Date jour;
     private int heure;
     private int numSalle;
 
-    
+    public int getIdRepres() {
+        return this.idRepres;
+    }
     public Spectacle getSpect() {
         return this.spect;
     }
@@ -39,6 +42,11 @@ public class Representation {
     public int getHeure() {
         return this.heure;
     }
+    
+    public void setIdRepres(int idRepres) {
+        this.idRepres=idRepres;
+    }
+    
    
     public int getNumSalle() {
         return this.numSalle;
