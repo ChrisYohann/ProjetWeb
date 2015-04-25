@@ -5,7 +5,10 @@
  */
 package controleur;
 
+import Metier.GestionAchat;
 import beans.Spectacle;
+import dao.DAOManager;
+import dao.PayerDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -20,7 +23,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "PayRes", urlPatterns = {"/PayRes"})
 public class PayRes extends HttpServlet {
+    public static final String ATT_DAO_MANAGER = "daomanager";
+    public static final String ATT_PANIER = "panier";
+    public static final String ATT_FORM = "form";
+    public static final String VUE = "/reserver.jsp";
 
+    private PayerDao payerdao;
+    
+     public void init(){
+        this.payerdao = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getPayerDao();
+    }  
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,6 +46,17 @@ public class PayRes extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        
+               GestionAchat groupmanager = new GestionAchat(this.payerdao) ;
+               request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+
+        /*
+        
+        
+        
+        
+        
         String payer = request.getParameter("payer");
         String reserver = request.getParameter("reserver");
         String spect1 = request.getParameter("spect 1");
@@ -46,7 +70,7 @@ public class PayRes extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
+            /*out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet PayRes</title>");            
@@ -65,7 +89,7 @@ public class PayRes extends HttpServlet {
 }
             out.println("</body>");
             out.println("</html>");
-        }
+        }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

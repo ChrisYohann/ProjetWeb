@@ -29,7 +29,7 @@ public class Reservation {
     public String getLogin() {
         return this.login;
     }
-    public List<Representation> getrespres() {
+    public List<Representation> getRepres() {
         return this.repres;
     }
     
