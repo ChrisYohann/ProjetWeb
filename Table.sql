@@ -91,3 +91,15 @@ CREATE TABLE reservation(
 	numPlace int check(0<numPlace and numPlace<21),
 	Foreign KEY(numSalle, numRang) references rang(numSalle, numRang) ON DELETE CASCADE,
 	Foreign Key(numSalle, numRang, numPlace) references place(numSalle, numRang, numPlace) ON DELETE CASCADE);
+
+CREATE TABLE panier(
+	login varchar(30) REFERENCES utilisateur(login) ON DELETE CASCADE,
+	numSpect int REFERENCES spectacle(numSpect) ON DELETE CASCADE,
+	jour DATE,
+	heure int  check(13<heure and heure<22),
+	FOREIGN KEY(jour, heure) references dateT(jour, heure) ON DELETE CASCADE,
+	numSalle int check(0<numSalle and numSalle<4),
+	numRang int check(0<numRang and numRang<11),
+	numPlace int check(0<numPlace and numPlace<21),
+	Foreign KEY(numSalle, numRang) references rang(numSalle, numRang) ON DELETE CASCADE,
+	Foreign Key(numSalle, numRang, numPlace) references place(numSalle, numRang, numPlace) ON DELETE CASCADE);
