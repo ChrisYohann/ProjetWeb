@@ -72,6 +72,7 @@ CREATE TABLE achat(
 
 	
 CREATE TABLE representation(
+        idRepres int primary key,
 	numSpect int REFERENCES spectacle(numSpect) ON DELETE CASCADE,
         nbrPlace int  check(nbrPlace>71),
 	jour DATE,
@@ -81,6 +82,20 @@ CREATE TABLE representation(
 	CONSTRAINT chk_repres CHECK (0<numSalle and numSalle<4 and 13<heure and heure<22));
 	
 CREATE TABLE reservation(
+        idPanier int primary key,
+	login varchar(30) REFERENCES utilisateur(login) ON DELETE CASCADE,
+	numSpect int REFERENCES spectacle(numSpect) ON DELETE CASCADE,
+	jour DATE,
+	heure int  check(13<heure and heure<22),
+	FOREIGN KEY(jour, heure) references dateT(jour, heure) ON DELETE CASCADE,
+	numSalle int check(0<numSalle and numSalle<4),
+	numRang int check(0<numRang and numRang<11),
+	numPlace int check(0<numPlace and numPlace<21),
+	Foreign KEY(numSalle, numRang) references rang(numSalle, numRang) ON DELETE CASCADE,
+	Foreign Key(numSalle, numRang, numPlace) references place(numSalle, numRang, numPlace) ON DELETE CASCADE);
+
+CREATE TABLE panier(
+        idPanier int primary key,
 	login varchar(30) REFERENCES utilisateur(login) ON DELETE CASCADE,
 	numSpect int REFERENCES spectacle(numSpect) ON DELETE CASCADE,
 	jour DATE,

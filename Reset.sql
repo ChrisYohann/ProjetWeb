@@ -1,3 +1,5 @@
+DROP TABLE panier;
+
 DROP TABLE reservation;
 
 DROP TABLE representation;

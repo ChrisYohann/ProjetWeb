@@ -55,15 +55,19 @@
                     <img class="col-md-5" height=500px src="image/romeo.jpg"/>
                     <p class="col-md-5">${spectvar.getDescription()}<br><br>
                         <br><br>${spectvar.getName()}
-                        <br><br>Representations :
-                        <c:forEach items="${spectvar.getRepresentation()}" var="representation">
+                        <br><br>Representations:
+                        <form  class="col-md-5" method="post" action="addCart">
+                        <label for="jour">Date:</label>
+                        <select name="jour" id="jour">
+                            <c:forEach items="${spectvar.getRepresentation()}" var="represvar">
+                                <option value="${represvar.afficherDate()}">${represvar.afficherDate()}, à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}</option>
+                            </c:forEach>
+                        </select>    
+                        <%-- <c:forEach items="${spectvar.getRepresentation()}" var="representation">
                                   ${representation.afficherDate()} ${"à"} ${representation.getHeure()} ${"heures"} 
                                   <br>
-                       </c:forEach>    
+                       </c:forEach>   --%> 
                         </p>
-                        
-                    <form  class="col-md-5" method="post" action="addCart">
-
                         <label for="nbrplace"></label><br>
                         <input type="number" name="nbrplace" id="nbrplace" min="1" max="10" value="1">
                     <input class="btn btn-primary" type="submit" name=${spectvar.getNumero()} value="Ajouter au panier" />
