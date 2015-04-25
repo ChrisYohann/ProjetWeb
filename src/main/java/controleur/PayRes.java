@@ -5,6 +5,7 @@
  */
 package controleur;
 
+import beans.Spectacle;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -34,6 +35,12 @@ public class PayRes extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String payer = request.getParameter("payer");
         String reserver = request.getParameter("reserver");
+        String spect1 = request.getParameter("spect 1");
+        String spect2 = request.getParameter("spect 2");
+        int nbplace1 = Integer.valueOf(request.getParameter("nbmplace1"));
+        int nbplace2 = Integer.valueOf(request.getParameter("nbmplace2"));
+        String cat1 = request.getParameter("categorie de spect1");
+        String cat2 = request.getParameter("categorie de spect2");
 
         
         try (PrintWriter out = response.getWriter()) {
@@ -46,11 +53,14 @@ public class PayRes extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             if(payer!=null){
-            out.println("<h1>Votre compte a bien été débité, TODO: enlever ce qui est coché de la page c'est à dire"
-                    + "acces en BD pour enlever ce truc de panier et le mettre dans achat, faire un ticket</h1>");
-            //ajouter ce spect à la BD
+            out.println("<h1>Vous avez acheté :</h1>");
+            if(spect1!=null) out.println("<h1>"+ nbplace1 +" place(s) pour le spectacle 1 en catégorie " + cat1 + "</h1>");
+            if(spect2!=null) out.println("<h1>"+ nbplace2 +" place(s) pour le spectacle 2 en catégorie " + cat2 + "</h1>");
+//ajouter ce spect à la BD
                 }else if(reserver!=null){
-            out.println("<h1>ajouter à mes reservation sur monCompte, idem acces en BD</h1>");
+            out.println("<h1>Vous avez réservé :</h1>");
+            if(spect1!=null) out.println("<h1>"+ nbplace1 +" place(s) pour le spectacle 1 en catégorie " + cat1 + "</h1>");
+            if(spect2!=null) out.println("<h1>"+ nbplace2 +" place(s) pour le spectacle 2 en catégorie " + cat2 + "</h1>");
             }else{out.println("<h1>Le serveur est actuelement indisponible veuillez reessayer plus tard</h1>");
 }
             out.println("</body>");
