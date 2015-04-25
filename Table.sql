@@ -72,6 +72,7 @@ CREATE TABLE achat(
 
 	
 CREATE TABLE representation(
+        idRepres int primary key,
 	numSpect int REFERENCES spectacle(numSpect) ON DELETE CASCADE,
         nbrPlace int  check(nbrPlace>71),
 	jour DATE,

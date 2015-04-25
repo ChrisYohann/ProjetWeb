@@ -18,9 +18,9 @@ import java.util.*;
  *
  * @author chris
  */
-/*
+
 public class PayerDaoImpl implements PayerDao {
-/*
+
     private static String SQL_CHECK_SPECTACLE = "SELECT * FROM spectacle where numSpect=?";
     private static String SQL_NEW_SPECTACLE = "INSERT INTO spectacle (numSpect,nomSpect,nbrPlace) VALUES (?,?,?)";
     private static String SQL_ALL_SPECTACLES = "SELECT * FROM spectacle ";
@@ -32,7 +32,7 @@ public class PayerDaoImpl implements PayerDao {
     }
 
     @Override
-    public void creer(Spectacle spectacle) throws DAOException {
+    public void creer(Panier panier) throws DAOException {
 
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -64,7 +64,7 @@ public class PayerDaoImpl implements PayerDao {
     }
 
     @Override
-    public Spectacle trouver(int numSpect) throws DAOException {
+    public Panier trouver(int numSpect) throws DAOException {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -149,4 +149,4 @@ public class PayerDaoImpl implements PayerDao {
         return spectacle;
     }
 
-}*/
+}

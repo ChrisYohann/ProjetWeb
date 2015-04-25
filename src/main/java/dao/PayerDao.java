@@ -15,8 +15,8 @@ public interface PayerDao {
     
     public void creer(Panier panier) throws DAOException ;//creer une reservation ou un achat
     
-    public Panier trouver(int id) throws DAOException ;//trouver une representation
+    public Representation trouver(int idRepres) throws DAOException ;//trouver une representation
     
-    public Panier afficher_panier() throws DAOException ;
+    public Panier afficher_panier() throws DAOException ;//enlever de la table panier la representation
         
 }
