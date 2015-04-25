@@ -8,6 +8,7 @@ package beans;
 import java.awt.Image;
 import java.beans.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 public class Reservation {
     private int id;
     private String  login;
-    private Representation repres;
+    private List<Representation> repres;
     private int nbrPlace;
     private ArrayList<Rang> numRang;
     private ArrayList<Place> numPlace;
@@ -28,7 +29,7 @@ public class Reservation {
     public String getLogin() {
         return this.login;
     }
-    public Representation getrespres() {
+    public List<Representation> getrespres() {
         return this.repres;
     }
     
@@ -47,7 +48,7 @@ public class Reservation {
     public void setLogin(String login) {
         this.login=login;
     }
-    public void setRepres(Representation repres) {
+    public void setRepres(List<Representation>repres) {
         this.repres=repres;
     }
     public void setNbrPlace(int nubrPlace) {
