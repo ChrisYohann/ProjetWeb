@@ -5,8 +5,13 @@
  */
 package controleur;
 
+import Metier.GestionPanier;
+import beans.Spectacle;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +38,8 @@ public class AddCart extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        String nbrPlace = request.getParameter("nbrplace");
+        GestionPanier gerant = new GestionPanier();
+        gerant.gerer(request);
         
         
         try (PrintWriter out = response.getWriter()) {
@@ -41,22 +47,16 @@ public class AddCart extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddCart</title>");            
+            out.println("<title>Ajout au panier</title>");            
             out.println("</head>");
             out.println("<body>");
-            for (int i=1; i<101; i++) {
-                String si= String.valueOf(i);
-                String name=request.getParameter(si);
-            if(name!=null){
-            out.println("<h1>Servlet donne:" + nbrPlace + "et" +name+"</h1>");
-            //ajouter ce spect à la BD
-                }else {
-            out.println("<h1>rien n'est réservé</h1>");
-            }out.println("</body>");
+            out.println("<div><h6><meta http-equiv=\"refresh\" content=\"0; URL=Spectacle.jsp\"></h6></div>");
+            out.println("</body>");
             out.println("</html>");
         }
+        
         }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -86,6 +86,7 @@ public class AddCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //List<Spectacle> spectacle = ( List<Spectacle>) request.getAttribute("liste_spectacles");
         processRequest(request, response);
     }
 

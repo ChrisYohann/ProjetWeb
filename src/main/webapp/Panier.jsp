@@ -88,7 +88,7 @@
         <title>Panier</title>
     </head>
     <body>
-        <%
+        <%--
                 java.util.ArrayList<Representation> representation = new java.util.ArrayList<Representation>();
                 java.util.ArrayList<Spectacle> spectacle = new java.util.ArrayList<Spectacle>();
 
@@ -126,7 +126,14 @@
                 spectacle.add(spect2);
                 request.setAttribute("representation", representation);
                 request.setAttribute("spectacle", spectacle);
-        %> 
+       --%> 
+       
+       <% java.util.ArrayList<String> panier = ( ArrayList<String>) request.getSession(true).getAttribute("monpanier");
+            if (panier!=null){
+               
+            
+               
+       %>
         
         <h1 class="Spect">Votre panier:</h1>
         
@@ -134,31 +141,17 @@
             
             <div class="col-md-offset-1 col-md-5">
                 <form method="post" action="PayRes">
-                    <%--       <c:forEach items="${spectacle}" var="spectvar" >
-                        --%>
+                         <c:forEach items="${monpanier}" var="spectvar" >
+                        
                 <artSpect class="row">
-                    <input type="checkbox" name="spect 1" id="idspect" checked>
-                    <label for="nomspectacle">spect 1</label>
-                    <br>
-                        <label for="jour">Nombre de place</label>
-                        <input type="number" name="nbmplace1" id="nbrplace" min="1" max="10" value="1"> <SELECT name="categorie de spect1"  size="1">
-<OPTION>orchestre
-<OPTION>balcon
-<OPTION>poulallier
+                    <input type="checkbox" name="ds" id="idspect" checked> 
+                    <label for="nomspectacle">${spectvar.getNom()}</label>
+                    <br>${spectvar.afficherInfo()}</artspect>
+                             
+                         </c:forEach>
+                        
 
-</SELECT>
-
-<artSpect class="row">
-                    <input type="checkbox" name="spect 2" id="idspect" checked>
-                    <label for="nomspectacle">spect 2</label>
-                    <br>
-                        <label for="jour">Nombre de place</label>
-                        <input type="number" name="nbmplace2" id="nbrplace" min="1" max="10" value="1"> <SELECT name="categorie de spect2"  size="1">
-<OPTION>orchestre
-<OPTION>balcon
-<OPTION>poulallier
-
-</SELECT>
+                        
                         <%--    <c:forEach items="${spectvar.getRepresentation()}" var="represvar">
                                 
                             </c:forEach> --%>
@@ -171,7 +164,12 @@
                     <br><br>
                 <input class="btn btn-primary" type="submit" name="payer" value="Payer" />
                 <input class="btn btn-primary" type="submit" name="reserver" value="Reserver" />
-
+                <% } 
+            else {%>
+                
+                <h1 class="Vide">Votre panier est vide</h1>
+                
+                <% } %>
                 </form>
                     </div>
     </body>
