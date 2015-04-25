@@ -1,13 +1,12 @@
 CREATE TABLE spectacle (
-	numSpect int  primary key check(numSpect>0), 
+	numSpect int primary key check(numSpect>0),
 	nomSpect varchar(30) NOT NULL,
         description varchar(200)); 
-	
 
-CREATE TABLE dateT ( 
-	jour DATE, 
-	heure int  check(13<heure and heure<22),
-	primary key(jour, heure));
+CREATE TABLE affiche(
+        numSpect int primary key references spectacle(numSpect) on DELETE CASCADE,
+        image varchar(60),
+        check(numSpect >0));
 
 CREATE TABLE salle ( 
 	numSalle int primary key check(0<numSalle and numSalle<4));
@@ -62,7 +61,6 @@ CREATE TABLE achat(
 	numSpect int REFERENCES spectacle(numSpect) ON DELETE CASCADE,
 	jour DATE,
 	heure int,
-	FOREIGN KEY(jour, heure) references dateT(jour, heure) ON DELETE CASCADE,
 	numSalle int,
 	numRang int,
 	numPlace int,
@@ -72,14 +70,15 @@ CREATE TABLE achat(
 
 	
 CREATE TABLE representation(
-        idRepres int primary key,
 	numSpect int REFERENCES spectacle(numSpect) ON DELETE CASCADE,
         nbrPlace int  check(nbrPlace>71),
 	jour DATE,
 	heure int,
-	FOREIGN KEY(jour, heure) references dateT(jour, heure) ON DELETE CASCADE,
 	numSalle int references salle(numSalle),
+        primary key (jour,heure,numSalle),
 	CONSTRAINT chk_repres CHECK (0<numSalle and numSalle<4 and 13<heure and heure<22));
+
+--"ALTER TABLE spectacle AUTO_INCREMENT=1;
 	
 CREATE TABLE reservation(
         idPanier int primary key,
@@ -87,7 +86,6 @@ CREATE TABLE reservation(
 	numSpect int REFERENCES spectacle(numSpect) ON DELETE CASCADE,
 	jour DATE,
 	heure int  check(13<heure and heure<22),
-	FOREIGN KEY(jour, heure) references dateT(jour, heure) ON DELETE CASCADE,
 	numSalle int check(0<numSalle and numSalle<4),
 	numRang int check(0<numRang and numRang<11),
 	numPlace int check(0<numPlace and numPlace<21),
@@ -100,7 +98,6 @@ CREATE TABLE panier(
 	numSpect int REFERENCES spectacle(numSpect) ON DELETE CASCADE,
 	jour DATE,
 	heure int  check(13<heure and heure<22),
-	FOREIGN KEY(jour, heure) references dateT(jour, heure) ON DELETE CASCADE,
 	numSalle int check(0<numSalle and numSalle<4),
 	numRang int check(0<numRang and numRang<11),
 	numPlace int check(0<numPlace and numPlace<21),
