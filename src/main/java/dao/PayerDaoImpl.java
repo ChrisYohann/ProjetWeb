@@ -26,7 +26,7 @@ public class PayerDaoImpl implements PayerDao {
     private static String SQL_ALL_SPECTACLES = "SELECT * FROM spectacle ";
     private static String SQL_DATE_SPECTACLE = "SELECT DISTINCT prez.numSpect,prez.nbrPlace,prez.jour,prez.heure,prez.numSalle from representation prez,spectacle s where s.numSpect = ? and prez.numSpect = s.numSpect ";
     private DAOManager manager;
-
+/*
     public PayerDaoImpl(DAOManager gerant) {
         this.manager = gerant;
     }
@@ -86,7 +86,7 @@ public class PayerDaoImpl implements PayerDao {
     }
 
     @Override
-    public List<Spectacle> afficher_spectacles() throws DAOException {
+    public Panier afficher_panier() throws DAOException {
         List<Spectacle> spectacles_list = new ArrayList();
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -149,4 +149,4 @@ public class PayerDaoImpl implements PayerDao {
         return spectacle;
     }
 
-}
+}*/
