@@ -64,7 +64,7 @@ public class PayerDaoImpl implements PayerDao {
     }
 
     @Override
-    public Panier trouver(int numSpect) throws DAOException {
+    public Representation trouver(int idRepres) throws DAOException {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
