@@ -17,7 +17,8 @@ import java.util.*;
 /**
  *
  * @author chris
- */
+ * */
+
 
 public class PayerDaoImpl implements PayerDao {
 
@@ -96,5 +97,9 @@ public class PayerDaoImpl implements PayerDao {
 
         return panier;
     }
+
 */
+
+
 }
+

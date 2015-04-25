@@ -71,6 +71,15 @@
                         <label for="nbrplace"></label><br>
                         <input type="number" name="nbrplace" id="nbrplace" min="1" max="10" value="1">
                     <input class="btn btn-primary" type="submit" name=${spectvar.getNumero()} value="Ajouter au panier" />
+                     <% if (request.getSession(true).getAttribute("utilisateur") != null && ((UtilisateurCoBean)request.getSession(true).getAttribute("utilisateur")).isAdmin())
+                        {
+                    out.print("<form  class=\"col-md-5\" method=\"post\" action=\"SpectacleManagementCo\">");
+                    out.print("<input class=\"btn btn-primary\" type=\"submit\" value=\"Modifier\" />");
+                    out.print("</form>");
+                    out.print("<form  class=\"col-md-5\" method=\"post\" action=\"GestionBookings\">");
+                    out.print("<input class=\"btn btn-primary\" type=\"submit\" value=\"Voir les Réservations\" />");
+                    out.print("</form>");}
+                    %>
                     <br>
                     </form>    
                 </artSpect>

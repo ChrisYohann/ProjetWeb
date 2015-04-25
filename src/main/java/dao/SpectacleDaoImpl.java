@@ -117,7 +117,6 @@ public class SpectacleDaoImpl implements SpectacleDao {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        Representation prez = new Representation();
         
 
         try {
@@ -125,6 +124,7 @@ public class SpectacleDaoImpl implements SpectacleDao {
             preparedStatement = initRequete(connexion, SQL_DATE_SPECTACLE, false, numSpect);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+                Representation prez = new Representation();
                 prez.setSpect(this.trouver(resultSet.getInt("numSpect")));
                 prez.setJour((Date)resultSet.getDate("jour"));
                 prez.setHeure(resultSet.getInt("heure"));

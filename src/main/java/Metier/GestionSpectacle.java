@@ -16,12 +16,25 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class GestionSpectacle {
     
+   private static final String CHAMP_nomSpect = "nomSpect" ;
+   private static final String CHAMP_DESCRIPTION = "description" ;
+   private static final String CHAMP_IMAGE = "affiche" ;
         
     private SpectacleDao spectacle ;
     
     public GestionSpectacle(SpectacleDao scene){
        this.spectacle = scene ;
    }
+    
+    public Spectacle nouveauSpectacle(HttpServletRequest request){
+        Spectacle festival = new Spectacle();
+        
+        festival.setName(request.getParameter(CHAMP_nomSpect));
+        festival.setDescription(request.getParameter(CHAMP_DESCRIPTION));
+        festival.setAffiche(request.getParameter(CHAMP_IMAGE));
+        this.spectacle.creer(festival);
+        return festival ;
+    }
     
     public List<Spectacle> AfficherSpectacle(HttpServletRequest request){
         return spectacle.afficher_spectacles() ;
