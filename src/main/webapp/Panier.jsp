@@ -16,7 +16,6 @@
     <body>
         <%
                 java.util.ArrayList<Representation> representation = new java.util.ArrayList<Representation>();
-                java.util.ArrayList<Spectacle> spectacle = new java.util.ArrayList<Spectacle>();
 
                 Representation repres1= new Representation();
                 
@@ -46,12 +45,7 @@
                 representation.add(repres1);
                 representation.add(repres2);
                 representation.add(repres3);
-                spect1.setRepresentation(representation);
-                spect2.setRepresentation(representation);
-                spectacle.add(spect1);
-                spectacle.add(spect2);
                 request.setAttribute("representation", representation);
-                request.setAttribute("spectacle", spectacle);
         %>
         <h1 class="Spect">Votre panier:</h1>
         
@@ -59,19 +53,13 @@
             
             <div class="col-md-offset-1 col-md-5">
                 <form method="post" action="PayRes">
-                    <c:forEach items="${spectacle}" var="spectvar" >
+                    <c:forEach items="${representation}" var="represvar" >
                         
                 <artSpect class="row">
-                    <input type="checkbox" name="${spectvar.getName()}" id="${spectvar.getName()}" checked>
-                    <label for="${spectvar.getName()}">${spectvar.getName()}</label>
-                    <p>Veuillez choisir la representation qui vous convient (et le nbr de place souhaité?)<br>
-                        </p>
-                        <label for="jour">Date:</label>
-                        <select name="jour" id="jour">
-                            <c:forEach items="${spectvar.getRepresentation()}" var="represvar">
-                                <option value="${represvar.getJour()}">${represvar.afficherDate()}, à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}</option>
-                            </c:forEach>
-                        </select>
+                    <input type="checkbox" name="${represvar.getSpect().getName()}" id="${represvar.getSpect().getName()}" checked>
+                    <label for="${represvar.getSpect().getName()}">${represvar.getSpect().getName()}</label>
+                    <p>Vous avez choisis d'assister à la representation du ${represvar.afficherDate()} à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}
+                    </p>
                         
                     <br> 
                 </artSpect>
