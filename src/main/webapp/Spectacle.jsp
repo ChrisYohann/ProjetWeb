@@ -52,7 +52,7 @@
             <article class="col-md-offset-1 col-md-10">
                 <c:forEach items="${liste_spectacles}" var="spectvar" >
                 <artSpect class="row">
-                    <img class="col-md-5" height=500px src="image/romeo.jpg"/>
+                    <img class="col-md-5" height=500px src="image/${spectvar.getAffiche()}.jpg"/>
                     <p class="col-md-5">${spectvar.getDescription()}<br><br>
                         <br><br>${spectvar.getName()}
                         <br><br>Representations:

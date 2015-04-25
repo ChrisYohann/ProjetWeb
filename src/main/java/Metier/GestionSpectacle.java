@@ -26,14 +26,13 @@ public class GestionSpectacle {
        this.spectacle = scene ;
    }
     
-    public Spectacle nouveauSpectacle(HttpServletRequest request){
+    public void nouveauSpectacle(HttpServletRequest request){
         Spectacle festival = new Spectacle();
         
         festival.setName(request.getParameter(CHAMP_nomSpect));
         festival.setDescription(request.getParameter(CHAMP_DESCRIPTION));
         festival.setAffiche(request.getParameter(CHAMP_IMAGE));
         this.spectacle.creer(festival);
-        return festival ;
     }
     
     public List<Spectacle> AfficherSpectacle(HttpServletRequest request){

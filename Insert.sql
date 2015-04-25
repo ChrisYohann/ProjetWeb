@@ -1,9 +1,9 @@
 INSERT INTO utilisateur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES ('root', 'root',  'root', '', 'root');
 INSERT INTO utilisateur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES ('yohann', 'hako',  'root', '', 'root');
 INSERT INTO programmeur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES ('root', 'root',  'root', '', 'root');
-INSERT INTO spectacle(numSpect,nomSpect,description) VALUES (1,'Spectacle 1','Description Spectacle 1');
-INSERT INTO spectacle(numSpect,nomSpect,description) VALUES (2,'Spectacle 2','Description Spectacle 2');
-INSERT INTO spectacle(numSpect,nomSpect,description) VALUES (3,'Spectacle 3','Description Spectacle 3');
+INSERT INTO spectacle(nomSpect,description) VALUES ('Spectacle 1','Description Spectacle 1');
+INSERT INTO spectacle(nomSpect,description) VALUES ('Spectacle 2','Description Spectacle 2');
+INSERT INTO spectacle(nomSpect,description) VALUES (S'pectacle 3','Description Spectacle 3');
  insert into representation (numSpect,nbrPlace,jour,heure,numSalle) VALUES(1,90,'2015-04-24',17,1);
  insert into representation (numSpect,nbrPlace,jour,heure,numSalle) VALUES(2,90,'2015-04-24',19,1);
  insert into representation (numSpect,nbrPlace,jour,heure,numSalle) VALUES(2,90,'2016-04-24',19,1);
