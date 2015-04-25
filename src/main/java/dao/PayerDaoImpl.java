@@ -86,7 +86,7 @@ public class PayerDaoImpl implements PayerDao {
     }
 
     @Override
-    public List<Spectacle> afficher_spectacles() throws DAOException {
+    public Panier afficher_panier() throws DAOException {
         List<Spectacle> spectacles_list = new ArrayList();
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
