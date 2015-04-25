@@ -116,9 +116,9 @@ public class DAOManager {
     public SpectacleDao getSpectacleDao(){
         return new SpectacleDaoImpl(this);
     }
-    /*
+    
     public PayerDao getPayerDao(){
         return new PayerDaoImpl(this);
-    }*/
+    }
     
 } 

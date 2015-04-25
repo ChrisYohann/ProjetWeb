@@ -17,16 +17,17 @@ import java.util.*;
 /**
  *
  * @author chris
+ * */
 
 
 public class PayerDaoImpl implements PayerDao {
 
-    private static String SQL_CHECK_SPECTACLE = "SELECT * FROM spectacle where numSpect=?";
+    private static String SQL_ADD_RESERVATION = "INSERT INTO reservation (idPanier, login, numSpect,jour, heure, numSalle, numRang, numPlace) VALUES (?,?,?,?,?,?,?,?)";
     private static String SQL_NEW_SPECTACLE = "INSERT INTO spectacle (numSpect,nomSpect,nbrPlace) VALUES (?,?,?)";
     private static String SQL_ALL_SPECTACLES = "SELECT * FROM spectacle ";
     private static String SQL_DATE_SPECTACLE = "SELECT DISTINCT prez.numSpect,prez.nbrPlace,prez.jour,prez.heure,prez.numSalle from representation prez,spectacle s where s.numSpect = ? and prez.numSpect = s.numSpect ";
     private DAOManager manager;
-/*
+
     public PayerDaoImpl(DAOManager gerant) {
         this.manager = gerant;
     }
@@ -40,19 +41,17 @@ public class PayerDaoImpl implements PayerDao {
 
         try {
             connexion = manager.getConnection();
-            preparedStatement = initRequete(connexion, SQL_CHECK_SPECTACLE, false, spectacle.getNumero());
-            resultSet = preparedStatement.executeQuery();//On recherche le login dans la table 
-            if (resultSet.next()) {
+            List<Representation> rep= panier.getRepres();
+            for (int i=0;i<rep.size();i++){
+            preparedStatement = initRequete(connexion, SQL_ADD_RESERVATION, false, panier.getId(), panier.getLogin(), panier.getRepres().get(i).getSpect().getNumero(),
+                    panier.getRepres().get(i).getJour(),panier.getRepres().get(i).getHeure(), panier.getRepres().get(i).getNumSalle(), panier.getNumRang(), panier.getNumPlace());
+            int sucess = preparedStatement.executeUpdate();//On recherche le login dans la table 
+            if (sucess==0) {
                 //spectacle.setErreur("<FONT COLOR=\"red\" >Le spectacle existe déjà.</FONT>");
-                throw new DAOException("Echec : Le spectacle existe déjà");
+                throw new DAOException("Echec : La reservation correspondant n'a pas été chargée");
+                }
             }
-            preparedStatement = initRequete(connexion, SQL_NEW_SPECTACLE, true, spectacle.getNumero(), spectacle.getName(), spectacle.getDescription());
-            int success = preparedStatement.executeUpdate();
-            if (success == 0) {
-                //new_user.setErreur("Erreur survenue. Veuillez réessayer dans quelques instants.");
-                throw new DAOException("Echec d'ajout du spectacle dans la table");
-
-            }
+            
             //new_user.setInscrit(true);
 
         } catch (SQLException e) {
@@ -62,29 +61,7 @@ public class PayerDaoImpl implements PayerDao {
         }
 
     }
-
-    @Override
-    public Representation trouver(int idRepres) throws DAOException {
-        Connection connexion = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        Spectacle fiesta = null;
-
-        try {
-            connexion = manager.getConnection();
-            preparedStatement = initRequete(connexion, SQL_CHECK_SPECTACLE, false, numSpect);
-            resultSet = preparedStatement.executeQuery();//On recherche le spectacle
-            if (resultSet.next()) {
-                  fiesta = this.link(resultSet) ;
-            }
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        } finally {
-            closeAll(resultSet, preparedStatement, connexion);
-        }
-        return fiesta ;
-    }
-
+/*
     @Override
     public Panier afficher_panier() throws DAOException {
         List<Spectacle> spectacles_list = new ArrayList();
@@ -111,43 +88,18 @@ public class PayerDaoImpl implements PayerDao {
         return spectacles_list;
     }
 
-    public List<Representation> associer_representations(int numSpect) {
-        List<Representation> spectacles_list = new ArrayList();
-        Connection connexion = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        Representation prez = new Representation();
-        
+    public Panier link(ResultSet resultSet) throws SQLException {
 
-        try {
-            connexion = manager.getConnection();
-            preparedStatement = initRequete(connexion, SQL_DATE_SPECTACLE, false, numSpect);
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                prez.setSpect(this.trouver(resultSet.getInt("numSpect")));
-                prez.setJour((Date)resultSet.getDate("jour"));
-                prez.setHeure(resultSet.getInt("heure"));
-                prez.setNumSalle(resultSet.getInt("numSalle"));
-                spectacles_list.add(prez);
-            }
+        Panier panier = new Panier();
+        panier.setNumero(resultSet.getInt("numSpect"));
+        panier.setName(resultSet.getString("nomSpect"));
+        panier.setDescription(resultSet.getString("description"));
 
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        } finally {
-            closeAll(resultSet, preparedStatement, connexion);
-        }
-        return spectacles_list;
+        return panier;
     }
 
-    public Spectacle link(ResultSet resultSet) throws SQLException {
+*/
 
-        Spectacle spectacle = new Spectacle();
-        spectacle.setNumero(resultSet.getInt("numSpect"));
-        spectacle.setName(resultSet.getString("nomSpect"));
-        spectacle.setDescription(resultSet.getString("description"));
-
-        return spectacle;
-    }
 
 }
-*/
+
