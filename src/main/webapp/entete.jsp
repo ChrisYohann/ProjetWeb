@@ -25,6 +25,13 @@
                 <li><a href="Calendrier.jsp">Calendrier</a></li>
                 <li><a href="Information.jsp">Information</a></li>
                 <li><a href="Panier.jsp"><img src="image/gestion-du-panier.jpg"/></a></li>
+                <% java.util.ArrayList<String> paniere = ( ArrayList<String>) request.getSession(true).getAttribute("monpanier");
+            if (paniere!=null){
+                int taille=paniere.size(); %>
+                
+                <li><font color=white>Vous avez <% out.print(taille); %> article<% if(taille>1) out.print("s"); %> <br>
+                     dans votre panier </font></li> 
+                <% } %>
             </ul>
                         
         <% 

@@ -6,11 +6,14 @@
 package controleur;
 
 import Metier.GestionAchat;
+import beans.Representation;
 import beans.Spectacle;
 import dao.DAOManager;
 import dao.PayerDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,8 +49,13 @@ public class PayRes extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        
+        List<Representation> repres = new ArrayList<Representation>();
+               for (int i=0; i<101; i++) {
+                   //String representation=request.getParameter(i);
+                   //i num spectacle de la representation -> unique
+                   //if ( representation!=null) {repres.add(null)}
+                   
+               }
                GestionAchat groupmanager = new GestionAchat(this.payerdao) ;
                request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 

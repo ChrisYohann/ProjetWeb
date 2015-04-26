@@ -60,17 +60,26 @@
                         <label for="jour">Date:</label>
                         <select name="jour" id="jour">
                             <c:forEach items="${spectvar.getRepresentation()}" var="represvar">
-                                <option value="${represvar.afficherDate()}">${represvar.afficherDate()}, à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}</option>
+                                <option value="${represvar.afficherDate()} a ${represvar.getHeure()}h">${represvar.afficherDate()}, à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}</option>
                             </c:forEach>
-                        </select>    
-                        <%-- <c:forEach items="${spectvar.getRepresentation()}" var="representation">
-                                  ${representation.afficherDate()} ${"à"} ${representation.getHeure()} ${"heures"} 
-                                  <br>
-                       </c:forEach>   --%> 
+                        </select> 
+                         <c:forEach items="${spectvar.getRepresentation()}" var="representation">
+                                 
+                                  <br></c:forEach> 
+                       
                         </p>
-                        <label for="nbrplace"></label><br>
-                        <input type="number" name="nbrplace" id="nbrplace" min="1" max="10" value="1">
-                    <input class="btn btn-primary" type="submit" name=${spectvar.getNumero()} value="Ajouter au panier" />
+
+                        <label for="nbrplace"> Nombre de Place: </label>
+                        <input type="number" name="nbrplace ${spectvar.getName()}" id="nbrplace" min="1" max="10" value="1"><SELECT name="categorie de ${spectvar.getName()}"  size="1">
+<OPTION>orchestre
+<OPTION>balcon
+<OPTION>poulailler
+
+</SELECT>
+                        <br><br>
+   
+                    <input class="btn btn-primary" type="submit" name="ajout de ${spectvar.getName()}" value="Ajouter au panier" />
+
                      <% if (request.getSession(true).getAttribute("utilisateur") != null && ((UtilisateurCoBean)request.getSession(true).getAttribute("utilisateur")).isAdmin())
                         {
                     out.print("<form  class=\"col-md-5\" method=\"post\" action=\"SpectacleManagementCo\">");
