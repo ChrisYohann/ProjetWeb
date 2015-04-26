@@ -51,20 +51,22 @@
         <div class="row">
             <article class="col-md-offset-1 col-md-10">
                 <c:forEach items="${liste_spectacles}" var="spectvar" >
-                <artSpect class="row">
+                <artSpect class="row">  
                     <img class="col-md-5" height=500px src="image/${spectvar.getAffiche()}.jpg"/>
                     <p class="col-md-5">${spectvar.getDescription()}<br><br>
                         <br><br>${spectvar.getName()}
                         <br><br>Representations:
                         <form  class="col-md-5" method="post" action="addCart">
-                        <label for="jour">Date:</label>
+                        <label  for="jour">Date:</label>
                         <select name="jour" id="jour">
                             <c:forEach items="${spectvar.getRepresentation()}" var="represvar">
-                                <option value="${represvar.afficherDate()} a ${represvar.getHeure()}h">${represvar.afficherDate()}, à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}</option>
+                                <option value="${represvar.afficherDate()} a ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}">${represvar.afficherDate()   }, à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}</option>
                             </c:forEach>
                         </select> 
+                        
                          <c:forEach items="${spectvar.getRepresentation()}" var="representation">
-                                 
+                         
+
                                   <br></c:forEach> 
                        
                         </p>

@@ -64,6 +64,6 @@ public class PreTicket {
     }
     
     public String afficherInfo() {
-        return "Le " + date + ", Nombre de place(s): " + nb_place + " en catégorie " + cat +  " en position " + position ;
+        return  date + ", Nombre de place(s): " + nb_place + " en catégorie " + cat ;
     }
 }

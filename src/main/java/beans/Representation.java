@@ -7,6 +7,7 @@ package beans;
 
 import java.awt.Image;
 import java.text.DateFormat;
+
 import java.util.* ;
 
 /**
@@ -14,15 +15,17 @@ import java.util.* ;
  * @author igierm
  */
 public class Representation {
-    private int idRepres;
+    
     private Spectacle spect;
     private Date jour;
     private int heure;
     private int numSalle;
 
-    public int getIdRepres() {
-        return this.idRepres;
+    public Representation() {
+        
     }
+    
+    
     public Spectacle getSpect() {
         return this.spect;
     }
@@ -43,11 +46,7 @@ public class Representation {
         return this.heure;
     }
     
-    public void setIdRepres(int idRepres) {
-        this.idRepres=idRepres;
-    }
-    
-   
+      
     public int getNumSalle() {
         return this.numSalle;
     }

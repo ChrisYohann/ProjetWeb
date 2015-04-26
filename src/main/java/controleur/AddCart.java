@@ -6,6 +6,7 @@
 package controleur;
 
 import Metier.GestionPanier;
+import Metier.PourRepres;
 import beans.Spectacle;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,6 +42,8 @@ public class AddCart extends HttpServlet {
         
         GestionPanier gerant = new GestionPanier();
         gerant.gerer(request);
+        PourRepres conv = new PourRepres();
+        conv.gerer(request);
         
         
         try (PrintWriter out = response.getWriter()) {
