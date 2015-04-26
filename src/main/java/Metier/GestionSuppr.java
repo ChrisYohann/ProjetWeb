@@ -5,7 +5,7 @@
  */
 package Metier;
 
-import beans.PreTicket;
+import beans.PreReservation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class GestionSuppr {
     
     public void gerer_suppr (HttpServletRequest request, HttpServletResponse response) {
         
-        ArrayList<PreTicket> panier = ( ArrayList<PreTicket>) request.getSession(true).getAttribute("monpanier");
+        ArrayList<PreReservation> panier = ( ArrayList<PreReservation>) request.getSession(true).getAttribute("monpanier");
                
                int i=0;
                int j = panier.size();         

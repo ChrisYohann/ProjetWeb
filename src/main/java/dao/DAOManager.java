@@ -121,4 +121,7 @@ public class DAOManager {
         return new PayerDaoImpl(this);
     }
     
+    public RepresentationDao getRepresentationDao(){
+        return new RepresentationDaoImpl(this) ;
+    }
 } 

@@ -59,8 +59,11 @@
                         <form  class="col-md-5" method="post" action="addCart">
                         <label  for="jour">Date:</label>
                         <select name="jour" id="jour">
+                            
                             <c:forEach items="${spectvar.getRepresentation()}" var="represvar">
-                                <option value="${represvar.afficherDate()} a ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}">${represvar.afficherDate()   }, à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}</option>
+                               
+                                <option value="${represvar.getJour()} ${represvar.getHeure()} ${represvar.getNumSalle()}">${represvar.afficherDate()}, à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}</option>
+                                
                             </c:forEach>
                         </select> 
                         

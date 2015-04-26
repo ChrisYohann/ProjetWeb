@@ -6,6 +6,7 @@
 package controleur;
 
 import Metier.GestionSpectacle;
+import beans.Spectacle;
 import dao.DAOManager;
 import dao.SpectacleDao;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -25,7 +27,8 @@ import javax.servlet.http.HttpServletResponse;
 public class SetSpectacleCo extends HttpServlet {
     
     private static final String ATT_DAO_MANAGER = "daomanager";
-    private static final String VUE = "/NewSpectacle.jsp" ;
+    private static final String VUE = "/SetRepresentation.jsp" ;
+    private static final String SPECTACLE = "newspectacle" ;
     
     private SpectacleDao stadier ;
 
@@ -48,8 +51,12 @@ public class SetSpectacleCo extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+            Spectacle theatre ;
             GestionSpectacle metier = new GestionSpectacle(this.stadier);
-            metier.nouveauSpectacle(request);
+            theatre = metier.nouveauSpectacle(request);
+            
+            HttpSession session1 = request.getSession(true);
+            session1.setAttribute(SPECTACLE, theatre);
             request.getServletContext().getRequestDispatcher(VUE).forward(request,response);
             
         

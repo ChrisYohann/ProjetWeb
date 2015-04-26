@@ -15,23 +15,21 @@ import java.util.* ;
  * @author igierm
  */
 public class Representation {
-    
+
     private Spectacle spect;
     private Date jour;
     private int heure;
     private int numSalle;
+    private int nbrPlace ;
+    private String erreur ;
 
-    public Representation() {
-        
-    }
-    
-    
     public Spectacle getSpect() {
         return this.spect;
     }
     public Date getJour() {
         return this.jour;
     }
+    
     
     public String afficherDate(){
         String belle_date = null ;
@@ -45,10 +43,17 @@ public class Representation {
     public int getHeure() {
         return this.heure;
     }
-    
-      
+
     public int getNumSalle() {
         return this.numSalle;
+    }
+    
+    public String getErreur(){
+        return this.erreur ;
+    }
+    
+    public int getNbrPlace(){
+        return this.nbrPlace ;
     }
     
     public void setSpect(Spectacle spect) {
@@ -62,5 +67,13 @@ public class Representation {
     }  
     public void setNumSalle(int numSalle) {
         this.numSalle=numSalle;
+    }
+    
+    public void setErreur(String mistake){
+        this.erreur = mistake ;
+    }
+    
+    public void setNbrPlace(int places){
+        this.nbrPlace = places ;
     }
 }
