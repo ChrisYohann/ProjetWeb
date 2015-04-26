@@ -6,15 +6,14 @@
 package controleur;
 
 import Metier.GestionAchat;
-import Metier.GestionSuppr;
-import beans.PreTicket;
+import beans.Representation;
 import beans.Spectacle;
 import dao.DAOManager;
 import dao.PayerDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -50,34 +49,16 @@ public class PayRes extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-            if(request.getParameter("payer")==null&&request.getParameter("reserver")==null){
-            GestionSuppr gerant = new GestionSuppr();            
-            gerant.gerer_suppr(request, response);                
-            }
-        
-            //   GestionAchat groupmanager = new GestionAchat(this.payerdao) ;
-          //     request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-               
-               
-               
-               try (PrintWriter out = response.getWriter()) {
-            
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet PayRes</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            
-          
-            out.println("<div><h6><meta http-equiv=\"refresh\" content=\"0; URL=Panier.jsp\"></h6></div>");
-            
-            out.println("</body>");
-            out.println("</html>");
-        }
-               
+        List<Representation> repres = new ArrayList<Representation>();
+               for (int i=0; i<101; i++) {
+                   //String representation=request.getParameter(i);
+                   //i num spectacle de la representation -> unique
+                   //if ( representation!=null) {repres.add(null)}
+                   
+               }
+               GestionAchat groupmanager = new GestionAchat(this.payerdao) ;
+               request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+
         /*
         
         
