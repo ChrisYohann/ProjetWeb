@@ -1,5 +1,5 @@
 CREATE TABLE spectacle (
-	numSpect int primary key check(numSpect>0),
+	numSpect int AUTO_INCREMENT primary key check(numSpect>0),
 	nomSpect varchar(30) NOT NULL,
         description varchar(200)); 
 

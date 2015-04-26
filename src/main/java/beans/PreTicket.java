@@ -11,6 +11,7 @@ package beans;
  */
 public class PreTicket {
     
+    private int position;
     private String nomspect;
     private int nb_place;
     private String cat;
@@ -37,6 +38,15 @@ public class PreTicket {
         return this.nb_place;
     }
     
+    public int getPos() {
+        
+        return this.position;
+    }
+    
+    public void setPos(int pos) {
+        this.position=pos;
+    }
+    
     public void setNom(String nom){
         this.nomspect=nom;
     }
@@ -54,6 +64,6 @@ public class PreTicket {
     }
     
     public String afficherInfo() {
-        return "Le " + date + ", Nombre de place(s): " + nb_place + " en catégorie " + cat ;
+        return "Le " + date + ", Nombre de place(s): " + nb_place + " en catégorie " + cat +  " en position " + position ;
     }
 }

@@ -38,6 +38,7 @@ public class AddCart extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        
         GestionPanier gerant = new GestionPanier();
         gerant.gerer(request);
         

@@ -5,6 +5,7 @@
  */
 package controleur;
 
+import Metier.GestionSpectacle;
 import dao.DAOManager;
 import dao.SpectacleDao;
 import java.io.IOException;
@@ -47,6 +48,9 @@ public class SetSpectacleCo extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+            GestionSpectacle metier = new GestionSpectacle(this.stadier);
+            metier.nouveauSpectacle(request);
+            request.getServletContext().getRequestDispatcher(VUE).forward(request,response);
             
         
         }

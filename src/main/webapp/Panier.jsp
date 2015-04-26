@@ -144,11 +144,13 @@
                          <c:forEach items="${monpanier}" var="spectvar" >
                         
                 <artSpect class="row">
-                    <input type="checkbox" name="ds" id="idspect" checked> 
+                    <input type="checkbox" name="${spectvar.getNom()}" id="idspect" checked> 
                     <label for="nomspectacle">${spectvar.getNom()}</label>
-                    <br>${spectvar.afficherInfo()}</artspect>
+                    <br>${spectvar.afficherInfo()}<br></artspect>
+                    <input class="btn btn-primary" type="submit" name="position ${spectvar.getPos()}" value="Suppr" />
+                    
                              
-                         </c:forEach>
+                        
                         
 
                         
@@ -159,8 +161,8 @@
                         </select>
                         
                     <br> 
-                </artSpect>
                 
+                 </c:forEach>
                     <br><br>
                 <input class="btn btn-primary" type="submit" name="payer" value="Payer" />
                 <input class="btn btn-primary" type="submit" name="reserver" value="Reserver" />
