@@ -18,7 +18,7 @@
         <label for="affiche">Affiche (sans l'extension .jpg):</label>
         <p><input type="text" name="affiche" /></p>
         <br>
-        <input class="btn btn-primary" type="submit" name="creer" value="Envoyer" />      
+        <input class="btn btn-primary" type="submit" name="creer" value="Représentations" />      
         </form>
     </body>
 </html>

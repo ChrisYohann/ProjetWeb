@@ -5,10 +5,10 @@
  */
 package controleur;
 
-import Metier.GestionSpectacle;
-import beans.Spectacle;
+import Metier.SetRepresentation;
+import beans.Representation;
 import dao.DAOManager;
-import dao.SpectacleDao;
+import dao.RepresentationDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,29 +16,28 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 
 /**
  *
  * @author chris
  */
-@WebServlet(name = "SetSpectacleCo", urlPatterns = {"/SetSpectacleCo"})
-public class SetSpectacleCo extends HttpServlet {
+@WebServlet(name = "SetRepresentation", urlPatterns = {"/SetRepresentation"})
+public class SetRepresentationCo extends HttpServlet {
+        private static final String ATT_DAO_MANAGER = "daomanager";
+        private static final String VUE_FAILED = "/SetRepresentation.jsp" ;    
+        private static final String VUE="/Complete.jsp" ;
+        private static final String ERREUR ="message_erreur" ;
+        private static final String REPRESENTATION = "representation" ;
     
-    private static final String ATT_DAO_MANAGER = "daomanager";
-    private static final String VUE = "/SetRepresentation.jsp" ;
-    private static final String SPECTACLE = "newspectacle" ;
-    
-    private SpectacleDao stadier ;
+         private RepresentationDao representant ;
+         
 
-
-   @Override
-   public void init(){
-       this.stadier = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getSpectacleDao();
-   }
+    @Override
+    public void init(){
+               this.representant = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getRepresentationDao();
     
-    
+    }
+            
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,17 +50,26 @@ public class SetSpectacleCo extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            Spectacle theatre ;
-            GestionSpectacle metier = new GestionSpectacle(this.stadier);
-            theatre = metier.nouveauSpectacle(request);
-            
-            HttpSession session1 = request.getSession(true);
-            session1.setAttribute(SPECTACLE, theatre);
-            request.getServletContext().getRequestDispatcher(VUE).forward(request,response);
-            
-        
+        SetRepresentation metier = new SetRepresentation(this.representant);
+        Representation festival = metier.creer_representation(request);
+        if(festival==null || festival.getErreur() != null)
+        {   request.getSession(true).setAttribute(REPRESENTATION, festival);
+            request.getServletContext().getRequestDispatcher(VUE_FAILED).forward(request,response) ;}
+        else{
+            if(!((String)request.getParameter("terminer")).equals("Terminer"))
+            request.getServletContext().getRequestDispatcher(VUE_FAILED).forward(request,response);      
+            request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
         }
-
+        
+    
+    
+    
+    }
+        
+        
+          
+        
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
