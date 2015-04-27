@@ -45,6 +45,7 @@ public class GestionAchat {
         List<Representation> repres = new ArrayList<Representation>();
         ArrayList<PreReservation> panier = ( ArrayList<PreReservation>) request.getSession(true).getAttribute("monpanier");
         
+        
         for (int i=0; i<panier.size(); i++) {
                 String pos = request.getParameter("pos "+ panier.get(i).getPos() );
                    if ( pos!=null) {
@@ -63,9 +64,9 @@ public class GestionAchat {
         String login= (String) request.getSession().getAttribute("utilisateur");
         //TODO: gerer les cas impossible
             if (payers!=null) {
-        payer.creer(repres, login);
+        payer.creer(panier, login);
             }else if(reserver!=null)  {
-        payer.reserver(repres, login);    
+        payer.reserver(panier, login);    
             }
     }
 }
