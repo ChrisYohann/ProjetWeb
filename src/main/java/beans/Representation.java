@@ -7,6 +7,7 @@ package beans;
 
 import java.awt.Image;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import java.util.* ;
 
@@ -38,6 +39,11 @@ public class Representation {
         belle_date = belle_date.substring(0,belle_date.length()-12);
         return belle_date ;
 
+    }
+    
+    public String date_en_chaine(Date date){
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(date) ;
     }
     
     public int getHeure() {

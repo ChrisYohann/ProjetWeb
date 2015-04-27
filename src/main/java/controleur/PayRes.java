@@ -36,9 +36,11 @@ public class PayRes extends HttpServlet {
     public static final String VUE = "/reserver.jsp";
 
     private PayerDao payerdao;
+    private RepresentationDao representant ;
     
      public void init(){
         this.payerdao = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getPayerDao();
+        this.representant = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getRepresentationDao();
     }  
     
     /**
@@ -56,7 +58,7 @@ public class PayRes extends HttpServlet {
         List<Representation> repres = new ArrayList<Representation>();
 
     
-        GestionAchat groupmanager = new GestionAchat(this.payerdao) ;
+        GestionAchat groupmanager = new GestionAchat(this.payerdao,this.representant) ;
         groupmanager.gerer( request, response);
         
        // GestionSuppr gestionnaire = new GestionSuppr();

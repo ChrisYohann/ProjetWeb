@@ -107,7 +107,7 @@ public class PreReservation {
         
          
         String jour= date.substring(0,10) ;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         this.setDate(sdf.parse(jour));
         int heure2 = Integer.valueOf(date.substring(11,13));
         int numsalle2 = Integer.valueOf(date.substring(14,15));

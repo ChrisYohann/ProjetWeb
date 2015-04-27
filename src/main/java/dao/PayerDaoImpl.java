@@ -22,7 +22,7 @@ import java.util.*;
 
 public class PayerDaoImpl implements PayerDao {
 
-    private static String SQL_ADD_ACHAT = "INSERT INTO achat (login, numDossier, numTicket, numSpect,jour, heure, numSalle, numRang, numPlace) VALUES (?,?,?,?,?,?,?,?, ?)";
+    private static String SQL_ADD_ACHAT = "INSERT INTO achat (login, numDossier, numTicket, numSpect,jour, heure, numSalle, numRang, numPlace) VALUES (?,?,?,?,?,?,?,?,?)";
     private static String SQL_ADD_RESERVATION = "INSERT INTO reservation (login, numSpect,jour, heure, numSalle, numRang, numPlace) VALUES (?,?,?,?,?,?,?)";
     private static String SQL_ALL_SPECTACLES = "SELECT * FROM spectacle ";
     private static String SQL_DATE_SPECTACLE = "SELECT DISTINCT prez.numSpect,prez.nbrPlace,prez.jour,prez.heure,prez.numSalle from representation prez,spectacle s where s.numSpect = ? and prez.numSpect = s.numSpect ";
@@ -43,8 +43,10 @@ public class PayerDaoImpl implements PayerDao {
         try {
             connexion = manager.getConnection();
             for (int i=0;i<rep.size();i++){
-            preparedStatement = initRequete(connexion, SQL_ADD_ACHAT, false, login, rep.get(i).getSpect().getNumero(),
-                    rep.get(i).getJour(),rep.get(i).getHeure(), rep.get(i).getNumSalle(), 15, 9);//TODO numrang place et dossier
+                /*if(rep.get(i) == null)
+                    throw new DAOException(Integer.toString(rep.size())) ;*/
+            preparedStatement = initRequete(connexion, SQL_ADD_ACHAT, false, login,16,i,rep.get(i).getSpect().getNumero(),
+                    rep.get(i).date_en_chaine(rep.get(i).getJour()),rep.get(i).getHeure(), rep.get(i).getNumSalle(), 15, 9);//TODO numrang place et dossier
             int sucess = preparedStatement.executeUpdate();//On recherche le login dans la table 
             if (sucess==0) {
                 //spectacle.setErreur("<FONT COLOR=\"red\" >Le spectacle existe déjà.</FONT>");

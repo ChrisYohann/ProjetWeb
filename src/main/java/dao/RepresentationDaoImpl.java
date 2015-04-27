@@ -79,7 +79,7 @@ public class RepresentationDaoImpl implements RepresentationDao {
                 festival = new Representation();
                 festival.setSpect(caissier.trouver(resultSet.getInt("numSpect")));
                 festival.setNbrPlace(resultSet.getInt("nbrPlace"));
-                //festival.setJour(jour);
+                festival.setJour(resultSet.getDate("jour"));
                 festival.setHeure(heure);
                 festival.setNumSalle(numSalle);
             }
