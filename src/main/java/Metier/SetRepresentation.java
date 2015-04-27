@@ -56,12 +56,12 @@ public class SetRepresentation {
         return prez ;
     }
     public String date_en_chaine(String jour, String mois, String annee){
-        return annee + "-" + jour + "-" + mois;
+        return annee + "-" + mois + "-" + jour;
     }
     
     public Date format_date(String jour, String mois, String annee) {
         String s = annee + "-" + jour + "-" + mois;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-DD-MM");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
         Date date = null;
         java.sql.Date d2 = null ;
         try {
