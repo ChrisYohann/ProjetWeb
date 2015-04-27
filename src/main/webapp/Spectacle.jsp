@@ -51,23 +51,29 @@
         <div class="row">
             <article class="col-md-offset-1 col-md-10">
                 <c:forEach items="${liste_spectacles}" var="spectvar" >
-                    <artSpect class="row">
-                        <img class="col-md-5" height=500px src="image/${spectvar.getAffiche()}.jpg"/>
-                        <p class="col-md-5">${spectvar.getDescription()}<br><br>
-                            <br><br>${spectvar.getName()}
-                            <br><br>Representations:
+
+                <artSpect class="row">  
+                    <img class="col-md-5" height=500px src="image/${spectvar.getAffiche()}.jpg"/>
+                    <p class="col-md-5">${spectvar.getDescription()}<br><br>
+                        <br><br>${spectvar.getName()}
+                        <br><br>Representations:
                         <form  class="col-md-5" method="post" action="addCart">
-                            <label for="jour">Date:</label>
-                            <select name="jour" id="jour">
-                                <c:forEach items="${spectvar.getRepresentation()}" var="represvar">
-                                    <option value="${represvar.afficherDate()} a ${represvar.getHeure()}h">${represvar.afficherDate()}, à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}</option>
-                                </c:forEach>
-                            </select> 
-                            <c:forEach items="${spectvar.getRepresentation()}" var="representation">
+                        <label  for="jour">Date:</label>
+                        <select name="jour" id="jour">
+                            
+                            <c:forEach items="${spectvar.getRepresentation()}" var="represvar">
+                               
+                                <option value="${represvar.getJour()} ${represvar.getHeure()} ${represvar.getNumSalle()}">${represvar.afficherDate()}, à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}</option>
+                                
+                            </c:forEach>
+                        </select> 
+                        
+                         <c:forEach items="${spectvar.getRepresentation()}" var="representation">
+                         
 
-                                <br></c:forEach> 
-
-                                </p>
+                                  <br></c:forEach> 
+                       
+                        </p>
 
                                 <label for="nbrplace"> Nombre de Place: </label>
                                 <input type="number" name="nbrplace ${spectvar.getName()}" id="nbrplace" min="1" max="10" value="1"><SELECT name="categorie de ${spectvar.getName()}"  size="1">

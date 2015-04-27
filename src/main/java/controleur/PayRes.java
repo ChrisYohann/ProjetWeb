@@ -6,6 +6,7 @@
 package controleur;
 
 import Metier.GestionAchat;
+import Metier.GestionSuppr;
 import beans.Representation;
 import beans.Spectacle;
 import dao.DAOManager;
@@ -50,7 +51,14 @@ public class PayRes extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         List<Representation> repres = new ArrayList<Representation>();
-               for (int i=0; i<101; i++) {
+        
+        GestionSuppr gestionnaire = new GestionSuppr();
+        if(request.getParameter("reserver")==null&&request.getParameter("payer")==null){
+            gestionnaire.gerer_suppr(request, response);
+            
+            gestionnaire.afficherpage(response);
+        }
+        /*for (int i=0; i<101; i++) {
                    //String representation=request.getParameter(i);
                    //i num spectacle de la representation -> unique
                    //if ( representation!=null) {repres.add(null)}
@@ -58,7 +66,7 @@ public class PayRes extends HttpServlet {
                }
                GestionAchat groupmanager = new GestionAchat(this.payerdao) ;
                request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-
+               */
         /*
         
         

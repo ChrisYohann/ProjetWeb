@@ -5,10 +5,11 @@
  */
 package Metier;
 
-import beans.PreTicket;
+import beans.PreReservation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,16 +25,17 @@ public class GestionSuppr {
     
     public void gerer_suppr (HttpServletRequest request, HttpServletResponse response) {
         
-        ArrayList<PreTicket> panier = ( ArrayList<PreTicket>) request.getSession(true).getAttribute("monpanier");
+        ArrayList<PreReservation> panier = ( ArrayList<PreReservation>) request.getSession(true).getAttribute("monpanier");
                
                int i=0;
                int j = panier.size();         
                
-               for(i=1;i<j+1;i++) {
+               for(i=0;i<j-1;i++) {
                    
-               if(i==1) {    
+               if(i==0) {    
                if (panier.size()==1){
                panier=null;
+               request.getSession().setAttribute("monpanier", panier);
                }    
                                                 
                else {
@@ -42,7 +44,11 @@ public class GestionSuppr {
                String pos = request.getParameter("position "+ panier.get(i).getPos() );
                
                if(pos!=null) {                                     
-                   panier.remove(i);                   
+                   panier.remove(i);
+                   this.agencement(panier, i);
+                   panier.trimToSize();
+                   request.getSession().setAttribute("monpanier", panier);
+                   this.gerer_suppr(request, response);
                    
                }               
                }   
@@ -55,14 +61,17 @@ public class GestionSuppr {
                String pos = request.getParameter("position "+ panier.get(i).getPos() );
                
                if(pos!=null) {                                     
-                   panier.remove(i);                   
-                   
+                   panier.remove(i);   
+                   panier.trimToSize();
+                   request.getSession().setAttribute("monpanier", panier);
+                   this.gerer_suppr(request, response);
                }               
                }
                
                }
-               }
                request.getSession().setAttribute("monpanier", panier);
+               }
+               
     }
     
     public void afficherpage(HttpServletResponse response) throws IOException {
@@ -85,4 +94,25 @@ public class GestionSuppr {
     }
     
 }
+    
+    public void agencement(ArrayList<PreReservation> panier, int index) {
+        
+        Iterator<PreReservation> it = panier.iterator();
+        PreReservation pre = new PreReservation();
+        
+        int i=0;
+        for(i=0;i<index;i++){
+            pre = it.next();
+        }
+        
+        while(it.hasNext()){
+            
+            pre = it.next();
+            pre.setPos(pre.getPos()-1);
+                        
+        }
+        
+     
+        
+    }
 }

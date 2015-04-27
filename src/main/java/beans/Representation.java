@@ -7,6 +7,7 @@ package beans;
 
 import java.awt.Image;
 import java.text.DateFormat;
+
 import java.util.* ;
 
 /**
@@ -14,6 +15,7 @@ import java.util.* ;
  * @author igierm
  */
 public class Representation {
+
     private Spectacle spect;
     private Date jour;
     private int heure;
@@ -28,6 +30,7 @@ public class Representation {
         return this.jour;
     }
     
+    
     public String afficherDate(){
         String belle_date = null ;
         DateFormat dateformatFR = DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL, new Locale("FR","fr"));
@@ -40,7 +43,7 @@ public class Representation {
     public int getHeure() {
         return this.heure;
     }
-   
+
     public int getNumSalle() {
         return this.numSalle;
     }

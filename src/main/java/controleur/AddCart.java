@@ -6,12 +6,16 @@
 package controleur;
 
 import Metier.GestionPanier;
+import Metier.PourRepres;
 import beans.Spectacle;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,12 +39,14 @@ public class AddCart extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         
         
         GestionPanier gerant = new GestionPanier();
         gerant.gerer(request);
+       /* PourRepres conv = new PourRepres();
+        conv.gerer(request);*/
         
         
         try (PrintWriter out = response.getWriter()) {
@@ -73,7 +79,11 @@ public class AddCart extends HttpServlet {
             throws ServletException, IOException {
         
         
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(AddCart.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -87,8 +97,12 @@ public class AddCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //List<Spectacle> spectacle = ( List<Spectacle>) request.getAttribute("liste_spectacles");
-        processRequest(request, response);
+        try {
+            //List<Spectacle> spectacle = ( List<Spectacle>) request.getAttribute("liste_spectacles");
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(AddCart.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

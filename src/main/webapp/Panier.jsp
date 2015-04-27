@@ -80,6 +80,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="beans.*"%>
+
 <%@ include file="entete.jsp" %>
 <!DOCTYPE html> 
 <html>
@@ -128,7 +129,9 @@
                 request.setAttribute("spectacle", spectacle);
        --%> 
        
-       <% java.util.ArrayList<String> panier = ( ArrayList<String>) request.getSession(true).getAttribute("monpanier");
+       <% 
+       
+       java.util.ArrayList<PreReservation> panier = ( ArrayList<PreReservation>) request.getSession(true).getAttribute("monpanier");
             if (panier!=null){
                
             
