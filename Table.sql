@@ -26,7 +26,7 @@ CREATE TABLE programmeur(
 	mdpUt varchar(20) NOT NULL);
 
 CREATE TABLE dossier ( 
-	numDossier int primary key check(numDossier>0));
+	numDossier int AUTO_INCREMENT primary key check(numDossier>0));
 
 CREATE TABLE categorie (
 	catTarif varchar(20) primary key check(catTarif in('orchestre','balcon','poulailler')),
@@ -44,12 +44,12 @@ CREATE TABLE rang (
 	catTarif varchar(20) check(catTarif in('orchestre','balcon','poulailler')),
 	PRIMARY KEY (numSalle, numRang),
 	FOREIGN KEY (catTarif) references categorie(catTarif) ON DELETE CASCADE,
-        CONSTRAINT chk_salle CHECK (0<numSalle and numSalle<4 and numRang>0 and numRang<11));
+        CONSTRAINT chk_salle CHECK (0<numSalle and numSalle<4 and numRang>0 and numRang<15));
 	
 CREATE TABLE place ( 
 	numSalle int check(0<numSalle and numSalle<4),
-	numRang int check(0<numRang and numRang<11),
-	numPlace int check(0<numPlace and numPlace<21),
+	numRang int check(0<numRang and numRang<16),
+	numPlace int check(0<numPlace and numPlace<11),
 	PRIMARY KEY (numSalle, numRang, numPlace),
 	Foreign KEY(numSalle, numRang) references rang(numSalle, numRang) ON DELETE CASCADE);
 	
@@ -81,7 +81,6 @@ CREATE TABLE representation(
 --"ALTER TABLE spectacle AUTO_INCREMENT=1;
 	
 CREATE TABLE reservation(
-        idPanier int primary key,
 	login varchar(30) REFERENCES utilisateur(login) ON DELETE CASCADE,
 	numSpect int REFERENCES spectacle(numSpect) ON DELETE CASCADE,
 	jour DATE,

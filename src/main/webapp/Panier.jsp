@@ -146,7 +146,10 @@
                 <form method="post" action="PayRes">
                          <c:forEach items="${monpanier}" var="spectvar" >
                         
-                    <input type="checkbox" name="${spectvar.getNom()}" id="idspect" checked> 
+
+                <artSpect class="row">
+                    <input type="checkbox" name="pos ${spectvar.getPos()}" id="idspect" checked> 
+
                     <label for="nomspectacle">${spectvar.getNom()}</label>
                     <br>${spectvar.afficherInfo()}<br></artspect>
                     <input class="btn btn-primary" type="submit" name="position ${spectvar.getPos()}" value="Suppr" />

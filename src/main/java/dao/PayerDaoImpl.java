@@ -22,8 +22,8 @@ import java.util.*;
 
 public class PayerDaoImpl implements PayerDao {
 
-    private static String SQL_ADD_RESERVATION = "INSERT INTO reservation (idPanier, login, numSpect,jour, heure, numSalle, numRang, numPlace) VALUES (?,?,?,?,?,?,?,?)";
-    private static String SQL_NEW_SPECTACLE = "INSERT INTO spectacle (numSpect,nomSpect,nbrPlace) VALUES (?,?,?)";
+    private static String SQL_ADD_ACHAT = "INSERT INTO achat (login, numDossier, numTicket, numSpect,jour, heure, numSalle, numRang, numPlace) VALUES (?,?,?,?,?,?,?,?, ?)";
+    private static String SQL_ADD_RESERVATION = "INSERT INTO reservation (login, numSpect,jour, heure, numSalle, numRang, numPlace) VALUES (?,?,?,?,?,?,?)";
     private static String SQL_ALL_SPECTACLES = "SELECT * FROM spectacle ";
     private static String SQL_DATE_SPECTACLE = "SELECT DISTINCT prez.numSpect,prez.nbrPlace,prez.jour,prez.heure,prez.numSalle from representation prez,spectacle s where s.numSpect = ? and prez.numSpect = s.numSpect ";
     private DAOManager manager;
@@ -32,8 +32,9 @@ public class PayerDaoImpl implements PayerDao {
         this.manager = gerant;
     }
 
+    //dans le cas ou l'utilisateur souhaite payer pour les representation en parametre
     @Override
-    public void creer(Panier panier) throws DAOException {
+    public void creer(List<Representation> rep, String login) throws DAOException {
 
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -41,10 +42,9 @@ public class PayerDaoImpl implements PayerDao {
 
         try {
             connexion = manager.getConnection();
-            List<Representation> rep= panier.getRepres();
             for (int i=0;i<rep.size();i++){
-            preparedStatement = initRequete(connexion, SQL_ADD_RESERVATION, false, panier.getId(), panier.getLogin(), panier.getRepres().get(i).getSpect().getNumero(),
-                    panier.getRepres().get(i).getJour(),panier.getRepres().get(i).getHeure(), panier.getRepres().get(i).getNumSalle(), panier.getNumRang(), panier.getNumPlace());
+            preparedStatement = initRequete(connexion, SQL_ADD_ACHAT, false, login, rep.get(i).getSpect().getNumero(),
+                    rep.get(i).getJour(),rep.get(i).getHeure(), rep.get(i).getNumSalle(), 15, 9);//TODO numrang place et dossier
             int sucess = preparedStatement.executeUpdate();//On recherche le login dans la table 
             if (sucess==0) {
                 //spectacle.setErreur("<FONT COLOR=\"red\" >Le spectacle existe déjà.</FONT>");
@@ -61,6 +61,36 @@ public class PayerDaoImpl implements PayerDao {
         }
 
     }
+    
+    @Override
+    public void reserver(List<Representation> rep, String login) throws DAOException {
+
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connexion = manager.getConnection();
+            for (int i=0;i<rep.size();i++){
+            preparedStatement = initRequete(connexion, SQL_ADD_RESERVATION, false, login, rep.get(i).getSpect().getNumero(),
+                    rep.get(i).getJour(),rep.get(i).getHeure(), rep.get(i).getNumSalle(), 15, 9);//TODO
+            int sucess = preparedStatement.executeUpdate();//On recherche le login dans la table 
+            if (sucess==0) {
+                //spectacle.setErreur("<FONT COLOR=\"red\" >Le spectacle existe déjà.</FONT>");
+                throw new DAOException("Echec : La reservation correspondant n'a pas été chargée");
+                }
+            }
+            
+            //new_user.setInscrit(true);
+
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            closeAll(resultSet, preparedStatement, connexion);
+        }
+
+    }
+    
 /*
     @Override
     public Panier afficher_panier() throws DAOException {
