@@ -113,4 +113,15 @@ public class DAOManager {
         return new SetRoleDaoImpl(this);
     }
     
+    public SpectacleDao getSpectacleDao(){
+        return new SpectacleDaoImpl(this);
+    }
+    
+    public PayerDao getPayerDao(){
+        return new PayerDaoImpl(this);
+    }
+    
+    public RepresentationDao getRepresentationDao(){
+        return new RepresentationDaoImpl(this) ;
+    }
 } 

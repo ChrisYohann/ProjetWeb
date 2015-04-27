@@ -5,17 +5,12 @@
  */
 package controleur;
 
-import Metier.GestionPanier;
-import Metier.PourRepres;
-import beans.Spectacle;
+import Metier.SetRepresentation;
+import beans.Representation;
+import dao.DAOManager;
+import dao.RepresentationDao;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,11 +19,26 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author igierm
+ * @author chris
  */
-@WebServlet(name = "AddCart", urlPatterns = {"/addCart"})
-public class AddCart extends HttpServlet {
+@WebServlet(name = "SetRepresentation", urlPatterns = {"/SetRepresentation"})
+public class SetRepresentationCo extends HttpServlet {
+        private static final String ATT_DAO_MANAGER = "daomanager";
+        private static final String VUE_FAILED = "/SetRepresentation.jsp" ;    
+        private static final String VUE="/Complete.jsp" ;
+        private static final String ERREUR ="message_erreur" ;
+        private static final String REPRESENTATION = "representation" ;
+    
+         private RepresentationDao representant ;
+         
 
+    @Override
+    public void init(){
+               this.representant = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getRepresentationDao();
+    
+    }
+            
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,30 +49,26 @@ public class AddCart extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
-        response.setContentType("text/html;charset=UTF-8");
-        
-        
-        GestionPanier gerant = new GestionPanier();
-        gerant.gerer(request);
-       /* PourRepres conv = new PourRepres();
-        conv.gerer(request);*/
-        
-        
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Ajout au panier</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<div><h6><meta http-equiv=\"refresh\" content=\"0; URL=Spectacle.jsp\"></h6></div>");
-            out.println("</body>");
-            out.println("</html>");
+            throws ServletException, IOException {
+        SetRepresentation metier = new SetRepresentation(this.representant);
+        Representation festival = metier.creer_representation(request);
+        if(festival==null || festival.getErreur() != null)
+        {   request.getSession(true).setAttribute(REPRESENTATION, festival);
+            request.getServletContext().getRequestDispatcher(VUE_FAILED).forward(request,response) ;}
+        else{
+            if(!((String)request.getParameter("terminer")).equals("Terminer"))
+            request.getServletContext().getRequestDispatcher(VUE_FAILED).forward(request,response);      
+            request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
         }
         
-        }
+    
+    
+    
+    }
+        
+        
+          
+        
     
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,13 +83,7 @@ public class AddCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(AddCart.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -97,12 +97,7 @@ public class AddCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            //List<Spectacle> spectacle = ( List<Spectacle>) request.getAttribute("liste_spectacles");
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(AddCart.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

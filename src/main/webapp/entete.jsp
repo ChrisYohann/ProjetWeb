@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@page import="beans.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
@@ -21,20 +22,27 @@
             </div>
             <ul class="nav navbar-nav">
                 <li ><a href="index.jsp">Accueil</a></li>
-                <li><a href="Spectacle.jsp">Spectacle</a></li>
+                <li><a href="GestionSpectacle">Spectacle</a></li>
                 <li><a href="Calendrier.jsp">Calendrier</a></li>
                 <li><a href="Information.jsp">Information</a></li>
                 <li><a href="Panier.jsp"><img src="image/gestion-du-panier.jpg"/></a></li>
+                <% java.util.ArrayList<String> paniere = ( ArrayList<String>) request.getSession(true).getAttribute("monpanier");
+            if (paniere!=null){
+                int taille=paniere.size(); %>
+                
+                <li><font color=white>Vous avez <% out.print(taille); %> article<% if(taille>1) out.print("s"); %> <br>
+                     dans votre panier </font></li> 
+                <% } %>
             </ul>
                         
         <% 
         beans.UtilisateurCoBean utilisateur = (beans.UtilisateurCoBean) request.getSession(true).getAttribute("utilisateur"); 
         beans.UtilisateurInscrBean nouveaumembre = (beans.UtilisateurInscrBean) request.getSession(true).getAttribute("newuser");
         if(utilisateur != null){   
-            out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"MonCompte.jsp\">Mon Compte</a></p>");
+            
             out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Logout\">Deconnexion ("+utilisateur.getLogin()+")</a></p>");
                 if(utilisateur.isAdmin())
-                {
+                {   out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"NewSpectacle.jsp\">Proposer Spectacle</a></p>");
                     out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"GestionMembre\">Groupes</a></p>");
                 }
            }

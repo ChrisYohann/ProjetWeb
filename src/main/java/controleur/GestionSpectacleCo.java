@@ -5,30 +5,36 @@
  */
 package controleur;
 
-import Metier.GestionPanier;
-import Metier.PourRepres;
-import beans.Spectacle;
+import Metier.GestionSpectacle;
+import dao.DAOManager;
+import dao.SpectacleDao;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.*;
+import beans.Spectacle ;
 
 /**
  *
- * @author igierm
+ * @author chris
  */
-@WebServlet(name = "AddCart", urlPatterns = {"/addCart"})
-public class AddCart extends HttpServlet {
-
+@WebServlet(name = "GestionSpectacle", urlPatterns = {"/GestionSpectacle"})
+public class GestionSpectacleCo extends HttpServlet {
+        private static final String ATT_DAO_MANAGER = "daomanager";
+        private static final String VUE = "/Spectacle.jsp";
+        private static final String VUE_FAILED = "/index.jsp" ;
+        private SpectacleDao utilisateur ;
+    
+    
+   public void init(){
+        this.utilisateur = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getSpectacleDao();
+    }    
+        
+        
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,32 +44,18 @@ public class AddCart extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
-        response.setContentType("text/html;charset=UTF-8");
+      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+       
+       
+       List<Spectacle> spectacle_list = new ArrayList();
+       GestionSpectacle groupmanager = new GestionSpectacle(this.utilisateur) ;
+       spectacle_list = groupmanager.AfficherSpectacle(request);
+       request.getSession(true).setAttribute("liste_spectacles", spectacle_list) ;
+       request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
         
-        
-        GestionPanier gerant = new GestionPanier();
-        gerant.gerer(request);
-       /* PourRepres conv = new PourRepres();
-        conv.gerer(request);*/
-        
-        
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Ajout au panier</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<div><h6><meta http-equiv=\"refresh\" content=\"0; URL=Spectacle.jsp\"></h6></div>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-        
-        }
-    
+    }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -77,13 +69,7 @@ public class AddCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(AddCart.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -97,12 +83,7 @@ public class AddCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            //List<Spectacle> spectacle = ( List<Spectacle>) request.getAttribute("liste_spectacles");
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(AddCart.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

@@ -21,7 +21,7 @@ import static dao.DAOUtil.* ;
 public class UtilisateurCoDaoImpl implements UtilisateurCoDao {
             private static final String SQL_FIND_LOGIN = "SELECT * FROM utilisateur WHERE login=? and mdpUt=?";
             private static final String SQL_FIND_ADMIN = "SELECT * FROM programmeur WHERE login=? and mdpUt=?";
-            private DAOManager manager ;
+            private DAOManager manager ;        
             
     public UtilisateurCoDaoImpl(DAOManager gerant){
         this.manager = gerant ;
