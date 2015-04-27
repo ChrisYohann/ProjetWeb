@@ -64,9 +64,9 @@ public class GestionAchat {
         String login= ((UtilisateurCoBean) request.getSession().getAttribute("utilisateur")).getLogin();
         //TODO: gerer les cas impossible
             if (payers!=null) {
-        payer.creer(panier, repres, login);
+        payer.creer(repres, panier , login);
             }else if(reserver!=null)  {
-        payer.reserver(panier, repres, login);    
+        payer.reserver(repres, panier, login);    
             }
     }
 }
