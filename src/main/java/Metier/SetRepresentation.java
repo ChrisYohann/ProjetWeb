@@ -60,7 +60,7 @@ public class SetRepresentation {
     }
     
     public Date format_date(String jour, String mois, String annee) {
-        String s = annee + "-" + jour + "-" + mois;
+        String s = annee + "-" + mois + "-" + jour;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
         Date date = null;
         java.sql.Date d2 = null ;

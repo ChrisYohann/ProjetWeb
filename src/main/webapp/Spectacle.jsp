@@ -76,7 +76,7 @@
                         </p>
 
                                 <label for="nbrplace"> Nombre de Place: </label>
-                                <input type="number" name="nbrplace ${spectvar.getName()}" id="nbrplace" min="1" max="10" value="1"><SELECT name="categorie de ${spectvar.getName()}"  size="1">
+                                <input type="number" name="nbrplace ${spectvar.getNumero()}" id="nbrplace" min="1" max="10" value="1"><SELECT name="categorie de ${spectvar.getNumero()}"  size="1">
                                 <OPTION>orchestre
                                 <OPTION>balcon
                                 <OPTION>poulailler
@@ -84,14 +84,14 @@
                             </SELECT>
                             <br><br>
 
-                            <input class="btn btn-primary" type="submit" name="ajout de ${spectvar.getName()}" value="Ajouter au panier" />
+                            <input class="btn btn-primary" type="submit" name="ajout de ${spectvar.getNumero()}" value="Ajouter au panier" />
                             <c:if test="${not empty utilisateur}">
                                 <c:if test="${utilisateur.isAdmin()}">
                                     <form  class="col-md-5" method="post" action="SpectacleManagementCo">
-                                        <input class="btn btn-primary" type="submit" name="${spectvar.getName()}" value="Modifier" />
+                                        <input class="btn btn-primary" type="submit" name="${spectvar.getNumero()}" value="Modifier" />
                                     </form>
                                     <form  class="col-md-5" method="post" action="GestionBookings">
-                                        <input class="btn btn-primary" type="submit" name="${spectvar.getName()}" value="Voir les Réservations" />
+                                        <input class="btn btn-primary" type="submit" name="${spectvar.getNumero()}" value="Voir les Réservations" />
                                     </form>
                                 </c:if>    
                             </c:if>

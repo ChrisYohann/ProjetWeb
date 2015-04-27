@@ -39,7 +39,10 @@ public class Representation {
         return belle_date ;
 
     }
+      
     
+    
+        
     public int getHeure() {
         return this.heure;
     }
