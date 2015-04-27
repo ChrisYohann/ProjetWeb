@@ -63,6 +63,7 @@ public class SetRepresentation {
     public Date format_date(String jour, String mois, String annee) {
         String s = annee + "-" + mois + "-" + jour;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
         Date date = null;
         try {
             date = sdf.parse(s);

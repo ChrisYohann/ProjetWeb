@@ -18,6 +18,7 @@ import java.util.Locale;
 public class PreReservation {
     
     private int position;
+    private int numero;
     private String nomspect;
     private int nb_place;
     private String cat;
@@ -29,6 +30,10 @@ public class PreReservation {
     
     public PreReservation(){
         
+    }
+    
+    public int getNum() {
+        return this.numero;
     }
     
     public int getSalle() {
@@ -59,6 +64,10 @@ public class PreReservation {
     public int getPos() {
         
         return this.position;
+    }
+    
+    public void setNum(int num) {
+        this.numero=num;
     }
     
     public void setHeure(int heure) {
@@ -105,10 +114,14 @@ public class PreReservation {
     
     public void setDate_Heure_Salle(String date) throws ParseException{
         
-         
+        
+       
         String jour= date.substring(0,10) ;
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         this.setDate(sdf.parse(jour));
+        Date doute = sdf.parse(jour);
+        
         int heure2 = Integer.valueOf(date.substring(11,13));
         int numsalle2 = Integer.valueOf(date.substring(14,15));
         this.setHeure(heure2);

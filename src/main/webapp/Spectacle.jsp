@@ -76,7 +76,9 @@
                         </p>
 
                                 <label for="nbrplace"> Nombre de Place: </label>
+
                                 <input type="number" name="nbrplace ${spectvar.getNumero()}" id="nbrplace" min="1" max="10" value="1"><SELECT name="categorie de ${spectvar.getName()}"  size="1">
+
                                 <OPTION>orchestre
                                 <OPTION>balcon
                                 <OPTION>poulailler

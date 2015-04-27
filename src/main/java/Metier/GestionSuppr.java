@@ -28,49 +28,45 @@ public class GestionSuppr {
         ArrayList<PreReservation> panier = ( ArrayList<PreReservation>) request.getSession(true).getAttribute("monpanier");
                
                int i=0;
-               int j = panier.size();         
+               int j = panier.size();  
                
-               for(i=0;i<j-1;i++) {
-                   
-               if(i==0) {    
                if (panier.size()==1){
                panier=null;
                request.getSession().setAttribute("monpanier", panier);
-               }    
-                                                
-               else {
+               }
                
-               if(panier.get(i)!=null){
+               else {
+               for(i=1;i<panier.size()-1;i++) {
+                   
+               
                String pos = request.getParameter("position "+ panier.get(i).getPos() );
                
                if(pos!=null) {                                     
                    panier.remove(i);
-                   this.agencement(panier, i);
+                   this.agencement(panier, i+1);
                    panier.trimToSize();
                    request.getSession().setAttribute("monpanier", panier);
                    this.gerer_suppr(request, response);
                    
                }               
-               }   
+                  
                }
-                       }
+                       
                
-               else {
-               
-                   if(panier.get(i)!=null){
-               String pos = request.getParameter("position "+ panier.get(i).getPos() );
+               String pos = request.getParameter("position "+ panier.get(i-1).getPos() );
                
                if(pos!=null) {                                     
                    panier.remove(i);   
+                   this.agencement(panier, i+1);
                    panier.trimToSize();
                    request.getSession().setAttribute("monpanier", panier);
                    this.gerer_suppr(request, response);
                }               
-               }
+               
                
                }
                request.getSession().setAttribute("monpanier", panier);
-               }
+               
                
     }
     

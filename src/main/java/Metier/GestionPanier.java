@@ -10,6 +10,8 @@ import beans.PreReservation;
 import beans.Representation;
 import beans.Spectacle;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -34,6 +36,7 @@ public class GestionPanier {
             oui = 0;
             panier = new ArrayList<PreReservation>();
         }
+        
         ArrayList<Spectacle> spectacle = ( ArrayList<Spectacle>) request.getSession().getAttribute("liste_spectacles");
         Iterator<Spectacle> it_spect = spectacle.iterator();
                 
@@ -41,17 +44,19 @@ public class GestionPanier {
            
            while (it_spect.hasNext()) {
            Spectacle Spect = it_spect.next();
-           String  nom_spect= Spect.getName();
            int  num_spect= Spect.getNumero();
+           String nom_spect= Spect.getName();
            if(request.getParameter("ajout de " + num_spect)!=null){
-           String categorie = request.getParameter("categorie de " + nom_spect);
+           String categorie = request.getParameter("categorie de " + num_spect);
            String date = request.getParameter("jour");
-           int nbrplace = Integer.valueOf(request.getParameter("nbrplace " + nom_spect));
+           int nbrplace = Integer.valueOf(request.getParameter("nbrplace " + num_spect));
            
            
            preticket.setCat(categorie);
            preticket.setNbPlace(nbrplace);
            preticket.setNom(nom_spect);
+           preticket.setNum(num_spect);
+           
            preticket.setDate_Heure_Salle(date);
            if(oui==0) preticket.setPos(1);
            else {
