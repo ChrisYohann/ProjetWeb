@@ -131,7 +131,7 @@
        
        <% 
        
-       java.util.ArrayList<PreTicket> panier = ( ArrayList<PreTicket>) request.getSession(true).getAttribute("monpanier");
+       java.util.ArrayList<PreReservation> panier = ( ArrayList<PreReservation>) request.getSession(true).getAttribute("monpanier");
             if (panier!=null){
                
             
