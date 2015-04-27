@@ -28,7 +28,7 @@ public class SpectacleDaoImpl implements SpectacleDao {
     private static String SQL_ALL_SPECTACLES = "SELECT * FROM spectacle ";
     private static String SQL_DATE_SPECTACLE = "SELECT DISTINCT prez.numSpect,prez.nbrPlace,prez.jour,prez.heure,prez.numSalle from representation prez,spectacle s where s.numSpect = ? and prez.numSpect = s.numSpect ";
     private static String SQL_AFFICHE = "SELECT DISTINCT i.image from affiche i,spectacle s where s.numSpect=? and i.numSpect = s.numSpect";
-    
+    private static String UTF8 = "set NAMES 'utf8'";
     
     private DAOManager manager;
 
@@ -46,6 +46,8 @@ public class SpectacleDaoImpl implements SpectacleDao {
 
         try {
             connexion = manager.getConnection();
+            preparedStatement = initRequete(connexion,UTF8,true) ;
+            int statut = preparedStatement.executeUpdate();
             preparedStatement = initRequete(connexion, SQL_NEW_SPECTACLE, true, spectacle.getName(), spectacle.getDescription());
             int success = preparedStatement.executeUpdate();
             if (success == 0) {

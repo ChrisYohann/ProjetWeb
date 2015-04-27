@@ -42,7 +42,8 @@ public class GestionPanier {
            while (it_spect.hasNext()) {
            Spectacle Spect = it_spect.next();
            String  nom_spect= Spect.getName();
-           if(request.getParameter("ajout de " + nom_spect)!=null){
+           int  num_spect= Spect.getNumero();
+           if(request.getParameter("ajout de " + num_spect)!=null){
            String categorie = request.getParameter("categorie de " + nom_spect);
            String date = request.getParameter("jour");
            int nbrplace = Integer.valueOf(request.getParameter("nbrplace " + nom_spect));
