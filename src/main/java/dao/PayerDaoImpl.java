@@ -22,7 +22,7 @@ import java.util.*;
  *
  */
 public class PayerDaoImpl implements PayerDao {
-
+    
     private static String SQL_ADD_ACHAT = "INSERT INTO achat (login, numDossier, numTicket, numSpect,jour, heure, numSalle, numRang, numPlace) VALUES (?,?,?,?,?,?,?,?,?)";
     private static String SQL_ADD_RESERVATION = "INSERT INTO reservation (login, numSpect,jour, heure, numSalle, numRang, numPlace) VALUES (?,?,?,?,?,?,?)";
     private static String SQL_ALL_SPECTACLES = "SELECT * FROM spectacle ";
@@ -34,13 +34,14 @@ public class PayerDaoImpl implements PayerDao {
     private static String FOREIGN_PLACE = "INSERT INTO place(numSalle,numRang,numPlace) VALUES (?,?,?)";
 
     private static String SQL_CHECK_PLACE = "SELECT p.numSalle,p.numRang,p.numPlace FROM place p where p.numSalle = ? and p.numRang = ? and p.numPlace = ?";
-
+    
     private DAOManager manager;
 
     public PayerDaoImpl(DAOManager gerant) {
         this.manager = gerant;
     }
 
+    
     public String date_en_chaine(Date date) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         return df.format(date);
