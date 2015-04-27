@@ -27,34 +27,33 @@ import javax.servlet.http.HttpServletResponse;
 public class GestionAchat {
     
     private PayerDao payer ;
-    private RepresentationDao represdao;
 
     
     public GestionAchat(PayerDao scene,RepresentationDao representant){
        this.payer = scene ;
-       this.represdao = representant ;
+      // this.represdao = representant ;
 
    }
     
-   public String date_en_chaine(Date date){
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        return df.format(date) ;
-    }
+  
      
     public void gerer(HttpServletRequest request, HttpServletResponse response){
-        List<Representation> repres = new ArrayList<Representation>();
+        //List<Representation> repres = new ArrayList<Representation>();
+        ArrayList<PreReservation> panierbis= new ArrayList();
         ArrayList<PreReservation> panier = ( ArrayList<PreReservation>) request.getSession(true).getAttribute("monpanier");
         
         
         for (int i=0; i<panier.size(); i++) {
                 String pos = request.getParameter(Integer.toString(panier.get(i).getPos()));
                    if ( pos!=null) {
-                     Date date=  panier.get(i).getDate();
-                     String dateE = date_en_chaine(date);
-                     int heure =panier.get(i).getHeure();
-                     int salle =panier.get(i).getSalle();
-                     Representation representation= this.represdao.trouver(dateE, heure, salle);
-                     repres.add(representation);
+                       panierbis.add(panier.get(i));
+                      
+                     //Date date=  panier.get(i).getDate();
+                     //String dateE = date_en_chaine(date);
+                     //int heure =panier.get(i).getHeure();
+                     //int salle =panier.get(i).getSalle();
+                     ///Representation representation= this.represdao.trouver(dateE, heure, salle);
+                     //repres.add(representation);
                            }
                     
                    
@@ -64,9 +63,10 @@ public class GestionAchat {
         String login= ((UtilisateurCoBean) request.getSession().getAttribute("utilisateur")).getLogin();
         //TODO: gerer les cas impossible
             if (payers!=null) {
-        payer.creer(repres, panier , login);
+
+        payer.creer( panierbis, login);
             }else if(reserver!=null)  {
-        payer.reserver(repres, panier, login);    
+        payer.reserver( panierbis,  login);    
             }
     }
 }

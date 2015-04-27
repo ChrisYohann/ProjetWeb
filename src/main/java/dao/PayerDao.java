@@ -13,9 +13,9 @@ import java.util.* ;
  */
 public interface PayerDao {
     
-    public void creer(List<Representation> repres,  ArrayList<PreReservation> preRes, String login) throws DAOException ;//creer une reservation ou un achat
+    public void creer(ArrayList<PreReservation> preRes, String login) throws DAOException ;//creer une reservation ou un achat
        
-    public void reserver(List<Representation> repres, ArrayList<PreReservation> preRes, String login) throws DAOException ;//creer une reservation ou un achat
+    public void reserver(ArrayList<PreReservation> preRes, String login) throws DAOException ;//creer une reservation ou un achat
 
    // public Panier afficher_panier() throws DAOException ;//enlever de la table panier la representation
         
