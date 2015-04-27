@@ -7,13 +7,16 @@ package controleur;
 
 import Metier.GestionAchat;
 import Metier.GestionSuppr;
+import beans.PreReservation;
 import beans.Representation;
 import beans.Spectacle;
 import dao.DAOManager;
 import dao.PayerDao;
+import dao.RepresentationDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,22 +54,21 @@ public class PayRes extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         List<Representation> repres = new ArrayList<Representation>();
+
+    
+        GestionAchat groupmanager = new GestionAchat(this.payerdao) ;
+        groupmanager.gerer( request, response);
         
-        GestionSuppr gestionnaire = new GestionSuppr();
-        if(request.getParameter("reserver")==null&&request.getParameter("payer")==null){
-            gestionnaire.gerer_suppr(request, response);
+       // GestionSuppr gestionnaire = new GestionSuppr();
+       // if(request.getParameter("reserver")==null&&request.getParameter("payer")==null){
+       //     gestionnaire.gerer_suppr(request, response);
             
-            gestionnaire.afficherpage(response);
-        }
-        /*for (int i=0; i<101; i++) {
-                   //String representation=request.getParameter(i);
-                   //i num spectacle de la representation -> unique
-                   //if ( representation!=null) {repres.add(null)}
-                   
-               }
-               GestionAchat groupmanager = new GestionAchat(this.payerdao) ;
+       //     gestionnaire.afficherpage(response);
+        //}
+        
+               
                request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-               */
+               
         /*
         
         

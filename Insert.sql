@@ -19,3 +19,4 @@ INSERT INTO dateT(jour,heure) VALUES ('2015-03-04',18);
 insert into representation (numSpect,nbrPlace,jour,heure,numSalle) VALUES(1,90,'2015-01-05',17,3); 
  insert into representation (numSpect,nbrPlace,jour,heure,numSalle) VALUES(3,90,'2016-04-24',19,2);
 insert into representation (numSpect,nbrPlace,jour,heure,numSalle) VALUES(3,100,'2015-01-07',18,3); 
+

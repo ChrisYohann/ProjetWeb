@@ -68,24 +68,24 @@ public class DAOManager {
             throw new DAOConfigurationException("Le fichier de configuration est impossible à charger. Erreur de syntaxe");
         }
 
-        
-        //try{ 
-        //    Class.forName("oracle.jdbc.OracleDriver");
+        /*
+        try{ 
+            Class.forName("oracle.jdbc.OracleDriver");
            
-       // }
-      //  catch ( ClassNotFoundException e ) {
-    /* Gérer les éventuelles erreurs ici. */
-       // }
-       // String url = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
-       // String utilisateur = "igierm" ;
-       // String password = "igierm";
+        }
+        catch ( ClassNotFoundException e ) {
+     //Gérer les éventuelles erreurs ici. 
+        }
+        String url = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
+        String utilisateur = "celestij" ;
+        String password = "celestij";
+        */
         
         
-        
-        //Chargement du Driver
-        
+       // Chargement du Driver
+       
         try{
-           Class.forName(driver) ;
+           Class.forName(driver);
         }
         catch(ClassNotFoundException e){
             throw new DAOConfigurationException("Le driver est introuvable");
