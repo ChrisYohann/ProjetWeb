@@ -34,7 +34,7 @@ public class PayerDaoImpl implements PayerDao {
 
     //dans le cas ou l'utilisateur souhaite payer pour les representation en parametre
     @Override
-    public void creer(List<Representation> rep, String login) throws DAOException {
+    public void creer(List<Representation> rep, List<PreReservation> preRes, String login) throws DAOException {
 
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -44,7 +44,7 @@ public class PayerDaoImpl implements PayerDao {
             connexion = manager.getConnection();
             for (int i=0;i<rep.size();i++){
             preparedStatement = initRequete(connexion, SQL_ADD_ACHAT, false, login, rep.get(i).getSpect().getNumero(),
-                    rep.get(i).getJour(),rep.get(i).getHeure(), rep.get(i).getNumSalle(), 15, 9);//TODO numrang place et dossier
+                    rep.get(i).getJour(),rep.get(i).getHeure(), rep.get(i).getNumSalle(), 15, 9);//TODO numrang place et
             int sucess = preparedStatement.executeUpdate();//On recherche le login dans la table 
             if (sucess==0) {
                 //spectacle.setErreur("<FONT COLOR=\"red\" >Le spectacle existe déjà.</FONT>");
@@ -63,7 +63,7 @@ public class PayerDaoImpl implements PayerDao {
     }
     
     @Override
-    public void reserver(List<Representation> rep, String login) throws DAOException {
+    public void reserver(List<Representation> rep, List<PreReservation> preRes, String login) throws DAOException {
 
         Connection connexion = null;
         PreparedStatement preparedStatement = null;

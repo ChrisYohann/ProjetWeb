@@ -64,9 +64,9 @@ public class GestionAchat {
         String login= (String) request.getSession().getAttribute("utilisateur");
         //TODO: gerer les cas impossible
             if (payers!=null) {
-        payer.creer(panier, login);
+        payer.creer(panier, repres, login);
             }else if(reserver!=null)  {
-        payer.reserver(panier, login);    
+        payer.reserver(panier, repres, login);    
             }
     }
 }
