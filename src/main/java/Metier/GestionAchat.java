@@ -7,9 +7,12 @@ package Metier;
 
 import beans.PreReservation;
 import beans.Representation;
+import beans.UtilisateurCoBean;
+import dao.DAOException;
 import dao.PayerDao;
 import dao.RepresentationDao;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,18 +30,15 @@ public class GestionAchat {
     private RepresentationDao represdao;
 
     
-    public GestionAchat(PayerDao scene){
+    public GestionAchat(PayerDao scene,RepresentationDao representant){
        this.payer = scene ;
+       this.represdao = representant ;
 
    }
     
-     public String afficherDate(Date date){
-        String belle_date = null ;
-        DateFormat dateformatFR = DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL, new Locale("FR","fr"));
-        belle_date = dateformatFR.format(date);
-        belle_date = belle_date.substring(0,belle_date.length()-12);
-        return belle_date ;
-
+   public String date_en_chaine(Date date){
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(date) ;
     }
      
     public void gerer(HttpServletRequest request, HttpServletResponse response){
@@ -47,10 +47,10 @@ public class GestionAchat {
         
         
         for (int i=0; i<panier.size(); i++) {
-                String pos = request.getParameter("pos "+ panier.get(i).getPos() );
+                String pos = request.getParameter(Integer.toString(panier.get(i).getPos()));
                    if ( pos!=null) {
                      Date date=  panier.get(i).getDate();
-                     String dateE = afficherDate(date);        
+                     String dateE = date_en_chaine(date);
                      int heure =panier.get(i).getHeure();
                      int salle =panier.get(i).getSalle();
                      Representation representation= this.represdao.trouver(dateE, heure, salle);
@@ -61,7 +61,7 @@ public class GestionAchat {
                }//fin de la boucle for
         String payers=request.getParameter("payer");
         String reserver=request.getParameter("reserver");
-        String login= (String) request.getSession().getAttribute("utilisateur");
+        String login= ((UtilisateurCoBean) request.getSession().getAttribute("utilisateur")).getLogin();
         //TODO: gerer les cas impossible
             if (payers!=null) {
         payer.creer(panier, repres, login);

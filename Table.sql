@@ -1,7 +1,7 @@
 CREATE TABLE spectacle (
 	numSpect int AUTO_INCREMENT primary key check(numSpect>0),
 	nomSpect varchar(30) NOT NULL,
-        description varchar(200)); 
+        description varchar(200))CHARACTER SET utf8 COLLATE utf8_bin; 
 
 CREATE TABLE affiche(
         numSpect int primary key references spectacle(numSpect) on DELETE CASCADE,

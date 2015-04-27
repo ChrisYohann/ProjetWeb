@@ -24,7 +24,8 @@ public class RepresentationDaoImpl implements RepresentationDao {
 
     private static String SQL_NEW_PREZ = "INSERT INTO representation (numSpect,nbrPlace,jour,heure,numSalle) VALUES (?,?,?,?,?)";
     private static String SQL_CHECK_ONLY = "SELECT * from representation where jour = ? and heure = ? and numSalle = ?";
-
+    private static String UTF8 = "set NAMES 'utf8'";
+    
     private DAOManager manager;
 
     public RepresentationDaoImpl(DAOManager gerant) {
@@ -46,6 +47,8 @@ public class RepresentationDaoImpl implements RepresentationDao {
                 presentation.setErreur("<FONT COLOR=\"red\" >Une autre représentation est déjà programmée.</FONT>");
                 throw new DAOException("Impossible de creer representation : Une autre representation est déjà programmée.");
             }
+            preparedStatement = initRequete(connexion,UTF8,true) ;
+            int statut = preparedStatement.executeUpdate();
             preparedStatement = initRequete(connexion, SQL_NEW_PREZ, true, presentation.getSpect().getNumero(), presentation.getNbrPlace(), jour, presentation.getHeure(), presentation.getNumSalle());
             int success = preparedStatement.executeUpdate();
             if (success == 0) {
@@ -76,7 +79,7 @@ public class RepresentationDaoImpl implements RepresentationDao {
                 festival = new Representation();
                 festival.setSpect(caissier.trouver(resultSet.getInt("numSpect")));
                 festival.setNbrPlace(resultSet.getInt("nbrPlace"));
-                //festival.setJour(jour);
+                festival.setJour(resultSet.getDate("jour"));
                 festival.setHeure(heure);
                 festival.setNumSalle(numSalle);
             }
