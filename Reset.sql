@@ -28,7 +28,7 @@ DROP TABLE affiche;
 
 DROP TABLE spectacle;
 
-DROP SEQUENCE spec_seq;
+--DROP SEQUENCE spec_seq;
 
 
 
