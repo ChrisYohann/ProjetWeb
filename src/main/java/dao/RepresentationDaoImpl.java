@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class RepresentationDaoImpl implements RepresentationDao {
 
-    private static String SQL_NEW_PREZ = "INSERT INTO representation (numSpect,nbrPlace,jour,heure,numSalle) VALUES (?,?,?,?,?)";
+    private static String SQL_NEW_PREZ = "INSERT INTO representation (numSpect,nbrPlace,jour,heure,numSalle,dernierPO,dernierPP,dernierPB,dernierRO,dernierRP,dernierRB) VALUES (?,?,?,?,?,0,0,0,1,6,13)";
     private static String SQL_CHECK_ONLY = "SELECT * from representation where jour = ? and heure = ? and numSalle = ?";
     private static String UTF8 = "set NAMES 'utf8'";
     
