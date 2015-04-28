@@ -7,7 +7,9 @@ package Metier;
 
 import dao.UtilisateurCoDao ;
 import beans.UtilisateurCoBean ;
+import controleur.Crypteur;
 import dao.DAOException;
+import java.security.NoSuchAlgorithmException;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -25,9 +27,9 @@ public class MetierCo {
         this.utilisateurdao = utilisateur ;
     }
     
-    public UtilisateurCoBean connectUser( HttpServletRequest request ) {
+    public UtilisateurCoBean connectUser( HttpServletRequest request, Crypteur crypteur ) throws NoSuchAlgorithmException {
     String user = request.getParameter(CHAMP_USER );
-    String pass = request.getParameter(CHAMP_PASS);
+    String pass = crypteur.crypter_mdp(request.getParameter(CHAMP_PASS));
 
     UtilisateurCoBean utilisateur = new UtilisateurCoBean();
     try {

@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import dao.DAOManager ;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -53,11 +56,12 @@ public class ControleurCo extends HttpServlet {
      */
     
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
+            throws ServletException, IOException, NoSuchAlgorithmException{
             HttpSession session1 ;
+            Crypteur crypte = new Crypteur();
             MetierCo metier = new MetierCo(this.utilisateur) ;
             UtilisateurCoBean user = new UtilisateurCoBean();
-            user = metier.connectUser(request);
+            user = metier.connectUser(request,crypte);
             
             request.setAttribute(USER,user);
             if(user == null){
@@ -106,7 +110,11 @@ public class ControleurCo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(ControleurCo.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     /**
@@ -120,7 +128,11 @@ public class ControleurCo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(ControleurCo.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     /**

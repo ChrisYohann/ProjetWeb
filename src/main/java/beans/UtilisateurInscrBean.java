@@ -79,4 +79,6 @@ public class UtilisateurInscrBean {
             return this.inscrit ;
         }
     
+        
+        
 }

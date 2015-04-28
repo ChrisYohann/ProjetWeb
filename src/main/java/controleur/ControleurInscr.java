@@ -11,6 +11,9 @@ import dao.DAOManager;
 import dao.UtilisateurInscrDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,6 +35,7 @@ public class ControleurInscr extends HttpServlet {
         public static final String SIGNUP = "signup";
     
     private UtilisateurInscrDao utilisateur ;
+    private Crypteur crypteur;
     
     
     @Override
@@ -49,11 +53,13 @@ public class ControleurInscr extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, NoSuchAlgorithmException {
           HttpSession session1 ;
         UtilisateurInscrBean membre = new UtilisateurInscrBean();
-        MetierInscr objet_metier = new MetierInscr(this.utilisateur) ;
+        Crypteur crypte = new Crypteur();
+        MetierInscr objet_metier = new MetierInscr(this.utilisateur,crypte) ;
         membre = objet_metier.inscrireUtilisateur(request) ;
+        
              request.setAttribute(USER,membre);
             if(!membre.getInscrit()){
                 session1 = request.getSession(true);
@@ -95,7 +101,11 @@ public class ControleurInscr extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(ControleurInscr.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     /**
@@ -109,7 +119,11 @@ public class ControleurInscr extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(ControleurInscr.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     /**
