@@ -27,11 +27,14 @@ public class PayerDaoImpl implements PayerDao {
     private static String SQL_ADD_RESERVATION = "INSERT INTO reservation (login, numSpect,jour, heure, numSalle, numRang, numPlace) VALUES (?,?,?,?,?,?,?)";
     private static String SQL_ALL_SPECTACLES = "SELECT * FROM spectacle ";
     private static String SQL_DATE_SPECTACLE = "SELECT prez.numSpect,prez.nbrPlace,prez.jour,prez.heure,prez.numSalle from representation prez,spectacle s where s.numSpect = ? and prez.numSpect = s.numSpect ";
-
+    
+    private static String UPDATE_PREZ_ORCHESTRE = "UPDATE representation SET dernierPO = ?,dernierRO = ? where jour = ? and heure = ? and numSalle = ?";
+   
+    
     private static String FOREIGN_SALLE = "INSERT INTO salle(numSalle) VALUES (?)";
     private static String FOREIGN_CATEGORIE = "INSERT INTO categorie(catTarif,tarif) VALUES(?,?)";
     private static String FOREIGN_RANG = "INSERT INTO rang(numSalle,numRang,catTarif) VALUES(?,?,?)";
-    private static String FOREIGN_PLACE = "INSERT INTO place(numSalle,numRang,numPlace) VALUES (?,?,?)";
+    private static String FOREIGN_PLACE = "INSERT INTO place(numSalle,numRang,numPlace,jour,heure) VALUES (?,?,?,?,?)";
 
     private static String SQL_CHECK_PLACE = "SELECT p.numSalle,p.numRang,p.numPlace FROM place p where p.numSalle = ? and p.numRang = ? and p.numPlace = ?";
 
@@ -69,61 +72,150 @@ public class PayerDaoImpl implements PayerDao {
                     String cat = preRes.get(i).getCat();
                     switch (cat) {
                         case "orchestre":
-                            preparedStatement=initRequete(connexion, FOREIGN_SALLE, true, salle);
-                            preparedStatement.executeUpdate();
-                            preparedStatement = initRequete(connexion,FOREIGN_CATEGORIE,true,"orchestre",40) ;
-                            preparedStatement.executeUpdate();
                             preparedStatement = initRequete(connexion, SQL_CHECK_PLACE, false, salle, 5, 11 - nbrPlace);
                             resultSet = preparedStatement.executeQuery();
                             if (!resultSet.next()) {
                                 //1er cas : Tous cote a cote
                                 if (11 - representation.getDernierPO() > nbrPlace) {
-                                    preparedStatement = initRequete(connexion,FOREIGN_RANG,true,salle,representation.getDernierRO(),"orchestre");
-                                    preparedStatement.executeUpdate();
                                     for (i = 1; i <= nbrPlace; i++) {
-                                        preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, representation.getDernierRO(), representation.getDernierPO() + i);
+                                        //preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, 1, 1 + i);
+                                        preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, representation.getDernierRO(), representation.getDernierPO() + i,dateE,heure);
                                         int statut = preparedStatement.executeUpdate();
                                         if (statut == 0) {
                                             throw new DAOException("On peut plus rien faire pour toi.");
                                         }
-                                        representation.setDernierPO(representation.getDernierPO() + 1);
                                     }
-                                } else {preparedStatement = initRequete(connexion,FOREIGN_RANG,true,salle,representation.getDernierRO(),"orchestre");
-                                    preparedStatement.executeUpdate();
-                                    preparedStatement = initRequete(connexion,FOREIGN_RANG,true,salle,representation.getDernierRO()+1,"orchestre");
-                                    preparedStatement.executeUpdate();
+                                    //ON MET LA BDD A JOUR
+                                     preparedStatement = initRequete(connexion, UPDATE_PREZ_ORCHESTRE, true,representation.getDernierPO()+i-1, representation.getDernierRO(),dateE,heure,salle);
+                                        int statut = preparedStatement.executeUpdate();
+                                    
+                                    
+                                    
+                                } else {
                                     int j = nbrPlace + representation.getDernierPO() - 10;
                                     int rangee_dessous = nbrPlace - j;
-                                    for (i = 0; i < rangee_dessous; i++) {
-                                        preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, representation.getDernierRO(), representation.getDernierPO() + i);
+                                    for (i = 1; i <= rangee_dessous; i++) {
+                                        preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, representation.getDernierRO(), representation.getDernierPO() + i,dateE,heure);
                                         int statut = preparedStatement.executeUpdate();
                                         if (statut == 0) {
                                             throw new DAOException("On peut plus rien faire pour toi encore une fois");
                                         }
-                                        representation.setDernierPO(representation.getDernierPO() + 1);
+                                        preparedStatement = initRequete(connexion, UPDATE_PREZ_ORCHESTRE, true,0, representation.getDernierRO()+1,dateE,heure,salle);
+                                         statut = preparedStatement.executeUpdate();
+                                        
                                     }
-                                    representation.setDernierRO(representation.getDernierRO() + 1);
-                                    for (i = 0; i < j; i++) {
-                                        preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, representation.getDernierRO(), representation.getDernierPO() + i);
+                   
+                                    for (i = 1; i <= j; i++) {
+                                        preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, representation.getDernierRO()+1,i,dateE,heure);
                                         int statut = preparedStatement.executeUpdate();
-                                        if (statut == 0) {
+                                        if (statut == 0) 
                                             throw new DAOException("On peut plus rien faire pour toi encore une fois");
                                         }
-                                        representation.setDernierPO(representation.getDernierPO() + 1);
+                                         preparedStatement = initRequete(connexion, UPDATE_PREZ_ORCHESTRE, true,j, representation.getDernierRO()+1,dateE,heure,salle);
+                                        int statut = preparedStatement.executeUpdate();
                                     }
-                                    }
-
-                                }
+                                   
+                                    
+                            }
 
                                 //Si le resultSet est vide, la place est libre
                                 break;
                             
-                            case "poulailler":
-                           preparedStatement = initRequete(connexion,SQL_CHECK_PLACE,false,salle,12,11-nbrPlace);
-                           break ;    
-                       case "balcon" :
-                           preparedStatement = initRequete(connexion,SQL_CHECK_PLACE,false,salle,15,11-nbrPlace);
-                           break ;      
+                           case "poulailler":
+                            preparedStatement = initRequete(connexion, SQL_CHECK_PLACE, false, salle, 5, 11 - nbrPlace);
+                            resultSet = preparedStatement.executeQuery();
+                            if (!resultSet.next()) {
+                                //1er cas : Tous cote a cote
+                                if (11 - representation.getDernierPP() > nbrPlace) {
+                                    for (i = 1; i <= nbrPlace; i++) {
+                                        //preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, 1, 1 + i);
+                                        preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, representation.getDernierRP(), representation.getDernierPP() + i,dateE,heure);
+                                        int statut = preparedStatement.executeUpdate();
+                                        if (statut == 0) {
+                                            throw new DAOException("On peut plus rien faire pour toi.");
+                                        }
+                                    }
+                                    //ON MET LA BDD A JOUR
+                                     preparedStatement = initRequete(connexion, UPDATE_PREZ_ORCHESTRE, true,representation.getDernierPP()+i-1, representation.getDernierRP(),dateE,heure,salle);
+                                        int statut = preparedStatement.executeUpdate();
+                                    
+                                    
+                                    
+                                } else {
+                                    int j = nbrPlace + representation.getDernierPP() - 10;
+                                    int rangee_dessous = nbrPlace - j;
+                                    for (i = 1; i <= rangee_dessous; i++) {
+                                        preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, representation.getDernierRP(), representation.getDernierPP() + i,dateE,heure);
+                                        int statut = preparedStatement.executeUpdate();
+                                        if (statut == 0) {
+                                            throw new DAOException("On peut plus rien faire pour toi encore une fois");
+                                        }
+                                        preparedStatement = initRequete(connexion, UPDATE_PREZ_ORCHESTRE, true,0, representation.getDernierRP()+1,dateE,heure,salle);
+                                         statut = preparedStatement.executeUpdate();
+                                        
+                                    }
+                   
+                                    for (i = 1; i <= j; i++) {
+                                        preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, representation.getDernierRP()+1, i,dateE,heure);
+                                        int statut = preparedStatement.executeUpdate();
+                                        if (statut == 0) 
+                                            throw new DAOException("On peut plus rien faire pour toi encore une fois");
+                                        }
+                                         preparedStatement = initRequete(connexion, UPDATE_PREZ_ORCHESTRE, true,j, representation.getDernierRP()+1,dateE,heure,salle);
+                                        int statut = preparedStatement.executeUpdate();
+                                    }
+                                   
+                                    
+                            }
+                                break;
+                              
+                       case "balcon":
+                            preparedStatement = initRequete(connexion, SQL_CHECK_PLACE, false, salle, 5, 11 - nbrPlace);
+                            resultSet = preparedStatement.executeQuery();
+                            if (!resultSet.next()) {
+                                //1er cas : Tous cote a cote
+                                if (11 - representation.getDernierPP() > nbrPlace) {
+                                    for (i = 1; i <= nbrPlace; i++) {
+                                        //preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, 1, 1 + i);
+                                        preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, representation.getDernierRB(), representation.getDernierPB() + i,dateE,heure);
+                                        int statut = preparedStatement.executeUpdate();
+                                        if (statut == 0) {
+                                            throw new DAOException("On peut plus rien faire pour toi.");
+                                        }
+                                    }
+                                    //ON MET LA BDD A JOUR
+                                     preparedStatement = initRequete(connexion, UPDATE_PREZ_ORCHESTRE, true,representation.getDernierPB()+i-1, representation.getDernierRB(),dateE,heure,salle);
+                                        int statut = preparedStatement.executeUpdate();
+                                    
+                                    
+                                    
+                                } else {
+                                    int j = nbrPlace + representation.getDernierPP() - 10;
+                                    int rangee_dessous = nbrPlace - j;
+                                    for (i = 1; i <= rangee_dessous; i++) {
+                                        preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, representation.getDernierRB(), representation.getDernierPB() + i,dateE,heure);
+                                        int statut = preparedStatement.executeUpdate();
+                                        if (statut == 0) {
+                                            throw new DAOException("On peut plus rien faire pour toi encore une fois");
+                                        }
+                                        preparedStatement = initRequete(connexion, UPDATE_PREZ_ORCHESTRE, true,0, representation.getDernierRB()+1,dateE,heure,salle);
+                                         statut = preparedStatement.executeUpdate();
+                                        
+                                    }
+                   
+                                    for (i = 1; i <= j; i++) {
+                                        preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, representation.getDernierRB()+1, i,dateE,heure);
+                                        int statut = preparedStatement.executeUpdate();
+                                        if (statut == 0) 
+                                            throw new DAOException("On peut plus rien faire pour toi encore une fois");
+                                        }
+                                         preparedStatement = initRequete(connexion, UPDATE_PREZ_ORCHESTRE, true,j, representation.getDernierRB()+1,dateE,heure,salle);
+                                        int statut = preparedStatement.executeUpdate();
+                                    }
+                                   
+                                    
+                            }
+                                break;     
                        default :
                            preparedStatement = initRequete(connexion,SQL_CHECK_PLACE,false,salle,15,11-nbrPlace);
                    }
