@@ -1,0 +1,21 @@
+CREATE OR REPLACE TRIGGER spec_trig
+BEFORE INSERT ON spectacle
+FOR EACH ROW
+BEGIN
+	SELECT spec_seq.NEXTVAL
+	INTO : new.numSpect
+	FROM dual;
+END;
+/
+
+
+CREATE OR REPLACE TRIGGER doss_trig
+BEFORE INSERT ON dossier
+FOR EACH ROW
+BEGIN
+	SELECT doss_seq.NEXTVAL
+	INTO : new.numDossier
+	FROM dual;
+END;
+/
+
