@@ -49,8 +49,8 @@ public class RepresentationDaoImpl implements RepresentationDao {
                 presentation.setErreur("<FONT COLOR=\"red\" >Une autre représentation est déjà programmée.</FONT>");
                 throw new DAOException("Impossible de creer representation : Une autre representation est déjà programmée.");
             }
-            preparedStatement = initRequete(connexion,UTF8,true) ;
-            int statut = preparedStatement.executeUpdate();
+            //preparedStatement = initRequete(connexion,UTF8,true) ;
+            //int statut = preparedStatement.executeUpdate();
             preparedStatement = initRequete(connexion, SQL_NEW_PREZ, true, presentation.getSpect().getNumero(), presentation.getNbrPlace(), jour, presentation.getHeure(), presentation.getNumSalle());
             int success = preparedStatement.executeUpdate();
             if (success == 0) {

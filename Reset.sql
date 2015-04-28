@@ -2,11 +2,11 @@ DROP TABLE panier;
 
 DROP TABLE reservation;
 
-DROP TABLE representation;
-
 DROP TABLE achat;
 
 DROP TABLE place;
+
+DROP TABLE representation;
 
 DROP TABLE rang;
 

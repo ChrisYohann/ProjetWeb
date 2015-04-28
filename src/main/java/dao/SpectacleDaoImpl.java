@@ -22,6 +22,7 @@ import java.util.*;
  */
 public class SpectacleDaoImpl implements SpectacleDao {
 
+    private static String CHECK_SPEC = "SELECT * FROM spectacle";
     private static String SQL_CHECK_SPECTACLE = "SELECT * FROM spectacle where numSpect=?";
     private static String SQL_NEW_SPECTACLE = "INSERT INTO spectacle (nomSpect,description) VALUES (?,?)";
     private static String SQL_NEW_IMAGE = "INSERT INTO affiche (numSpect,image) VALUES (?,?)";
@@ -42,28 +43,35 @@ public class SpectacleDaoImpl implements SpectacleDao {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        int numeroSpectacle;
+        int numeroSpectacle=0;
 
         try {
             connexion = manager.getConnection();
-            preparedStatement = initRequete(connexion,UTF8,true) ;
-            int statut = preparedStatement.executeUpdate();
+            //preparedStatement = initRequete(connexion,UTF8,true) ;
+            //int statut = preparedStatement.executeUpdate();
             preparedStatement = initRequete(connexion, SQL_NEW_SPECTACLE, true, spectacle.getName(), spectacle.getDescription());
             int success = preparedStatement.executeUpdate();
             if (success == 0) {
                 //new_user.setErreur("Erreur survenue. Veuillez réessayer dans quelques instants.");
                 throw new DAOException("Echec d'ajout du spectacle dans la table");
             }
-            resultSet = preparedStatement.getGeneratedKeys();
-            if (resultSet.next()) {
-                numeroSpectacle = resultSet.getInt(1);
-                spectacle.setNumero(resultSet.getInt(1));
+            //resultSet = preparedStatement.getGeneratedKeys();
+            //if (resultSet.next()) {
+                //numeroSpectacle = resultSet.getInt(1);
+               // spectacle.setNumero(resultSet.getInt(1));
+            
+            preparedStatement = initRequete(connexion, CHECK_SPEC, false);
+            resultSet = preparedStatement.executeQuery();//On recherche le spectacle
+               while(resultSet.next()){
+                   numeroSpectacle++;
+               }
+               spectacle.setNumero(numeroSpectacle);
                 preparedStatement = initRequete(connexion, SQL_NEW_IMAGE, true, spectacle.getNumero(), spectacle.getAffiche());
                 success = preparedStatement.executeUpdate();
                 if (success == 0) {
                     throw new DAOException("Echec d'ajout de l'image");
                 }
-            }
+            
         } catch (SQLException e) {
             throw new DAOException(e);
         } finally {
