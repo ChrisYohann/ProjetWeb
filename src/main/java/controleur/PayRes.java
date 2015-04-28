@@ -38,9 +38,11 @@ public class PayRes extends HttpServlet {
              
 
     private PayerDao payerdao;
+    private RepresentationDao representant ;
     
      public void init(){
         this.payerdao = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getPayerDao();
+        this.representant = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getRepresentationDao();
     }  
     
     /**
@@ -57,6 +59,7 @@ public class PayRes extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         List<Representation> repres = new ArrayList<Representation>();
 
+
         
         GestionSuppr gestionnaire = new GestionSuppr();
         if(request.getParameter("reserver")==null&&request.getParameter("payer")==null){
@@ -65,12 +68,15 @@ public class PayRes extends HttpServlet {
            gestionnaire.afficherpage(response);
         }
         else {
-        GestionAchat groupmanager = new GestionAchat(this.payerdao) ;
+    
+    
+        GestionAchat groupmanager = new GestionAchat(this.payerdao,this.representant) ;
+
         groupmanager.gerer( request, response);
         
        
         
-               
+               request.getSession(true).removeAttribute("monpanier");
                request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
                }
         /*

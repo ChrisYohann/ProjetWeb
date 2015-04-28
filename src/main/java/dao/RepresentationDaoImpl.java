@@ -22,9 +22,10 @@ import java.util.List;
  */
 public class RepresentationDaoImpl implements RepresentationDao {
 
-    private static String SQL_NEW_PREZ = "INSERT INTO representation (numSpect,nbrPlace,jour,heure,numSalle) VALUES (?,?,?,?,?)";
+    private static String SQL_NEW_PREZ = "INSERT INTO representation (numSpect,nbrPlace,jour,heure,numSalle,dernierPO,dernierPP,dernierPB,dernierRO,dernierRP,dernierRB) VALUES (?,?,?,?,?,0,0,0,1,6,13)";
     private static String SQL_CHECK_ONLY = "SELECT * from representation where jour = ? and heure = ? and numSalle = ?";
-
+    private static String UTF8 = "set NAMES 'utf8'";
+    
     private DAOManager manager;
 
     public RepresentationDaoImpl(DAOManager gerant) {
@@ -33,12 +34,14 @@ public class RepresentationDaoImpl implements RepresentationDao {
 
     @Override
     public void creer(Representation presentation, String jour) throws DAOException {
+        InsertDaoImpl initialize = new InsertDaoImpl(this.manager);
         Representation festival;
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try {
+            initialize.creer();
 
             festival = this.trouver(jour, presentation.getHeure(), presentation.getNumSalle());
             connexion = manager.getConnection();
@@ -46,6 +49,8 @@ public class RepresentationDaoImpl implements RepresentationDao {
                 presentation.setErreur("<FONT COLOR=\"red\" >Une autre représentation est déjà programmée.</FONT>");
                 throw new DAOException("Impossible de creer representation : Une autre representation est déjà programmée.");
             }
+            preparedStatement = initRequete(connexion,UTF8,true) ;
+            int statut = preparedStatement.executeUpdate();
             preparedStatement = initRequete(connexion, SQL_NEW_PREZ, true, presentation.getSpect().getNumero(), presentation.getNbrPlace(), jour, presentation.getHeure(), presentation.getNumSalle());
             int success = preparedStatement.executeUpdate();
             if (success == 0) {
@@ -76,9 +81,15 @@ public class RepresentationDaoImpl implements RepresentationDao {
                 festival = new Representation();
                 festival.setSpect(caissier.trouver(resultSet.getInt("numSpect")));
                 festival.setNbrPlace(resultSet.getInt("nbrPlace"));
-                //festival.setJour(jour);
+                festival.setJour(resultSet.getDate("jour"));
                 festival.setHeure(heure);
                 festival.setNumSalle(numSalle);
+                festival.setDernierPB(resultSet.getInt("dernierPB"));
+                festival.setDernierPP(resultSet.getInt("dernierPP"));
+                festival.setDernierPO(resultSet.getInt("dernierPO"));
+                festival.setDernierRB(resultSet.getInt("dernierRB"));
+                festival.setDernierRP(resultSet.getInt("dernierRP"));
+                festival.setDernierRO(resultSet.getInt("dernierRO"));
             }
 
         } catch (SQLException e) {

@@ -7,6 +7,7 @@ package Metier;
 
 import beans.Spectacle;
 import beans.Representation;
+import dao.DAOException;
 import dao.RepresentationDao;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -61,12 +62,11 @@ public class SetRepresentation {
     
     public Date format_date(String jour, String mois, String annee) {
         String s = annee + "-" + mois + "-" + jour;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
         Date date = null;
-        java.sql.Date d2 = null ;
         try {
             date = sdf.parse(s);
-           d2 = new java.sql.Date(date.getTime());
         } catch (ParseException p) {
             p.printStackTrace();
         }

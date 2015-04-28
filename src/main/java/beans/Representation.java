@@ -7,6 +7,7 @@ package beans;
 
 import java.awt.Image;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import java.util.* ;
 
@@ -22,6 +23,13 @@ public class Representation {
     private int numSalle;
     private int nbrPlace ;
     private String erreur ;
+    private int dernierPO ;
+    private int dernierPP ;
+    private int dernierPB ;
+    private int dernierRO ;
+    private int dernierRP ;
+    private int dernierRB ;
+    
 
     public Spectacle getSpect() {
         return this.spect;
@@ -41,8 +49,12 @@ public class Representation {
     }
       
     
+    public String date_en_chaine(Date date){
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(date) ;
+    }
     
-        
+
     public int getHeure() {
         return this.heure;
     }
@@ -58,6 +70,31 @@ public class Representation {
     public int getNbrPlace(){
         return this.nbrPlace ;
     }
+    
+    public int getDernierPO(){
+        return this.dernierPO ;
+    }
+    
+    public int getDernierPB(){
+        return this.dernierPB ;
+    }
+    
+    public int getDernierPP(){
+        return this.dernierPP ;
+    }
+    
+    public int getDernierRO(){
+        return this.dernierRO ;
+    }
+    
+    public int getDernierRP(){
+        return this.dernierRP ;
+    }
+    
+    public int getDernierRB(){
+        return this.dernierRB ;
+    }
+    
     
     public void setSpect(Spectacle spect) {
         this.spect=spect;
@@ -78,5 +115,29 @@ public class Representation {
     
     public void setNbrPlace(int places){
         this.nbrPlace = places ;
+    }
+    
+    public void setDernierPO(int last){
+        this.dernierPO = last ;
+    }
+        
+    public void setDernierPP(int last){
+        this.dernierPP = last ;
+    }
+    
+    public void setDernierPB(int last){
+        this.dernierPB = last ;
+    }
+    
+    public void setDernierRO(int last){
+        this.dernierRO = last ;
+    }
+    
+    public void setDernierRP(int last){
+        this.dernierRP = last ;
+    }
+    
+    public void setDernierRB(int last){
+        this.dernierRB = last ;
     }
 }

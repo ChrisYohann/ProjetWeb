@@ -117,7 +117,7 @@ public class PreReservation {
         
        
         String jour= date.substring(0,10) ;
-        
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         this.setDate(sdf.parse(jour));
         Date doute = sdf.parse(jour);

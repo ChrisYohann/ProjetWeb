@@ -148,7 +148,8 @@
                         
 
                 <artSpect class="row">
-                    <input type="checkbox" name="pos ${spectvar.getPos()}" id="idspect" checked> 
+                    
+                    <input type="checkbox" name="${spectvar.getPos()}" id="idspect" checked> 
 
                     <label for="nomspectacle">${spectvar.getNom()}</label>
                     <br>${spectvar.afficherInfo()}<br></artspect>

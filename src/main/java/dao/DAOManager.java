@@ -124,4 +124,8 @@ public class DAOManager {
     public RepresentationDao getRepresentationDao(){
         return new RepresentationDaoImpl(this) ;
     }
+    
+    public InsertDao getInsertDao(){
+        return new InsertDaoImpl(this);
+    }
 } 
