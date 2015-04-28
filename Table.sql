@@ -82,6 +82,7 @@ CREATE TABLE achat(
 	numSalle int,
 	numRang int,
 	numPlace int,
+        Primary Key(login, numDossier, numTicket),
 	Foreign KEY(numSalle, numRang) references rang(numSalle, numRang) ON DELETE CASCADE,
 	Foreign Key(numSalle, numRang, numPlace) references place(numSalle, numRang, numPlace) ON DELETE 		CASCADE,
 	CONSTRAINT chk_achat CHECK (numTicket>0 and numDossier>0 and 0<numSalle and numSalle<4 and 13<heure and heure<22 and numRang>0 and numRang<11 and 0<numPlace and numPlace<21)
@@ -101,6 +102,7 @@ CREATE TABLE reservation(
 	numSalle int check(0<numSalle and numSalle<4),
 	numRang int check(0<numRang and numRang<11),
 	numPlace int check(0<numPlace and numPlace<21),
+        Primary Key(login, numDossier, numTicket),
 	Foreign KEY(numSalle, numRang) references rang(numSalle, numRang) ON DELETE CASCADE,
 	Foreign Key(numSalle, numRang, numPlace) references place(numSalle, numRang, numPlace) ON DELETE CASCADE
         Primary Key(login, numDossier, numTicket));
