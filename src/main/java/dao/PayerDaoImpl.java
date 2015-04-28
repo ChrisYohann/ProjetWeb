@@ -52,7 +52,7 @@ public class PayerDaoImpl implements PayerDao {
     //dans le cas ou l'utilisateur souhaite payer pour les representation en parametre
     @Override
     public void creer(ArrayList<PreReservation> preRes, String login) throws DAOException {
-
+        int numDossier = (int) (new Date().getTime()/10000);
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -84,6 +84,13 @@ public class PayerDaoImpl implements PayerDao {
                                         if (statut == 0) {
                                             throw new DAOException("On peut plus rien faire pour toi.");
                                         }
+                                        else{
+                                            preparedStatement = initRequete(connexion,SQL_ADD_ACHAT,true,login,numDossier,i,representation.getSpect().getNumero(),dateE,heure,salle,representation.getDernierRO(),representation.getDernierPO() + i);
+                                            statut = preparedStatement.executeUpdate();
+                                        if(statut ==0){
+                                            throw new DAOException("Impossible de créer l'achat");
+                                        }
+                                        }
                                     }
                                     //ON MET LA BDD A JOUR
                                      preparedStatement = initRequete(connexion, UPDATE_PREZ_ORCHESTRE, true,representation.getDernierPO()+i-1, representation.getDernierRO(),dateE,heure,salle);
@@ -91,7 +98,7 @@ public class PayerDaoImpl implements PayerDao {
                                     
                                     
                                     
-                                } else {
+                                } else { 
                                     int j = nbrPlace + representation.getDernierPO() - 10;
                                     int rangee_dessous = nbrPlace - j;
                                     for (i = 1; i <= rangee_dessous; i++) {
@@ -99,6 +106,12 @@ public class PayerDaoImpl implements PayerDao {
                                         int statut = preparedStatement.executeUpdate();
                                         if (statut == 0) {
                                             throw new DAOException("On peut plus rien faire pour toi encore une fois");
+                                        }
+                                         else{
+                                            preparedStatement = initRequete(connexion,SQL_ADD_ACHAT,true,login,numDossier,i,representation.getSpect().getNumero(),dateE,heure,salle,representation.getDernierRO(),representation.getDernierPO() + i);
+                                            statut = preparedStatement.executeUpdate() ;
+                                            
+                                          
                                         }
                                         preparedStatement = initRequete(connexion, UPDATE_PREZ_ORCHESTRE, true,0, representation.getDernierRO()+1,dateE,heure,salle);
                                          statut = preparedStatement.executeUpdate();
@@ -108,9 +121,14 @@ public class PayerDaoImpl implements PayerDao {
                                     for (i = 1; i <= j; i++) {
                                         preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, representation.getDernierRO()+1,i,dateE,heure);
                                         int statut = preparedStatement.executeUpdate();
-                                        if (statut == 0) 
+                                        if (statut == 0){
                                             throw new DAOException("On peut plus rien faire pour toi encore une fois");
                                         }
+                                    
+                                          else{
+                                            preparedStatement = initRequete(connexion,SQL_ADD_ACHAT,true,login,numDossier,i,representation.getSpect().getNumero(),dateE,heure,salle,representation.getDernierRO(),representation.getDernierPO() + i);
+                                        }
+                                    }
                                          preparedStatement = initRequete(connexion, UPDATE_PREZ_ORCHESTRE, true,j, representation.getDernierRO()+1,dateE,heure,salle);
                                         int statut = preparedStatement.executeUpdate();
                                     }

@@ -68,7 +68,7 @@ public class PayRes extends HttpServlet {
        //     gestionnaire.afficherpage(response);
         //}
         
-               
+               request.getSession(true).removeAttribute("monpanier");
                request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
                
         /*
