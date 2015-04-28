@@ -1,0 +1,10 @@
+CREATE OR REPLACE TRIGGER spec_trig
+BEFORE INSERT ON spectacle
+FOR EACH ROW
+BEGIN
+	SELECT spec_seq.NEXTVAL
+	INTO : new.numSpect
+	FROM dual;
+END;
+/
+

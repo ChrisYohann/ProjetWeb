@@ -18,7 +18,7 @@ import java.sql.Statement;
 public class DAOUtil {
     
     public static PreparedStatement initRequete( Connection connexion, String requete_sql, boolean returnGeneratedKeys, Object... parametres ) throws SQLException {
-    PreparedStatement preparedStatement = connexion.prepareStatement( requete_sql, returnGeneratedKeys ? Statement.RETURN_GENERATED_KEYS : Statement.NO_GENERATED_KEYS );
+    PreparedStatement preparedStatement = connexion.prepareStatement( requete_sql, returnGeneratedKeys ? Statement.RETURN_GENERATED_KEYS : Statement.NO_GENERATED_KEYS);//TODO modifié pour oracle
                             for ( int i = 0; i < parametres.length; i++ ) {
                             preparedStatement.setObject( i + 1, parametres[i] );
                                 }

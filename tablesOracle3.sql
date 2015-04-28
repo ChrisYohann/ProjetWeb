@@ -1,33 +1,3 @@
-CREATE TABLE spectacle (
-	numSpect int AUTO_INCREMENT primary key check(numSpect>0),
-	nomSpect varchar(30) NOT NULL,
-        description varchar(200))CHARACTER SET utf8 COLLATE utf8_bin; 
-
-CREATE TABLE affiche(
-        numSpect int primary key references spectacle(numSpect) on DELETE CASCADE,
-        image varchar(60),
-        check(numSpect >0));
-
-CREATE TABLE salle ( 
-	numSalle int primary key check(0<numSalle and numSalle<4));
-
-CREATE TABLE utilisateur ( 
-	login varchar(30) primary key, 
-	nomUt varchar(30) NOT NULL, 
-	prenomUt varchar(30) NOT NULL, 
-	AdresseUt varchar(50), 
-	mdpUt varchar(100) NOT NULL);
-
-CREATE TABLE programmeur( 
-	login varchar(30) primary key, 
-	nomUt varchar(30) NOT NULL, 
-	prenomUt varchar(30) NOT NULL, 
-	AdresseUt varchar(50), 
-	mdpUt varchar(100) NOT NULL);
-
-CREATE TABLE dossier ( 
-	numDossier int AUTO_INCREMENT primary key check(numDossier>0));
-
 CREATE TABLE categorie (
 	catTarif varchar(20) primary key check(catTarif in('orchestre','balcon','poulailler')),
 	tarif int check(tarif in('40','20','10')));
@@ -45,7 +15,7 @@ CREATE TABLE rang (
 	PRIMARY KEY (numSalle, numRang),
 	FOREIGN KEY (catTarif) references categorie(catTarif) ON DELETE CASCADE,
         CONSTRAINT chk_salle CHECK (0<numSalle and numSalle<4 and numRang>0 and numRang<15));
-
+	
 CREATE TABLE representation(
 	numSpect int REFERENCES spectacle(numSpect) ON DELETE CASCADE,
         nbrPlace int  check(nbrPlace>71),
@@ -53,14 +23,14 @@ CREATE TABLE representation(
 	heure int,
 	numSalle int references salle(numSalle),
         dernierPO int check(dernierPO<11),
-        dernierPP int check(dernierPO<11),
-        dernierPB int check(dernierPO<11),
-        dernierRO int check(dernierPO<6),
-        dernierRP int check(dernierPO<13),
-        dernierRB int check(dernierPO<16),
+        dernierPP int check(dernierPP<11),
+        dernierPB int check(dernierPB<11),
+        dernierRO int check(dernierRO<6),
+        dernierRP int check(dernierRP<13),
+        dernierRB int check(dernierRB<16),
         primary key (jour,heure,numSalle),
 	CONSTRAINT chk_repres CHECK (0<numSalle and numSalle<4 and 13<heure and heure<22));
-	
+
 CREATE TABLE place ( 
 	numSalle int check(0<numSalle and numSalle<4),
 	numRang int check(0<numRang and numRang<16),
