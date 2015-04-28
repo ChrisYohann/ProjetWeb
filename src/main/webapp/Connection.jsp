@@ -12,7 +12,7 @@
         <title>Se connecter</title>
     </head>
     <body>
-         
+        
         <h1 class="Spect">Se connecter</h1>
         
         <div class="row">
@@ -24,6 +24,7 @@
                     <legend>Bonjour, comment allez vous?</legend>
                     <div class="form-group">
                     <% 
+                    
                     if(request.getSession().getAttribute("message_erreur") != null)
                     {out.print(request.getSession().getAttribute("message_erreur")+"<br>");
                      request.getSession().removeAttribute("message_erreur");
@@ -58,6 +59,7 @@
                     <div class="form-group">
                         
                     <% 
+                    
                     if(request.getSession().getAttribute("signup") != null)
                     {out.print(request.getSession().getAttribute("signup")+"<br>");
                      request.getSession().removeAttribute("signup");

@@ -34,6 +34,8 @@ public class PayRes extends HttpServlet {
     public static final String ATT_PANIER = "panier";
     public static final String ATT_FORM = "form";
     public static final String VUE = "/reserver.jsp";
+    public static final String RETOUR = "/Panier.jsp";
+             
 
     private PayerDao payerdao;
     
@@ -55,20 +57,22 @@ public class PayRes extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         List<Representation> repres = new ArrayList<Representation>();
 
-    
+        
+        GestionSuppr gestionnaire = new GestionSuppr();
+        if(request.getParameter("reserver")==null&&request.getParameter("payer")==null){
+           gestionnaire.gerer_suppr(request);       
+            
+           gestionnaire.afficherpage(response);
+        }
+        else {
         GestionAchat groupmanager = new GestionAchat(this.payerdao) ;
         groupmanager.gerer( request, response);
         
-       // GestionSuppr gestionnaire = new GestionSuppr();
-       // if(request.getParameter("reserver")==null&&request.getParameter("payer")==null){
-       //     gestionnaire.gerer_suppr(request, response);
-            
-       //     gestionnaire.afficherpage(response);
-        //}
+       
         
                
                request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-               
+               }
         /*
         
         
