@@ -47,37 +47,37 @@ public class SpectacleDaoImpl implements SpectacleDao {
 
         try {
             connexion = manager.getConnection();
-            //preparedStatement = initRequete(connexion,UTF8,true) ;
-            //int statut = preparedStatement.executeUpdate();
+            preparedStatement = initRequete(connexion,UTF8,true) ;
+            int statut = preparedStatement.executeUpdate();
             preparedStatement = initRequete(connexion, SQL_NEW_SPECTACLE, true, spectacle.getName(), spectacle.getDescription());
             int success = preparedStatement.executeUpdate();
             if (success == 0) {
                 //new_user.setErreur("Erreur survenue. Veuillez réessayer dans quelques instants.");
                 throw new DAOException("Echec d'ajout du spectacle dans la table");
             }
-            //resultSet = preparedStatement.getGeneratedKeys();
-            //if (resultSet.next()) {
-                //numeroSpectacle = resultSet.getInt(1);
-               // spectacle.setNumero(resultSet.getInt(1));
+            resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                numeroSpectacle = resultSet.getInt(1);
+                spectacle.setNumero(resultSet.getInt(1));
             
-            preparedStatement = initRequete(connexion, CHECK_SPEC, false);
-            resultSet = preparedStatement.executeQuery();//On recherche le spectacle
-               while(resultSet.next()){
-                   numeroSpectacle++;
-               }
+            //preparedStatement = initRequete(connexion, CHECK_SPEC, false);
+            //resultSet = preparedStatement.executeQuery();//On recherche le spectacle
+              // while(resultSet.next()){
+                //   numeroSpectacle++;
+               //}
                spectacle.setNumero(numeroSpectacle);
                 preparedStatement = initRequete(connexion, SQL_NEW_IMAGE, true, spectacle.getNumero(), spectacle.getAffiche());
                 success = preparedStatement.executeUpdate();
                 if (success == 0) {
                     throw new DAOException("Echec d'ajout de l'image");
                 }
-            
+             }
         } catch (SQLException e) {
             throw new DAOException(e);
         } finally {
             closeAll(resultSet, preparedStatement, connexion);
         }
-
+       
     }
 
     @Override
