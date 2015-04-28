@@ -28,7 +28,7 @@ public class InsertDaoImpl implements InsertDao{
     
     private static String FOREIGN_SALLE = "INSERT INTO salle(numSalle) VALUES (?)";
     private static String FOREIGN_CATEGORIE = "INSERT INTO categorie(catTarif,tarif) VALUES(?,?)";
-    private static String FOREIGN_RANG = "INSERT INTO rang(numSalle,numRang,catTarif) VALUES(?,?)";
+    private static String FOREIGN_RANG = "INSERT INTO rang(numSalle,numRang,catTarif) VALUES(?,?,?)";
     private static String CHECK_SALLE="SELECT * FROM salle";
     private static String CHECK_CATEGORIE="SELECT * FROM categorie";
     private static String CHECK_RANG="SELECT * FROM rang";
@@ -42,11 +42,11 @@ public class InsertDaoImpl implements InsertDao{
     @Override
     public void creer(){
         
-        Connection connexion = null;
+       Connection connexion = null ;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
-        try {
+        try { connexion = manager.getConnection() ;
             preparedStatement = initRequete(connexion, CHECK_SALLE, false);
             resultSet = preparedStatement.executeQuery();
             if (!resultSet.next()) {//TODO: sinon renvoyer une erreur ?

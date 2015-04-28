@@ -22,7 +22,7 @@ DROP TABLE utilisateur;
 
 DROP TABLE salle;
 
-DROP TABLE dateT;
+DROP TABLE affiche ;
 
 DROP TABLE spectacle;
 

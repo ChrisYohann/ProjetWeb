@@ -34,12 +34,14 @@ public class RepresentationDaoImpl implements RepresentationDao {
 
     @Override
     public void creer(Representation presentation, String jour) throws DAOException {
+        InsertDaoImpl initialize = new InsertDaoImpl(this.manager);
         Representation festival;
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try {
+            initialize.creer();
 
             festival = this.trouver(jour, presentation.getHeure(), presentation.getNumSalle());
             connexion = manager.getConnection();
@@ -82,6 +84,12 @@ public class RepresentationDaoImpl implements RepresentationDao {
                 festival.setJour(resultSet.getDate("jour"));
                 festival.setHeure(heure);
                 festival.setNumSalle(numSalle);
+                festival.setDernierPB(resultSet.getInt("dernierPB"));
+                festival.setDernierPP(resultSet.getInt("dernierPP"));
+                festival.setDernierPO(resultSet.getInt("dernierPO"));
+                festival.setDernierRB(resultSet.getInt("dernierRB"));
+                festival.setDernierRP(resultSet.getInt("dernierRP"));
+                festival.setDernierRO(resultSet.getInt("dernierRO"));
             }
 
         } catch (SQLException e) {
