@@ -26,7 +26,9 @@ import java.util.*;
  */
 public class CompteDAOImpl implements CompteDAO{
   
+
     private static String SQL_TICKET = "select distinct a.login,a.numDossier, a.jour, a.numSpect,a.heure, a.numSalle, a.numRang, a.numPLace,s.nomSpect, count(*) as NbResa from achat a, spectacle s where a.numSpect = s.numSpect group by numDossier ";
+
     private DAOManager manager;
 
     
