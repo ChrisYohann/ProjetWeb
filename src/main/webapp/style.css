@@ -21,6 +21,10 @@ footer {
     border-top-style:ridge;
     border-top-color:#31708f;
 }
+#infos {
+    padding-top: 10px;
+    padding-left: 30px;
+}
 
 footer img {
     margin-top:20px;
