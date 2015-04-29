@@ -5,29 +5,46 @@
  */
 package beans;
 
-import java.awt.Image;
-import java.beans.*;
 import java.util.ArrayList;
-import java.util.*;
-
+import java.util.Date;
+import java.util.List;
 
 /**
  *
- * @author igierm
+ * @author matylde
  */
-public class Reservation {
-    private int id;
-    private String  login;
-    private List<Representation> repres;
-    private Date jour;
-    private int heure;
-    private int nbrPlace;
-    private int numDossier;
-    private ArrayList<Rang> numRang;
-    private ArrayList<Place> numPlace;
+public class Compte{
+        private int nbrPlaceValide;
+        private int numSpect;
+        private int id;
+        private String  login;
+        private List<Representation> repres;
+        private Date jour;
+        private int heure;
+        private int nbrPlace;
+        private int numDossier;
+        private int numRang;
+        private int numPlace;
+        private int numSalle;
+        
+        
+        public int getnbrPlacValide() {
+        return this.nbrPlaceValide;
+    }
+        
+        public void setnbrPlaceValide(int nbrPlaceValide) {
+              this.nbrPlaceValide=nbrPlaceValide;
+        }
+
+        public int getNumSalle(){
+            return numSalle;
+        }
     
     public Date getJour(){
         return this.jour;
+    }
+    public int getNumSpect(){
+        return this.numSpect;
     }
     
     public int getHeure(){
@@ -51,11 +68,11 @@ public class Reservation {
         return this.nbrPlace;
     }
     
-    public ArrayList<Rang> getNumRang() {
+    public int getNumRang() {
         return this.numRang;
     }
     
-    public ArrayList<Place> getNumPlace() {
+    public int getNumPlace() {
         return this.numPlace;
     } 
     
@@ -71,6 +88,10 @@ public class Reservation {
         this.numDossier=numDossier;
     }
     
+    public void setNumSalle(int numSalle){
+        this.numSalle=numSalle;
+    }
+    
     public void setLogin(String login) {
         this.login=login;
     }
@@ -81,10 +102,10 @@ public class Reservation {
         this.nbrPlace=nbrPlace;
     }
     
-    public void setNumRang(ArrayList<Rang> numRang) {
+    public void setNumRang(int numRang) {
         this.numRang=numRang;
     }
-    public void setNumPlace(ArrayList<Place> numPlace) {
+    public void setNumPlace(int numPlace) {
         this.numPlace=numPlace;
     }
     public void setId(int id) {
@@ -93,6 +114,7 @@ public class Reservation {
     public boolean isPanier(){
         return false;
     }
-    
-   
+    public void setNumSpect(int numSpect){
+        this.numSpect=numSpect;
+    }
 }

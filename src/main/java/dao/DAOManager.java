@@ -128,4 +128,8 @@ public class DAOManager {
     public InsertDao getInsertDao(){
         return new InsertDaoImpl(this);
     }
+    
+    public CompteDAO getCompteDao(){
+        return new CompteDAOImpl(this);
+    }
 } 
