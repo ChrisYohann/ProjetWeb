@@ -58,19 +58,21 @@ public class PayerDaoImpl implements PayerDao {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         RepresentationDao represdao = new RepresentationDaoImpl(this.manager);
+        
 
-        try {
+        try {int l;
             connexion = manager.getConnection();
-            for (int i = 0; i < preRes.size(); i++) {
-           int numDossier = (int) (new Date().getTime() / 10000);
-                Date date = preRes.get(i).getDate();
+            for (l=0; l < preRes.size(); l++) {
+                
+           int numDossier = (int) (new Date().getTime() / 10000)-25*l;
+                Date date = preRes.get(l).getDate();
                 String dateE = date_en_chaine(date);
-                int heure = preRes.get(i).getHeure();
-                int salle = preRes.get(i).getSalle();
+                int heure = preRes.get(l).getHeure();
+                int salle = preRes.get(l).getSalle();
                 Representation representation = represdao.trouver(dateE, heure, salle);
                 if (representation != null) {
-                    int nbrPlace = preRes.get(i).getNbPlace();
-                    String cat = preRes.get(i).getCat();
+                    int nbrPlace = preRes.get(l).getNbPlace();
+                    String cat = preRes.get(l).getCat();
                     switch (cat) {
                         case "orchestre":
                             preparedStatement = initRequete(connexion, SQL_CHECK_PLACE, false, salle, 5, 11 - nbrPlace);
@@ -81,7 +83,8 @@ public class PayerDaoImpl implements PayerDao {
                                 int transpole = preparedStatement.executeUpdate();
                                 //1er cas : Tous cote a cote
                                 if (11 - representation.getDernierPO() > nbrPlace) {
-                                    for (i = 1; i <= nbrPlace; i++) {
+                                    int i ;
+                                    for ( i = 1; i <= nbrPlace; i++) {
                                         //preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, 1, 1 + i);
                                         preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, representation.getDernierRO(), representation.getDernierPO() + i, dateE, heure);
                                         int statut = preparedStatement.executeUpdate();
@@ -101,7 +104,7 @@ public class PayerDaoImpl implements PayerDao {
                                     preparedStatement = initRequete(connexion, UPDATE_PREZ_ORCHESTRE, true, representation.getDernierPO() + i - 1, representation.getDernierRO(), dateE, heure, salle);
                                     int statut = preparedStatement.executeUpdate();
 
-                                } else {
+                                } else { int i ;
                                     int j = nbrPlace + representation.getDernierPO() - 10;
                                     int rangee_dessous = nbrPlace - j;
                                     for (i = 1; i <= rangee_dessous; i++) {
@@ -155,6 +158,7 @@ public class PayerDaoImpl implements PayerDao {
                             if (!resultSet.next()) {
                                 //1er cas : Tous cote a cote
                                 if (11 - representation.getDernierPP() > nbrPlace) {
+                                    int i;
                                     for (i = 1; i <= nbrPlace; i++) {
                                         //preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, 1, 1 + i);
                                         preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, representation.getDernierRP(), representation.getDernierPP() + i, dateE, heure);
@@ -170,6 +174,7 @@ public class PayerDaoImpl implements PayerDao {
                                 } else {
                                     int j = nbrPlace + representation.getDernierPP() - 10;
                                     int rangee_dessous = nbrPlace - j;
+                                    int i;
                                     for (i = 1; i <= rangee_dessous; i++) {
                                         preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, representation.getDernierRP(), representation.getDernierPP() + i, dateE, heure);
                                         int statut = preparedStatement.executeUpdate();
@@ -201,6 +206,7 @@ public class PayerDaoImpl implements PayerDao {
                             if (!resultSet.next()) {
                                 //1er cas : Tous cote a cote
                                 if (11 - representation.getDernierPP() > nbrPlace) {
+                                    int i;
                                     for (i = 1; i <= nbrPlace; i++) {
                                         //preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, 1, 1 + i);
                                         preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, representation.getDernierRB(), representation.getDernierPB() + i, dateE, heure);
@@ -216,6 +222,7 @@ public class PayerDaoImpl implements PayerDao {
                                 } else {
                                     int j = nbrPlace + representation.getDernierPP() - 10;
                                     int rangee_dessous = nbrPlace - j;
+                                    int i;
                                     for (i = 1; i <= rangee_dessous; i++) {
                                         preparedStatement = initRequete(connexion, FOREIGN_PLACE, true, salle, representation.getDernierRB(), representation.getDernierPB() + i, dateE, heure);
                                         int statut = preparedStatement.executeUpdate();
@@ -245,7 +252,7 @@ public class PayerDaoImpl implements PayerDao {
                     }
 
                 //repres.add(representation);
-                    //if(rep.get(i) == null)
+                    //if(rep.get(i-1) == null)
                     // throw new DAOException(Integer.toString(rep.size())) ;
                     // preparedStatement = initRequete(connexion, SQL_ADD_ACHAT, false, login, 16, i, representation.getSpect().getNumero(),
                     //          representation.date_en_chaine(representation.getJour()), representation.getHeure(), representation.getNumSalle(), 15, 9);//TODO numrang place et dossier
@@ -254,6 +261,9 @@ public class PayerDaoImpl implements PayerDao {
                     //spectacle.setErreur("<FONT COLOR=\"red\" >Le spectacle existe déjà.</FONT>");
                     //  throw new DAOException("Echec : La reservation correspondant n'a pas été chargée");
                     //}
+                }
+                else{
+                    throw new DAOException("La représentation est nulle"+l);
                 }
             }
             //new_user.setInscrit(true);
@@ -278,13 +288,13 @@ public class PayerDaoImpl implements PayerDao {
             connexion = manager.getConnection();
             for (int i = 0; i < preRes.size(); i++) {
 
-                Date date = preRes.get(i).getDate();
+                Date date = preRes.get(i-1).getDate();
                 String dateE = date_en_chaine(date);
-                int heure = preRes.get(i).getHeure();
-                int salle = preRes.get(i).getSalle();
+                int heure = preRes.get(i-1).getHeure();
+                int salle = preRes.get(i-1).getSalle();
                 Representation representation = represdao.trouver(dateE, heure, salle);
-                int nbrPlace = preRes.get(i).getNbPlace();
-                String cat = preRes.get(i).getCat();
+                int nbrPlace = preRes.get(i-1).getNbPlace();
+                String cat = preRes.get(i-1).getCat();
 
                 preparedStatement = initRequete(connexion, SQL_ADD_RESERVATION, false, login, representation.getSpect().getNumero(),
                         representation.getJour(), representation.getHeure(), representation.getNumSalle(), 15, 9);//TODO

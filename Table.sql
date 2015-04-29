@@ -23,7 +23,7 @@ CREATE TABLE programmeur(
 	nomUt varchar(30) NOT NULL, 
 	prenomUt varchar(30) NOT NULL, 
 	AdresseUt varchar(50), 
-	mdpUt varchar(20) NOT NULL);
+	mdpUt varchar(100) NOT NULL);
 
 CREATE TABLE dossier ( 
 	numDossier int primary key check(numDossier>0));
