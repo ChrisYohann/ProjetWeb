@@ -23,7 +23,6 @@
             <ul class="nav navbar-nav">
                 <li ><a href="index.jsp">Accueil</a></li>
                 <li><a href="GestionSpectacle">Spectacle</a></li>
-                <li><a href="Calendrier.jsp">Calendrier</a></li>
                 <li><a href="Information.jsp">Information</a></li>
                 <li><a href="Panier.jsp"><img src="image/gestion-du-panier.jpg"/></a></li>
                 <% java.util.ArrayList<String> paniere = ( ArrayList<String>) request.getSession(true).getAttribute("monpanier");
@@ -42,8 +41,10 @@
             
             out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Logout\">Deconnexion ("+utilisateur.getLogin()+")</a></p>");
                 if(utilisateur.isAdmin())
+                    out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"ModifSpect.jsp\">Modifier Représentation</a></p>");
                 {   out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"NewSpectacle.jsp\">Proposer Spectacle</a></p>");
                     out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"GestionMembre\">Groupes</a></p>");
+                    
                 }
            }
         else if(nouveaumembre != null){

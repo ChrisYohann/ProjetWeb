@@ -11,13 +11,19 @@ section {
 aside {
     margin-right: 80px;
     border-style:solid;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
     padding-bottom: 10px;
 }
 
 footer {
     margin-top:35px;
     text-align: center;
+    border-top-style:ridge;
+    border-top-color:#31708f;
+}
+#infos {
+    padding-top: 10px;
+    padding-left: 30px;
 }
 
 footer img {
@@ -40,6 +46,12 @@ h1.Spect {
     
 }
 
+#txtAcc {
+    color: gray;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.8em;
+    padding-top: 5px;
+}
 article{
     padding-top: 10px;
     padding-left: 10px;

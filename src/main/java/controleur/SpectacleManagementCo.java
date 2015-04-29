@@ -5,40 +5,47 @@
  */
 package controleur;
 
-import Metier.SetRepresentation;
+import Metier.GestionNewRepres;
+import Metier.GestionSpectacle;
 import beans.Representation;
-import dao.DAOException;
+import beans.Spectacle;
 import dao.DAOManager;
-import dao.RepresentationDao;
+import dao.ManagementRepresDao;
+import dao.SpectacleDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 
 /**
  *
  * @author chris
  */
-@WebServlet(name = "SetRepresentation", urlPatterns = {"/SetRepresentation"})
-public class SetRepresentationCo extends HttpServlet {
-        private static final String ATT_DAO_MANAGER = "daomanager";
-        private static final String VUE_FAILED = "/SetRepresentation.jsp" ;    
-        private static final String VUE="/Complete.jsp" ;
-        private static final String ERREUR ="message_erreur" ;
-        private static final String REPRESENTATION = "representation" ;
+@WebServlet(name = "SpectacleManagementCo", urlPatterns = {"/SpectacleManagementCo"})
+public class SpectacleManagementCo extends HttpServlet {
     
-         private RepresentationDao representant ;
-         
+    private static final String ATT_DAO_MANAGER = "daomanager";
+    private static final String VUE = "/SetNewRepresentation.jsp" ;
+    private static final String REPRESENTATION = "representation" ;
+    
+    private ManagementRepresDao stadier ;
 
-    @Override
-    public void init(){
-               this.representant = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getRepresentationDao();
+
+   @Override
+   public void init(){
+       this.stadier = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getManagementRepresDao();
+   }
     
-    }
-            
+    
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,30 +57,22 @@ public class SetRepresentationCo extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        SetRepresentation metier = new SetRepresentation(this.representant);
-        
-        Representation festival = metier.creer_representation(request);
-        
-       
-        if(festival==null || festival.getErreur() != null)
-        {   request.getSession(true).setAttribute(REPRESENTATION, festival);
-            request.getServletContext().getRequestDispatcher(VUE_FAILED).forward(request,response) ;}
-        else{
-            if(!((String)request.getParameter("terminer")).equals("Terminer")) request.getServletContext().getRequestDispatcher(VUE_FAILED).forward(request,response);      
-            request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+            throws ServletException, IOException, SQLException {
+            Spectacle repres = new Spectacle();
+            GestionNewRepres gerant = new GestionNewRepres(this.stadier);
+            int num_spect = gerant.trouver_elt(request);
+            String nom_spect =stadier.trouver_nom(num_spect);
+            repres.setName(nom_spect);
+            repres.setNumero(num_spect);
             
+            
+            HttpSession session1 = request.getSession(true);
+            session1.setAttribute(REPRESENTATION, repres);
+            request.getServletContext().getRequestDispatcher(VUE).forward(request,response);
+            
+        
         }
-        
-      
-    
-    
-    }
-        
-        
-          
-        
-    
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -87,7 +86,11 @@ public class SetRepresentationCo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(SpectacleManagementCo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -101,7 +104,11 @@ public class SetRepresentationCo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(SpectacleManagementCo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
