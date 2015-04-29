@@ -29,7 +29,7 @@ public class Compte {
     private int numSalle;
     private String nomSpect;
 
-    public int getnbrPlacValide() {
+    public int getnbrPlaceValide() {
         return this.nbrPlaceValide;
     }
 
