@@ -1,6 +1,7 @@
 INSERT INTO utilisateur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES ('root', '', '', '', '133daaa226d243e140d16fc1fd59189c7eb605a6b780552ea45ddbfcc6c1b1ba');
 INSERT INTO utilisateur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES ('yohann', 'hako',  'root', '', '133daaa226d243e140d16fc1fd59189c7eb605a6b780552ea45ddbfcc6c1b1ba');
 INSERT INTO programmeur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES ('root', '', '', '', '133daaa226d243e140d16fc1fd59189c7eb605a6b780552ea45ddbfcc6c1b1ba');
+
 --INSERT INTO spectacle(numSpect,nomSpect,description) VALUES (1,'Spectacle 1','Description Spectacle 1');
 --INSERT INTO spectacle(numSpect,nomSpect,description) VALUES (2,'Spectacle 2','Description Spectacle 2');
 --INSERT INTO spectacle(numSpect,nomSpect,description) VALUES (3,'Spectacle 3','Description Spectacle 3');
@@ -14,5 +15,3 @@ INSERT INTO programmeur (login, nomUt, prenomUt,AdresseUt,mdpUt) VALUES ('root',
 --insert into representation (numSpect,nbrPlace,jour,heure,numSalle) VALUES(1,90,'2015-01-05',17,3); 
  --insert into representation (numSpect,nbrPlace,jour,heure,numSalle) VALUES(3,90,'2016-04-24',19,2);
 --insert into representation (numSpect,nbrPlace,jour,heure,numSalle) VALUES(3,100,'2015-01-07',18,3); 
-
-

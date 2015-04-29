@@ -26,7 +26,7 @@ CREATE TABLE programmeur(
 	mdpUt varchar(100) NOT NULL);
 
 CREATE TABLE dossier ( 
-	numDossier int AUTO_INCREMENT primary key check(numDossier>0));
+	numDossier int primary key check(numDossier>0));
 
 CREATE TABLE categorie (
 	catTarif varchar(20) primary key check(catTarif in('orchestre','balcon','poulailler')),
@@ -84,9 +84,10 @@ CREATE TABLE achat(
 	numPlace int,
         Primary Key(login, numDossier, numTicket),
 	Foreign KEY(numSalle, numRang) references rang(numSalle, numRang) ON DELETE CASCADE,
-	Foreign Key(numSalle, numRang, numPlace) references place(numSalle, numRang, numPlace) ON DELETE 		CASCADE,
+        Foreign Key(numSalle, numRang, numPlace,jour,heure) references place(numSalle, numRang, numPlace,jour,heure) ON DELETE 		CASCADE,
 	CONSTRAINT chk_achat CHECK (numTicket>0 and numDossier>0 and 0<numSalle and numSalle<4 and 13<heure and heure<22 and numRang>0 and numRang<11 and 0<numPlace and numPlace<21));
-        
+
+
 
 
 --"ALTER TABLE spectacle AUTO_INCREMENT=1;
@@ -104,8 +105,8 @@ CREATE TABLE reservation(
 	numPlace int check(0<numPlace and numPlace<21),
         Primary Key(login, numDossier, numTicket),
 	Foreign KEY(numSalle, numRang) references rang(numSalle, numRang) ON DELETE CASCADE,
-	Foreign Key(numSalle, numRang, numPlace) references place(numSalle, numRang, numPlace) ON DELETE CASCADE);
-        
+	Foreign Key(numSalle, numRang, numPlace,jour,heure) references place(numSalle, numRang, numPlace,jour,heure) ON DELETE CASCADE);
+
 
 --CREATE TABLE panier(
   --      idPanier int primary key,

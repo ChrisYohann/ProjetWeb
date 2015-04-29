@@ -58,15 +58,15 @@
                     <p class="col-md-5">${spectvar.getName()}<br><br>
                         <br><br>${spectvar.getDescription()}
                         
-                        <form  class="col-md-5" method="post" action="addCart">
+                    <form  class="col-md-5" method="post" action="addCart">
                         <label  for="jour">Date:</label>
                         <select name="jour" id="jour">
                             
                             <c:forEach items="${spectvar.getRepresentation()}" var="represvar">
-                                <c:if test="${represvar.getNbrPlace() != 80}" >
+                                
                                     
                                 <option value="${represvar.getJour()} ${represvar.getHeure()} ${represvar.getNumSalle()}">${represvar.afficherDate()}, à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}, nombre de palces restantes : ${represvar.getNbrPlace()}</option>
-                                </c:if>
+                               
                             </c:forEach>
                         </select> 
                         
@@ -88,19 +88,22 @@
                             </SELECT>
                             <br><br>
 
-                            <input class="btn btn-primary" type="submit" name="ajout de ${spectvar.getNumero()}" value="Ajouter au panier" />
+                            <input class="btn btn-primary" type="submit" name="ajout de ${spectvar.getNumero()}" value="Ajouter au panier" /></form> 
                             <c:if test="${not empty utilisateur}">
                                 <c:if test="${utilisateur.isAdmin()}">
                                     <form  class="col-md-5" method="post" action="SpectacleManagementCo">
-                                        <input class="btn btn-primary" type="submit" name="${spectvar.getNumero()}" value="Modifier" />
+                                        <input class="btn btn-primary" type="submit" name="modifier ${spectvar.getNumero()}" value="Ajouter une représentation pour ce spectacle" />
                                     </form>
-                                    <form  class="col-md-5" method="post" action="GestionBookings">
-                                        <input class="btn btn-primary" type="submit" name="${spectvar.getNumero()}" value="Voir les Réservations" />
+                                   <form  class="col-md-5" method="post" action="GestionBookings">
+                                        <input class="btn btn-primary" type="submit" name="gestion ${spectvar.getNumero()}" value="Voir les Réservations" />
                                     </form>
+                                    
+                                    
+                                    
                                 </c:if>    
                             </c:if>
                             <br>
-                        </form>    
+                          
                     </artSpect>
                 </c:forEach>
                 <%--

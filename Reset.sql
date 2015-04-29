@@ -49,4 +49,3 @@ DROP TABLE spectacle;
 
 
 
-
