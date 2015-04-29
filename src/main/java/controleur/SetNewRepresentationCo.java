@@ -30,7 +30,7 @@ public class SetNewRepresentationCo extends HttpServlet {
         private static final String VUE_FAILED = "/SetNewRepresentation.jsp" ;    
         private static final String VUE="/Complete.jsp" ;
         private static final String ERREUR ="message_erreur" ;
-        private static final String REPRESENTATION = "representation" ;
+        private static final String REPRESENTATION = "representation2" ;
     
          private ManagementRepresDao representant ;
          

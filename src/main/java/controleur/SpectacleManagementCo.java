@@ -35,7 +35,7 @@ public class SpectacleManagementCo extends HttpServlet {
     
     private static final String ATT_DAO_MANAGER = "daomanager";
     private static final String VUE = "/SetNewRepresentation.jsp" ;
-    private static final String REPRESENTATION = "representation" ;
+    private static final String REPRESENTATION = "representation2" ;
     
     private ManagementRepresDao stadier ;
 

@@ -1,5 +1,3 @@
-DROP TABLE panier;
-
 DROP TABLE reservation;
 
 DROP TABLE achat;
@@ -15,8 +13,6 @@ DROP TABLE ticket;
 DROP TABLE categorie;
 
 DROP TABLE dossier;
-
-DROP SEQUENCE doss_seq;
 
 DROP TABLE programmeur;
 

@@ -15,7 +15,7 @@
         
         <form  class="col-md-5" method="post" action="SetNewRepresentation">
         <label for="nomSpect">Nom du Spectacle :</label>
-        <p><input type="text" name="nomSpect" value="${representation.getName()}" disabled /></p>
+        <p><input type="text" name="nomSpect" value="${representation2.getName()}" disabled /></p>
         
         <br>    
         <p><label for="nomSpect">Date :</label>

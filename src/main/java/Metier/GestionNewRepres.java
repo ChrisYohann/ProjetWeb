@@ -42,7 +42,7 @@ public class GestionNewRepres {
 
         Representation prez = new Representation();
         
-        prez.setSpect((Spectacle) request.getSession().getAttribute("representation"));
+        prez.setSpect((Spectacle) request.getSession().getAttribute("representation2"));
         prez.setJour(format_date(jour,mois,annee));
         prez.setHeure(Integer.parseInt(request.getParameter(HEURE)));
         prez.setNumSalle(Integer.parseInt(request.getParameter(SALLE)));
@@ -63,7 +63,7 @@ public class GestionNewRepres {
         int j = spect.size();
 
         if (spect.size() == 1) {
-            elt = 0;
+            elt = 1;
 
         } else {
 
