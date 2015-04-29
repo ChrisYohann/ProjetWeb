@@ -26,7 +26,7 @@ import java.util.*;
  */
 public class CompteDAOImpl implements CompteDAO{
   
-    private static String SQL_TICKET = "select distinct a.login,a.numDossier, a.jour, a.numSpect, a.heure, a.numSalle, a.numRang, a.numPLace, count(*) as NbResa from achat a group by numDossier ";
+    private static String SQL_TICKET = "select distinct a.login,a.numDossier, a.jour, a.numSpect,a.heure, a.numSalle, a.numRang, a.numPLace,s.nomSpect, count(*) as NbResa from achat a, spectacle s where a.numSpect = s.numSpect group by numDossier ";
     private DAOManager manager;
 
     
@@ -56,7 +56,8 @@ public class CompteDAOImpl implements CompteDAO{
                 comptable.setNumSalle(resultSet.getInt(6));
                 comptable.setNumRang(resultSet.getInt(7));
                 comptable.setNumPlace(resultSet.getInt(8));
-                comptable.setnbrPlaceValide(resultSet.getInt(9));
+                comptable.setnbrPlaceValide(resultSet.getInt(10));
+                comptable.setNomSpect(resultSet.getString("nomSpect"));
                 compte.add(comptable);
             }                
             } catch (SQLException e) {

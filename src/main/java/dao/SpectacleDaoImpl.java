@@ -145,6 +145,7 @@ public class SpectacleDaoImpl implements SpectacleDao {
                 prez.setJour((Date) resultSet.getDate("jour"));
                 prez.setHeure(resultSet.getInt("heure"));
                 prez.setNumSalle(resultSet.getInt("numSalle"));
+                prez.setNbrPlace(resultSet.getInt("nbrPlace"));
                 spectacles_list.add(prez);
             }
 
