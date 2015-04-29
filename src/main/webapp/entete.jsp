@@ -38,10 +38,14 @@
         beans.UtilisateurCoBean utilisateur = (beans.UtilisateurCoBean) request.getSession(true).getAttribute("utilisateur"); 
         beans.UtilisateurInscrBean nouveaumembre = (beans.UtilisateurInscrBean) request.getSession(true).getAttribute("newuser");
         if(utilisateur != null){   
-            
+            out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"MonCompte\">Mon Compte</a></p>");
             out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"Logout\">Deconnexion ("+utilisateur.getLogin()+")</a></p>");
                 if(utilisateur.isAdmin())
+
                 {   out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"NewSpectacle.jsp\">Proposer Spectacle</a></p>");
+
+                   
+                
                     out.print("<p class=\"navbar-text navbar-right\"><a class=\"navbar-link \" href=\"GestionMembre\">Groupes</a></p>");
                     
                 }

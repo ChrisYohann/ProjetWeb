@@ -5,12 +5,15 @@
  */
 package dao;
 
+import beans.Compte;
+import java.util.List;
+
 /**
  *
  * @author igierm
  */
 public interface CompteDAO {
     
-        public void creer() throws DAOException;
+        public List<Compte> creer() throws DAOException;
 
 }
