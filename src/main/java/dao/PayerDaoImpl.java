@@ -25,8 +25,8 @@ public class PayerDaoImpl implements PayerDao {
     
     private static String SQL_ADD_DOSSIER = "INSERT INTO dossier(numDossier) VALUES(?)";
     private static String SQL_ADD_TICKET = "INSERT INTO ticket (numTicket,numDossier) VALUES(?,?)";
-    private static String SQL_ADD_ACHAT = "INSERT INTO achat (login, numDossier, numTicket, numSpect,jour, heure, numSalle, numRang, numPlace) VALUES (?,?,?,?,?,?,?,?,?) ; COMMIT ";
-    private static String SQL_ADD_RESERVATION = "INSERT INTO reservation (login, numDossier, numTicket, numSpect,jour, heure, numSalle, numRang, numPlace) VALUES (?,?,?,?,?,?,?,?,?) ; COMMIT ";
+    private static String SQL_ADD_ACHAT = "INSERT INTO achat (login, numDossier, numTicket, numSpect,jour, heure, numSalle, numRang, numPlace) VALUES (?,?,?,?,?,?,?,?,?)  ";
+    private static String SQL_ADD_RESERVATION = "INSERT INTO reservation (login, numDossier, numTicket, numSpect,jour, heure, numSalle, numRang, numPlace) VALUES (?,?,?,?,?,?,?,?,?)  ";
     private static String SQL_ALL_SPECTACLES = "SELECT * FROM spectacle ";
     private static String SQL_DATE_SPECTACLE = "SELECT prez.numSpect,prez.nbrPlace,prez.jour,prez.heure,prez.numSalle from representation prez,spectacle s where s.numSpect = ? and prez.numSpect = s.numSpect ";
 

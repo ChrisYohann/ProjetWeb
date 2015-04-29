@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 public class MonCompte extends HttpServlet {
     
         private static final String ATT_DAO_MANAGER = "daomanager";
-        private static final String VUE = "/MonComte.jsp";
+        private static final String VUE = "/MonCompte.jsp";
         private static final String VUE_FAILED = "/index.jsp" ;
         private CompteDAO compte ;
         
@@ -53,7 +53,7 @@ public class MonCompte extends HttpServlet {
         List<Compte> compte_list = new ArrayList();
         GestionCompte groupmanager = new GestionCompte(this.compte) ;
         compte_list = groupmanager.AfficherCompte(request);
-        request.getSession(true).setAttribute("liste_spectacles", compte_list) ;
+        request.getSession(true).setAttribute("liste_comptes", compte_list) ;
         request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
         }
     

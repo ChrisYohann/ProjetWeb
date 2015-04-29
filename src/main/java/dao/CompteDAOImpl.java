@@ -26,7 +26,7 @@ import java.util.*;
  */
 public class CompteDAOImpl implements CompteDAO{
   
-    private static String SQL_TICKET = "select distinct a.login,a.numDossier, a.jour, a.numSpect, a.heure, a.numSalle, a.numRang, a.numPLace count(*) as NbResa from achat a group by numDossier ";
+    private static String SQL_TICKET = "select distinct a.login,a.numDossier, a.jour, a.numSpect, a.heure, a.numSalle, a.numRang, a.numPLace, count(*) as NbResa from achat a group by numDossier ";
     private DAOManager manager;
 
     
@@ -46,19 +46,19 @@ public class CompteDAOImpl implements CompteDAO{
             preparedStatement = initRequete(connexion, SQL_TICKET, false);
             resultSet = preparedStatement.executeQuery();
             
-            if (resultSet.next()) {
-                compte.get(i).setLogin(resultSet.getString(1));
-                compte.get(i).setNumDossier(resultSet.getInt(2));
-                compte.get(i).setJour(resultSet.getDate(3));
-                compte.get(i).setNumSpect(resultSet.getInt(4));
-                compte.get(i).setHeure(resultSet.getInt(5));
-                compte.get(i).setNumSalle(resultSet.getInt(6));
-                compte.get(i).setNumRang(resultSet.getInt(7));
-                compte.get(i).setNumPlace(resultSet.getInt(8));
-                compte.get(i).setnbrPlaceValide(resultSet.getInt(9));
-                i++;
-            }
-                
+            while(resultSet.next()) {
+                Compte comptable = new Compte();
+                comptable.setLogin(resultSet.getString(1));
+                comptable.setNumDossier(resultSet.getInt(2));
+                comptable.setJour(resultSet.getDate(3));
+                comptable.setNumSpect(resultSet.getInt(4));
+                comptable.setHeure(resultSet.getInt(5));
+                comptable.setNumSalle(resultSet.getInt(6));
+                comptable.setNumRang(resultSet.getInt(7));
+                comptable.setNumPlace(resultSet.getInt(8));
+                comptable.setnbrPlaceValide(resultSet.getInt(9));
+                compte.add(comptable);
+            }                
             } catch (SQLException e) {
             throw new DAOException(e);
         } finally {

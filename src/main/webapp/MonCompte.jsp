@@ -13,7 +13,7 @@
 
         <div class="row">
             <article class="col-md-offset-1 col-md-10">
-                <c:forEach items="${liste_compte}" var="cvar" >
+                <c:forEach items="${liste_comptes}" var="cvar" >
 
                     <p>dans votre compte monsieur ${cvar.getLogin()}</p>  
                 </c:forEach>
