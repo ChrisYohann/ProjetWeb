@@ -43,4 +43,9 @@ public class UtilisateurCoBean {
             return false ;
         }
         
+        public boolean isUtilisCoBean() {
+            if(this==null) return false;
+            return true;
+        }
+        
 }

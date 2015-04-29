@@ -68,7 +68,7 @@ public class ControleurInscr extends HttpServlet {
                  
            }
             else {session1 = request.getSession(true);
-            session1.setAttribute(USER, membre);
+                session1.setAttribute(USER, membre);
             if(request.getSession().getAttribute(SIGNUP) != null){
                // session1.removeAttribute(SIGNUP);
             }

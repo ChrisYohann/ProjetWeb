@@ -8,6 +8,7 @@ package Metier;
 import beans.PreReservation;
 import beans.Representation;
 import beans.UtilisateurCoBean;
+import beans.UtilisateurInscrBean;
 import dao.DAOException;
 import dao.PayerDao;
 import dao.RepresentationDao;
@@ -60,7 +61,13 @@ public class GestionAchat {
                }//fin de la boucle for
         String payers=request.getParameter("payer");
         String reserver=request.getParameter("reserver");
-        String login= ((UtilisateurCoBean) request.getSession().getAttribute("utilisateur")).getLogin();
+        String login = "";
+        if(request.getSession().getAttribute("utilisateur")!=null) {
+         login= ((UtilisateurCoBean) request.getSession().getAttribute("utilisateur")).getLogin();
+        }
+        else {
+             login= ((UtilisateurInscrBean) request.getSession().getAttribute("newuser")).getLogin();
+        }
         //TODO: gerer les cas impossible
             if (payers!=null) {
 
