@@ -10,7 +10,7 @@
 <html>
     <body>
         <h1 class="Spect">Votre Compte:</h1>
-        <h4>Monsieur ${list_comptes.get(1).getLogin()}, ces reservations resterons valident jusqu'à l'heure de debut de la représentation, veuiller les payer en ligne pour recevoir le ticket</h4>
+        <h4>ces reservations resterons valident jusqu'à l'heure de debut de la représentation, veuiller les payer en ligne pour recevoir le ticket</h4>
         <div class="row">
             <article class="col-md-offset-1 col-md-10">
                 <c:forEach items="${liste_comptes}" var="cvar" >
@@ -19,7 +19,8 @@
                     <label for="nomspectacle">${cvar.getNomSpect()}</label>
                     <br>Représentation du ${cvar.getJour()} à ${cvar.getHeure()} en salle ${cvar.getNumSalle()} vous avez commandé 
                     ${cvar.getnbrPlaceValide()}}<br></artspect>
-                    <p id="compte"></p>  
+                    <input class="btn btn-primary" type="submit" name="${cvar.getNumSpect()}" value="Suppr" />
+ 
                 </c:forEach>
                 <%--
         <artSpect class="row">
