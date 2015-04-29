@@ -10,12 +10,16 @@
 <html>
     <body>
         <h1 class="Spect">Votre Compte:</h1>
-
+        <h4>Monsieur ${list_comptes.get(1).getLogin()}, ces reservations resterons valident jusqu'à l'heure de debut de la représentation, veuiller les payer en ligne pour recevoir le ticket</h4>
         <div class="row">
             <article class="col-md-offset-1 col-md-10">
                 <c:forEach items="${liste_comptes}" var="cvar" >
+                    <input type="checkbox" name="${cvar.getNumSpect()}" id="idspect" checked> 
 
-                    <p>dans votre compte monsieur ${cvar.getLogin()}</p>  
+                    <label for="nomspectacle">${cvar.getNomSpect()}</label>
+                    <br>Représentation du ${cvar.getJour()} à ${cvar.getHeure()} en salle ${cvar.getNumSalle()} vous avez commandé 
+                    ${cvar.getnbrPlaceValide()}}<br></artspect>
+                    <p id="compte"></p>  
                 </c:forEach>
                 <%--
         <artSpect class="row">
