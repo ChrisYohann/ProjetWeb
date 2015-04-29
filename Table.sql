@@ -44,7 +44,7 @@ CREATE TABLE rang (
 	catTarif varchar(20) check(catTarif in('orchestre','balcon','poulailler')),
 	PRIMARY KEY (numSalle, numRang),
 	FOREIGN KEY (catTarif) references categorie(catTarif) ON DELETE CASCADE,
-        CONSTRAINT chk_salle CHECK (0<numSalle and numSalle<4 and numRang>0 and numRang<15));
+        CONSTRAINT chk_salle CHECK (0<numSalle and numSalle<4 and numRang>0 and numRang<16));
 
 CREATE TABLE representation(
 	numSpect int REFERENCES spectacle(numSpect) ON DELETE CASCADE,
@@ -85,7 +85,7 @@ CREATE TABLE achat(
         Primary Key(login, numDossier, numTicket),
 	Foreign KEY(numSalle, numRang) references rang(numSalle, numRang) ON DELETE CASCADE,
 	Foreign Key(numSalle, numRang, numPlace,jour,heure) references place(numSalle, numRang, numPlace,jour,heure) ON DELETE 		CASCADE,
-	CONSTRAINT chk_achat CHECK (numTicket>0 and numDossier>0 and 0<numSalle and numSalle<4 and 13<heure and heure<22 and numRang>0 and numRang<11 and 0<numPlace and numPlace<21));
+	CONSTRAINT chk_achat CHECK (numTicket>0 and numDossier>0 and 0<numSalle and numSalle<4 and 13<heure and heure<22 and numRang>0 and numRang<11 and 0<numPlace and numPlace<11));
 
 
 
@@ -101,7 +101,7 @@ CREATE TABLE reservation(
 	heure int  check(13<heure and heure<22),
 	numSalle int check(0<numSalle and numSalle<4),
 	numRang int check(0<numRang and numRang<11),
-	numPlace int check(0<numPlace and numPlace<21),
+	numPlace int check(0<numPlace and numPlace<11),
         Primary Key(login, numDossier, numTicket),
 	Foreign KEY(numSalle, numRang) references rang(numSalle, numRang) ON DELETE CASCADE,
 	Foreign Key(numSalle, numRang, numPlace,jour,heure) references place(numSalle, numRang, numPlace,jour,heure) ON DELETE CASCADE);
