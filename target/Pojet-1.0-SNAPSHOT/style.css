@@ -1,0 +1,99 @@
+body {
+    padding-top: 80px;
+	/* background-image:url(image/theater.jpg); */
+
+}
+
+section {
+    padding-left: 80px;
+}
+
+aside {
+    margin-right: 80px;
+    border-style:solid;
+    margin-bottom: 50px;
+    padding-bottom: 10px;
+}
+
+footer {
+    margin-top:35px;
+    text-align: center;
+    border-top-style:ridge;
+    border-top-color:#31708f;
+}
+#infos {
+    padding-top: 10px;
+    padding-left: 30px;
+}
+
+footer img {
+    margin-top:20px;
+    margin-right: 10px;
+    position: relative;
+}
+
+h1.Spect {
+    margin-top: -10px;
+    margin-left: 70px;
+}
+
+#blocgestion {
+    color: gray;
+    border-style:solid;
+    margin-bottom: 10px;
+    padding-bottom: -10px;
+    
+    
+}
+
+#txtAcc {
+    color: gray;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.8em;
+    padding-top: 5px;
+}
+article{
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+article artSpect {
+    padding-bottom: 15px;
+    padding-top:  15px;
+    border-top-style:ridge;
+    border-top-color:#31708f;
+}
+
+article artSpect form {
+  margin-top: 30px;  
+}
+
+article img {
+    border-style:solid;
+}
+
+#barre {
+    margin-left: 150px;
+    
+    margin-top: 20px;
+}
+
+label {
+    margin-top: 20px;
+}
+
+
+#seCo {
+    padding-top: 40px;
+}
+
+#bout {
+    margin-left: 10px;
+}
+
+nav img {
+    height:35px;
+    width:35px;
+    margin-top: -5px;
+    margin-left: 5px;
+}

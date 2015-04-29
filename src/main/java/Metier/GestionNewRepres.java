@@ -5,21 +5,22 @@
  */
 package Metier;
 
-import beans.Spectacle;
+import beans.PreReservation;
 import beans.Representation;
-import dao.DAOException;
-import dao.RepresentationDao;
+import beans.Spectacle;
+import dao.ManagementRepresDao;
+import dao.ManagementRepresDaoImpl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 /**
  *
- * @author chris
+ * @author jm
  */
-public class SetRepresentation {
-
+public class GestionNewRepres {
     private static final String JOUR = "day";
     private static final String MOIS = "month";
     private static final String ANNEE = "year";
@@ -27,15 +28,12 @@ public class SetRepresentation {
     private static final String SPECTACLE = "newspectacle";
     private static final String HEURE = "heure";
     private static final String PLACES = "places" ;
+    private ManagementRepresDao manager ;
     
-    private RepresentationDao representant;
-    
-    
-    public SetRepresentation(RepresentationDao representant) {
-        this.representant = representant ;
+    public GestionNewRepres(ManagementRepresDao repres) {
+        this.manager = repres; 
     }
     
-
     public Representation creer_representation(HttpServletRequest request) {
         String jour = request.getParameter(JOUR);
         String mois = request.getParameter(MOIS);
@@ -43,23 +41,57 @@ public class SetRepresentation {
         String date = date_en_chaine(jour, mois, annee);
 
         Representation prez = new Representation();
-        prez.setSpect(((Spectacle) request.getSession(true).getAttribute(SPECTACLE)));
+        
+        prez.setSpect((Spectacle) request.getSession().getAttribute("representation"));
         prez.setJour(format_date(jour,mois,annee));
         prez.setHeure(Integer.parseInt(request.getParameter(HEURE)));
         prez.setNumSalle(Integer.parseInt(request.getParameter(SALLE)));
         prez.setNbrPlace(Integer.valueOf(request.getParameter(PLACES)));
         
-        
-        
-        //On compare à la date actuelle
-        /*if (format_date(jour,mois,annee).compareTo(new Date()) < 0) {
-            request.getSession(true).setAttribute("message_erreur", "<FONT COLOR=\"red\" >Vous ne pouvez pas créer une representation antérieure à la date actuelle</FONT>");
-            return null ;
-        }*/
-        this.representant.creer(prez,date);
-              
-        return prez ;
+        this.manager.creer(prez,date);
+        return prez;
     }
+    
+    
+    public int trouver_elt(HttpServletRequest request) {
+
+        int elt = -1;
+       ArrayList<Spectacle> spect = (ArrayList<Spectacle>) request.getSession().getAttribute("liste_spectacles");
+
+
+        int i = 0;
+        int j = spect.size();
+
+        if (spect.size() == 1) {
+            elt = 0;
+
+        } else {
+
+            boolean dernier_element = true;
+            for (i = 1; i < j + 1; i++) {
+
+                if (i != j) {
+                    String pos = request.getParameter("modifier " + spect.get(i - 1).getNumero());
+                    if (pos != null) {
+
+                        dernier_element = false;
+                        elt = i;
+
+                    }
+                }
+
+            }
+            if (dernier_element) {
+
+                elt = spect.size();
+            }
+
+        }
+
+        return elt;
+
+    }
+    
     public String date_en_chaine(String jour, String mois, String annee){
         return annee + "-" + mois + "-" + jour;
     }
@@ -76,5 +108,4 @@ public class SetRepresentation {
         }
         return date ;
     }
-
 }

@@ -18,13 +18,13 @@ import java.util.*;
 public class Reservation {
     private int id;
     private String  login;
-    private List<Representation> repres;
+    private Representation repres;
     private Date jour;
     private int heure;
     private int nbrPlace;
     private int numDossier;
-    private ArrayList<Rang> numRang;
-    private ArrayList<Place> numPlace;
+    private int numRang;
+    private int numPlace;
     
     public Date getJour(){
         return this.jour;
@@ -36,10 +36,11 @@ public class Reservation {
     public int getId(){
         return this.id;
     }
+
     public String getLogin() {
         return this.login;
     }
-    public List<Representation> getRepres() {
+    public Representation getRepres() {
         return this.repres;
     }
     
@@ -51,11 +52,11 @@ public class Reservation {
         return this.nbrPlace;
     }
     
-    public ArrayList<Rang> getNumRang() {
+    public int getNumRang() {
         return this.numRang;
     }
     
-    public ArrayList<Place> getNumPlace() {
+    public int getNumPlace() {
         return this.numPlace;
     } 
     
@@ -74,21 +75,18 @@ public class Reservation {
     public void setLogin(String login) {
         this.login=login;
     }
-    public void setRepres(List<Representation>repres) {
+    public void setRepres(Representation repres) {
         this.repres=repres;
     }
     public void setNbrPlace(int nubrPlace) {
         this.nbrPlace=nbrPlace;
     }
     
-    public void setNumRang(ArrayList<Rang> numRang) {
+    public void setNumRang(int numRang) {
         this.numRang=numRang;
     }
-    public void setNumPlace(ArrayList<Place> numPlace) {
+    public void setNumPlace(int numPlace) {
         this.numPlace=numPlace;
-    }
-    public void setId(int id) {
-        this.id=id;
     }
     public boolean isPanier(){
         return false;

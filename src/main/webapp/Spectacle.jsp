@@ -47,24 +47,26 @@
                  request.setAttribute("spectacle", spectacle);
          %>--%>
         <h1 class="Spect">Spectacle</h1>
-
+     
+<p>  <span id='tab'/> Recherche Spectacle</p>
         <div class="row">
             <article class="col-md-offset-1 col-md-10">
                 <c:forEach items="${liste_spectacles}" var="spectvar" >
 
                 <artSpect class="row">  
                     <img class="col-md-5" height=500px src="image/${spectvar.getAffiche()}.jpg"/>
-                    <p class="col-md-5">${spectvar.getDescription()}<br><br>
-                        <br><br>${spectvar.getName()}
-                        <br><br>Representations:
-                        <form  class="col-md-5" method="post" action="addCart">
+                    <p class="col-md-5">${spectvar.getName()}<br><br>
+                        <br><br>${spectvar.getDescription()}
+                        
+                    <form  class="col-md-5" method="post" action="addCart">
                         <label  for="jour">Date:</label>
                         <select name="jour" id="jour">
                             
                             <c:forEach items="${spectvar.getRepresentation()}" var="represvar">
-                               
-                                <option value="${represvar.getJour()} ${represvar.getHeure()} ${represvar.getNumSalle()}">${represvar.afficherDate()}, à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}</option>
                                 
+                                    
+                                <option value="${represvar.getJour()} ${represvar.getHeure()} ${represvar.getNumSalle()}">${represvar.afficherDate()}, à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}, nombre de palces restantes : ${represvar.getNbrPlace()}</option>
+                               
                             </c:forEach>
                         </select> 
                         
@@ -86,19 +88,22 @@
                             </SELECT>
                             <br><br>
 
-                            <input class="btn btn-primary" type="submit" name="ajout de ${spectvar.getNumero()}" value="Ajouter au panier" />
+                            <input class="btn btn-primary" type="submit" name="ajout de ${spectvar.getNumero()}" value="Ajouter au panier" /></form> 
                             <c:if test="${not empty utilisateur}">
                                 <c:if test="${utilisateur.isAdmin()}">
                                     <form  class="col-md-5" method="post" action="SpectacleManagementCo">
-                                        <input class="btn btn-primary" type="submit" name="${spectvar.getNumero()}" value="Modifier" />
+                                        <input class="btn btn-primary" type="submit" name="modifier ${spectvar.getNumero()}" value="Ajouter une représentation pour ce spectacle" />
                                     </form>
-                                    <form  class="col-md-5" method="post" action="GestionBookings">
-                                        <input class="btn btn-primary" type="submit" name="${spectvar.getNumero()}" value="Voir les Réservations" />
+                                   <form  class="col-md-5" method="post" action="GestionBookings">
+                                        <input class="btn btn-primary" type="submit" name="gestion ${spectvar.getNumero()}" value="Voir les Réservations" />
                                     </form>
+                                    
+                                    
+                                    
                                 </c:if>    
                             </c:if>
                             <br>
-                        </form>    
+                          
                     </artSpect>
                 </c:forEach>
                 <%--

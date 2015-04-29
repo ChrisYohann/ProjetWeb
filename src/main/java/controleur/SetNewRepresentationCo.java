@@ -5,10 +5,12 @@
  */
 package controleur;
 
+import Metier.GestionNewRepres;
 import Metier.SetRepresentation;
 import beans.Representation;
 import dao.DAOException;
 import dao.DAOManager;
+import dao.ManagementRepresDao;
 import dao.RepresentationDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,20 +24,20 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author chris
  */
-@WebServlet(name = "SetRepresentation", urlPatterns = {"/SetRepresentation"})
-public class SetRepresentationCo extends HttpServlet {
+@WebServlet(name = "SetNewRepresentation", urlPatterns = {"/SetNewRepresentation"})
+public class SetNewRepresentationCo extends HttpServlet {
         private static final String ATT_DAO_MANAGER = "daomanager";
-        private static final String VUE_FAILED = "/SetRepresentation.jsp" ;    
+        private static final String VUE_FAILED = "/SetNewRepresentation.jsp" ;    
         private static final String VUE="/Complete.jsp" ;
         private static final String ERREUR ="message_erreur" ;
         private static final String REPRESENTATION = "representation" ;
     
-         private RepresentationDao representant ;
+         private ManagementRepresDao representant ;
          
 
     @Override
     public void init(){
-               this.representant = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getRepresentationDao();
+               this.representant = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getManagementRepresDao();
     
     }
             
@@ -51,13 +53,13 @@ public class SetRepresentationCo extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SetRepresentation metier = new SetRepresentation(this.representant);
+        GestionNewRepres metier = new GestionNewRepres(this.representant);
         
         Representation festival = metier.creer_representation(request);
         
        
         if(festival==null || festival.getErreur() != null)
-        {   request.getSession(true).setAttribute(REPRESENTATION, festival);
+        {   //request.getSession(true).setAttribute(REPRESENTATION, festival);
             request.getServletContext().getRequestDispatcher(VUE_FAILED).forward(request,response) ;}
         else{
             if(!((String)request.getParameter("terminer")).equals("Terminer")) request.getServletContext().getRequestDispatcher(VUE_FAILED).forward(request,response);      

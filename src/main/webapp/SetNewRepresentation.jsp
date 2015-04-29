@@ -1,5 +1,5 @@
 <%-- 
-    Document   : SetRepresentation
+    Document   : SetNewRepresentation
     Created on : 25 avr. 2015, 21:00:36
     Author     : chris
 --%>
@@ -12,16 +12,11 @@
         <h2>Representations :</h2>
         <p>${message_erreur}</p>
         <% request.getSession(true).setAttribute("message_erreur",""); %>
-        <c:if test="${not empty representation}">
-            ${representation.getErreur()}
-        </c:if>
-        <form  class="col-md-5" method="post" action="SetRepresentation">
+        
+        <form  class="col-md-5" method="post" action="SetNewRepresentation">
         <label for="nomSpect">Nom du Spectacle :</label>
-        <p><input type="text" name="nomSpect" value="${newspectacle.getName()}" disabled /></p>
-        <label for="description">Description (max 200 caractères) :</label>
-        <p><TEXTAREA name="description" rows=10 COLS=40 maxlength="200" value="${newspectacle.getDescription()}" disabled></TEXTAREA></p>
-        <label for="affiche">Affiche (sans l'extension .jpg):</label>
-        <p><input type="text" name="affiche" value="${newspectacle.getAffiche()}" disabled /></p>
+        <p><input type="text" name="nomSpect" value="${representation.getName()}" disabled /></p>
+        
         <br>    
         <p><label for="nomSpect">Date :</label>
         <input type="number" name="day" min="1" max="28" value="1">
