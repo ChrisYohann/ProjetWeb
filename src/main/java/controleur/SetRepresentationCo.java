@@ -7,6 +7,7 @@ package controleur;
 
 import Metier.SetRepresentation;
 import beans.Representation;
+import dao.DAOException;
 import dao.DAOManager;
 import dao.RepresentationDao;
 import java.io.IOException;
@@ -51,17 +52,20 @@ public class SetRepresentationCo extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         SetRepresentation metier = new SetRepresentation(this.representant);
+        
         Representation festival = metier.creer_representation(request);
+        
+       
         if(festival==null || festival.getErreur() != null)
         {   request.getSession(true).setAttribute(REPRESENTATION, festival);
             request.getServletContext().getRequestDispatcher(VUE_FAILED).forward(request,response) ;}
         else{
-            if(!((String)request.getParameter("terminer")).equals("Terminer"))
-            request.getServletContext().getRequestDispatcher(VUE_FAILED).forward(request,response);      
+            if(!((String)request.getParameter("terminer")).equals("Terminer")) request.getServletContext().getRequestDispatcher(VUE_FAILED).forward(request,response);      
             request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+            
         }
         
-    
+      
     
     
     }

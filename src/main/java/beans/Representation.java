@@ -22,6 +22,7 @@ public class Representation {
     private int heure;
     private int numSalle;
     private int nbrPlace ;
+    private int nbrPlace_rest;
     private String erreur ;
     private int dernierPO ;
     private int dernierPP ;
@@ -71,6 +72,11 @@ public class Representation {
         return this.nbrPlace ;
     }
     
+    
+    public int getNbrPlace_rest(){
+        return this.nbrPlace_rest ;
+    }
+    
     public int getDernierPO(){
         return this.dernierPO ;
     }
@@ -115,6 +121,10 @@ public class Representation {
     
     public void setNbrPlace(int places){
         this.nbrPlace = places ;
+    }
+    
+    public void setNbrPlace_Rest(int nbr) {
+        this.nbrPlace_rest = nbr;
     }
     
     public void setDernierPO(int last){

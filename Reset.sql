@@ -16,8 +16,6 @@ DROP TABLE categorie;
 
 DROP TABLE dossier;
 
-DROP SEQUENCE doss_seq;
-
 DROP TABLE programmeur;
 
 DROP TABLE utilisateur;
@@ -28,7 +26,7 @@ DROP TABLE affiche;
 
 DROP TABLE spectacle;
 
-DROP SEQUENCE spec_seq;
+
 
 
 

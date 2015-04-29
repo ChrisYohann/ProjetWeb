@@ -52,7 +52,7 @@
         </p>
         <p>
             <label for="places">Nombre de places:</label>
-            <input type="number" name="places" id="nbrplace" min="71" max="180" value="180">
+            <input type="number" name="places" id="places" min="71" max="180" value="180">
         </p>
         <p>
         <label for="heure">Heure :</label>

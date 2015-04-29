@@ -26,7 +26,7 @@ public class SetRepresentation {
     private static final String SALLE = "salle";
     private static final String SPECTACLE = "newspectacle";
     private static final String HEURE = "heure";
-    private static final String PLACES = "places";
+    private static final String PLACES = "places" ;
     
     private RepresentationDao representant;
     
@@ -47,13 +47,17 @@ public class SetRepresentation {
         prez.setJour(format_date(jour,mois,annee));
         prez.setHeure(Integer.parseInt(request.getParameter(HEURE)));
         prez.setNumSalle(Integer.parseInt(request.getParameter(SALLE)));
-        prez.setNbrPlace(Integer.parseInt(request.getParameter(PLACES)));
+        prez.setNbrPlace(Integer.valueOf(request.getParameter(PLACES)));
+        
+        
+        
         //On compare à la date actuelle
         /*if (format_date(jour,mois,annee).compareTo(new Date()) < 0) {
             request.getSession(true).setAttribute("message_erreur", "<FONT COLOR=\"red\" >Vous ne pouvez pas créer une representation antérieure à la date actuelle</FONT>");
             return null ;
         }*/
         this.representant.creer(prez,date);
+              
         return prez ;
     }
     public String date_en_chaine(String jour, String mois, String annee){

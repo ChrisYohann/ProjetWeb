@@ -47,24 +47,26 @@
                  request.setAttribute("spectacle", spectacle);
          %>--%>
         <h1 class="Spect">Spectacle</h1>
-
+     
+<p>  <span id='tab'/> Recherche Spectacle</p>
         <div class="row">
             <article class="col-md-offset-1 col-md-10">
                 <c:forEach items="${liste_spectacles}" var="spectvar" >
 
                 <artSpect class="row">  
                     <img class="col-md-5" height=500px src="image/${spectvar.getAffiche()}.jpg"/>
-                    <p class="col-md-5">${spectvar.getDescription()}<br><br>
-                        <br><br>${spectvar.getName()}
-                        <br><br>Representations:
+                    <p class="col-md-5">${spectvar.getName()}<br><br>
+                        <br><br>${spectvar.getDescription()}
+                        
                         <form  class="col-md-5" method="post" action="addCart">
                         <label  for="jour">Date:</label>
                         <select name="jour" id="jour">
                             
                             <c:forEach items="${spectvar.getRepresentation()}" var="represvar">
-                               
-                                <option value="${represvar.getJour()} ${represvar.getHeure()} ${represvar.getNumSalle()}">${represvar.afficherDate()}, à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}</option>
-                                
+                                <c:if test="${represvar.getNbrPlace() != 80}" >
+                                    
+                                <option value="${represvar.getJour()} ${represvar.getHeure()} ${represvar.getNumSalle()}">${represvar.afficherDate()}, à ${represvar.getHeure()}h en Salle ${represvar.getNumSalle()}, nombre de palces restantes : ${represvar.getNbrPlace()}</option>
+                                </c:if>
                             </c:forEach>
                         </select> 
                         
