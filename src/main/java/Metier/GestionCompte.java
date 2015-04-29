@@ -7,6 +7,7 @@ package Metier;
 
 import beans.Compte;
 import beans.Spectacle;
+import beans.UtilisateurCoBean;
 import dao.CompteDAO;
 import dao.SpectacleDao;
 import java.util.List;
@@ -24,7 +25,8 @@ public class GestionCompte {
    }
     
    public List<Compte> AfficherCompte(HttpServletRequest request){
-        return compte.creer() ;
+       String login = ((UtilisateurCoBean)request.getSession(true).getAttribute("utilisateur")).getLogin();
+        return compte.creer(login) ;
         
     }
 }

@@ -13,14 +13,18 @@
         <h6>Ces reservations resteront valides jusqu'à l'heure de debut de la représentation. Veuillez les payer en ligne pour recevoir le ticket.</h6>
         <div class="row">
             <article class="col-md-offset-1 col-md-10">
+                <form method="post" action="PayRes">
                 <c:forEach items="${liste_comptes}" var="cvar" >
                     <input type="checkbox" name="${cvar.getNumSpect()}" id="idspect" checked> 
 
                     <label for="nomspectacle">${cvar.getNomSpect()}</label>
-                    <br>Représentation du ${cvar.getJour()} à ${cvar.getHeure()} en salle ${cvar.getNumSalle()} Nombre de places :
+
+                    <br>${cvar.afficherDate()} à ${cvar.getHeure()} heures en salle ${cvar.getNumSalle()} Nombre de places :
                     ${cvar.getnbrPlaceValide()}<br></artspect>
-                    <p id="compte"></p>  
+                    <p><input class="btn btn-primary" type="submit" name="${cvar.getNumSpect()}" value="Payer" /></p> 
+
                 </c:forEach>
+                </form>  
                 <%--
         <artSpect class="row">
             <img class="col-md-5" height=500px src="image/Scoop.jpg"/>

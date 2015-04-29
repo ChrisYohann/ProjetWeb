@@ -5,9 +5,11 @@
  */
 package beans;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  *
@@ -35,6 +37,15 @@ public class Compte {
 
     public void setnbrPlaceValide(int nbrPlaceValide) {
         this.nbrPlaceValide = nbrPlaceValide;
+    }
+    
+    public String afficherDate(){
+        String belle_date = null ;
+        DateFormat dateformatFR = DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL, new Locale("FR","fr"));
+        belle_date = dateformatFR.format(jour);
+        belle_date = belle_date.substring(0,belle_date.length()-12);
+        return belle_date ;
+
     }
 
     public int getNumSalle() {

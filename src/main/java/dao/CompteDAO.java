@@ -14,6 +14,6 @@ import java.util.List;
  */
 public interface CompteDAO {
     
-        public List<Compte> creer() throws DAOException;
+        public List<Compte> creer(String login) throws DAOException;
 
 }

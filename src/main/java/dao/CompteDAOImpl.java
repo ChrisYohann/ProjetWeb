@@ -27,7 +27,7 @@ import java.util.*;
 public class CompteDAOImpl implements CompteDAO{
   
 
-    private static String SQL_TICKET = "select distinct a.login,a.numDossier, a.jour, a.numSpect,a.heure, a.numSalle, a.numRang, a.numPLace,s.nomSpect, count(*) as NbResa from achat a, spectacle s where a.numSpect = s.numSpect group by numDossier ";
+    private static String SQL_TICKET = "select distinct a.login,a.numDossier, a.jour, a.numSpect,a.heure, a.numSalle, a.numRang, a.numPLace,s.nomSpect, count(*) as NbResa from achat a, spectacle s where a.login = ? and a.numSpect = s.numSpect group by numDossier ";
 
     private DAOManager manager;
 
@@ -36,7 +36,7 @@ public class CompteDAOImpl implements CompteDAO{
         this.manager = gerant;
     }
     @Override
-    public List<Compte> creer() {
+    public List<Compte> creer(String login) {
       
       List<Compte> compte =new ArrayList();
       Connection connexion = null ;
@@ -45,7 +45,7 @@ public class CompteDAOImpl implements CompteDAO{
       int i=0;
        
       try { connexion = manager.getConnection() ;
-            preparedStatement = initRequete(connexion, SQL_TICKET, false);
+            preparedStatement = initRequete(connexion, SQL_TICKET, false,login);
             resultSet = preparedStatement.executeQuery();
             
             while(resultSet.next()) {
