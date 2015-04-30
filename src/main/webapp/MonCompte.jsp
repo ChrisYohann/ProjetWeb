@@ -10,10 +10,11 @@
 <html>
     <body>
         <h1 class="Spect">Votre Compte :</h1>
+        <div class="row">
+        <div class="col-md-offset-1 col-md-5">
         <h4>Vos réservations :</h4>
         <h6>Ces reservations resteront valides jusqu'à l'heure de debut de la représentation. Veuillez les payer en ligne pour recevoir le ticket.</h6>
-        <div class="row">
-            <article class="col-md-offset-1 col-md-10">
+        
                 <form method="post" action="PasserCaisse">
                 <c:forEach items="${liste_comptes}" var="cvar" >
                     <input type="checkbox" name="${cvar.getNumSpect()}" id="idspect" checked> 
@@ -29,19 +30,23 @@
                 </c:forEach>
                 </form>
             
+        </div>
+        <div class="col-md-offset-1 col-md-5">
+
         <h4>Vos achats :</h4>
                 <div class="row">
             
                 <c:forEach items="${liste_achats}" var="cvar" >
                     
-                    <p>${cvar.getNomSpect()}</p>
+                    <p>${cvar.getNomSpect()}
  
-                    <br>${cvar.afficherDate()} à ${cvar.getHeure()} heures en salle ${cvar.getNumSalle()} Nombre de places :
-                    ${cvar.getnbrPlaceValide()}<br></artspect>
+                    ${cvar.afficherDate()} à ${cvar.getHeure()} heures en salle ${cvar.getNumSalle()} Nombre de places :
+                    ${cvar.getnbrPlaceValide()}<br><br></p></artspect>
                     
                 </c:forEach>
-            
-            </article>
+          
+        </div>
+        </div>
         </div>
     </body>
 </html>

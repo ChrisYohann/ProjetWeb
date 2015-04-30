@@ -22,6 +22,7 @@ import java.util.Properties;
 
 
 
+
 public class DAOManager {
     
     //Classe qui va gérer la connexion à la BD via le JDBC
