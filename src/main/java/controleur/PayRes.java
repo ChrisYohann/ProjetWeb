@@ -30,21 +30,21 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "PayRes", urlPatterns = {"/PayRes"})
 public class PayRes extends HttpServlet {
+
     public static final String ATT_DAO_MANAGER = "daomanager";
     public static final String ATT_PANIER = "panier";
     public static final String ATT_FORM = "form";
     public static final String VUE = "/reserver.jsp";
     public static final String RETOUR = "/Panier.jsp";
-             
 
     private PayerDao payerdao;
-    private RepresentationDao representant ;
-    
-     public void init(){
-        this.payerdao = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getPayerDao();
-        this.representant = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getRepresentationDao();
-    }  
-    
+    private RepresentationDao representant;
+
+    public void init() {
+        this.payerdao = ((DAOManager) this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getPayerDao();
+        this.representant = ((DAOManager) this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getRepresentationDao();
+    }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -59,65 +59,59 @@ public class PayRes extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         List<Representation> repres = new ArrayList<Representation>();
 
-
-        
         GestionSuppr gestionnaire = new GestionSuppr();
-        if(request.getParameter("reserver")==null&&request.getParameter("payer")==null){
-           gestionnaire.gerer_suppr(request);       
-            
-           gestionnaire.afficherpage(response);
-        }
-        else {
-    
-    
-        GestionAchat groupmanager = new GestionAchat(this.payerdao,this.representant) ;
+        if (request.getParameter("reserver") == null && request.getParameter("payer") == null) {
+            gestionnaire.gerer_suppr(request);
 
-        groupmanager.gerer( request, response);
-        
-       
-        
-               request.getSession(true).removeAttribute("monpanier");
-               request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-               }
+            gestionnaire.afficherpage(response);
+        } else {
+
+            GestionAchat groupmanager = new GestionAchat(this.payerdao, this.representant);
+
+            groupmanager.gerer(request, response);
+
+            request.getSession(true).removeAttribute("monpanier");
+            request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+        }
         /*
         
         
         
         
         
-        String payer = request.getParameter("payer");
-        String reserver = request.getParameter("reserver");
-        String spect1 = request.getParameter("spect 1");
-        String spect2 = request.getParameter("spect 2");
-        int nbplace1 = Integer.valueOf(request.getParameter("nbmplace1"));
-        int nbplace2 = Integer.valueOf(request.getParameter("nbmplace2"));
-        String cat1 = request.getParameter("categorie de spect1");
-        String cat2 = request.getParameter("categorie de spect2");
+         String payer = request.getParameter("payer");
+         String reserver = request.getParameter("reserver");
+         String spect1 = request.getParameter("spect 1");
+         String spect2 = request.getParameter("spect 2");
+         int nbplace1 = Integer.valueOf(request.getParameter("nbmplace1"));
+         int nbplace2 = Integer.valueOf(request.getParameter("nbmplace2"));
+         String cat1 = request.getParameter("categorie de spect1");
+         String cat2 = request.getParameter("categorie de spect2");
 
         
-        try (PrintWriter out = response.getWriter()) {
+         try (PrintWriter out = response.getWriter()) {
             
-            /* TODO output your page here. You may use following sample code. */
-            /*out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet PayRes</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            if(payer!=null){
-            out.println("<h1>Vous avez acheté :</h1>");
-            if(spect1!=null) out.println("<h1>"+ nbplace1 +" place(s) pour le spectacle 1 en catégorie " + cat1 + "</h1>");
-            if(spect2!=null) out.println("<h1>"+ nbplace2 +" place(s) pour le spectacle 2 en catégorie " + cat2 + "</h1>");
-//ajouter ce spect à la BD
-                }else if(reserver!=null){
-            out.println("<h1>Vous avez réservé :</h1>");
-            if(spect1!=null) out.println("<h1>"+ nbplace1 +" place(s) pour le spectacle 1 en catégorie " + cat1 + "</h1>");
-            if(spect2!=null) out.println("<h1>"+ nbplace2 +" place(s) pour le spectacle 2 en catégorie " + cat2 + "</h1>");
-            }else{out.println("<h1>Le serveur est actuelement indisponible veuillez reessayer plus tard</h1>");
-}
-            out.println("</body>");
-            out.println("</html>");
-        }*/
+         /* TODO output your page here. You may use following sample code. */
+        /*out.println("<!DOCTYPE html>");
+         out.println("<html>");
+         out.println("<head>");
+         out.println("<title>Servlet PayRes</title>");            
+         out.println("</head>");
+         out.println("<body>");
+         if(payer!=null){
+         out.println("<h1>Vous avez acheté :</h1>");
+         if(spect1!=null) out.println("<h1>"+ nbplace1 +" place(s) pour le spectacle 1 en catégorie " + cat1 + "</h1>");
+         if(spect2!=null) out.println("<h1>"+ nbplace2 +" place(s) pour le spectacle 2 en catégorie " + cat2 + "</h1>");
+         //ajouter ce spect à la BD
+         }else if(reserver!=null){
+         out.println("<h1>Vous avez réservé :</h1>");
+         if(spect1!=null) out.println("<h1>"+ nbplace1 +" place(s) pour le spectacle 1 en catégorie " + cat1 + "</h1>");
+         if(spect2!=null) out.println("<h1>"+ nbplace2 +" place(s) pour le spectacle 2 en catégorie " + cat2 + "</h1>");
+         }else{out.println("<h1>Le serveur est actuelement indisponible veuillez reessayer plus tard</h1>");
+         }
+         out.println("</body>");
+         out.println("</html>");
+         }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

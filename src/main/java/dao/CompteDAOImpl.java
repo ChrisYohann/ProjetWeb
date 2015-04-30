@@ -27,8 +27,10 @@ import java.util.*;
 public class CompteDAOImpl implements CompteDAO{
   
 
-    private static String SQL_TICKET = "select distinct a.login,a.numDossier, a.jour, a.numSpect,a.heure, a.numSalle, a.numRang, a.numPLace,s.nomSpect, count(*) as NbResa from achat a, spectacle s where a.login = ? and a.numSpect = s.numSpect group by numDossier ";
-
+    private static String SQL_LISTE_RESERVATIONS = "select distinct a.login,a.numDossier, a.jour, a.numSpect,a.heure, a.numSalle, a.numRang, a.numPLace,s.nomSpect, count(*) as NbResa from reservation a, spectacle s where a.login = ? and a.numSpect = s.numSpect group by numDossier ";
+    private static String SQL_LISTE_ACHATS = "select distinct a.login,a.numDossier, a.jour, a.numSpect,a.heure, a.numSalle, a.numRang, a.numPLace,s.nomSpect, count(*) as NbResa from achat a, spectacle s where a.login = ? and a.numSpect = s.numSpect group by numDossier ";
+    private static String PASSE_A_LA_CAISSE = "INSERT INTO achat (login, numDossier, numTicket, numSpect,jour, heure, numSalle, numRang, numPlace) select login,numDossier,numTicket,numSpect,jour,heure,numSalle,numRang,numPlace from reservation where numDossier = ?";
+    private static String DELETE_BOOKINGS = "delete from reservation where numDossier = ?";
     private DAOManager manager;
 
     
@@ -36,7 +38,7 @@ public class CompteDAOImpl implements CompteDAO{
         this.manager = gerant;
     }
     @Override
-    public List<Compte> creer(String login) {
+    public List<Compte> creer(String login,boolean value) {
       
       List<Compte> compte =new ArrayList();
       Connection connexion = null ;
@@ -45,7 +47,10 @@ public class CompteDAOImpl implements CompteDAO{
       int i=0;
        
       try { connexion = manager.getConnection() ;
-            preparedStatement = initRequete(connexion, SQL_TICKET, false,login);
+           if(value)
+           {preparedStatement = initRequete(connexion, SQL_LISTE_RESERVATIONS, false,login);}
+           else
+           {preparedStatement = initRequete(connexion, SQL_LISTE_ACHATS, false,login);}    
             resultSet = preparedStatement.executeQuery();
             
             while(resultSet.next()) {
@@ -69,5 +74,28 @@ public class CompteDAOImpl implements CompteDAO{
         }
       return compte;
     }
+    
+    public void payer_reservation(int numDossier) throws DAOException{
+      Connection connexion = null ;
+      PreparedStatement preparedStatement = null;
+      ResultSet resultSet = null;
+      
+       
+      try { connexion = manager.getConnection() ;
+            preparedStatement = initRequete(connexion, PASSE_A_LA_CAISSE, true,numDossier);
+            int statut = preparedStatement.executeUpdate();
+            preparedStatement = initRequete(connexion, DELETE_BOOKINGS, true,numDossier);
+            statut = preparedStatement.executeUpdate();
+            
+                   
+            } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            closeAll(resultSet, preparedStatement, connexion);
+        }
+    
+    }
+        
+    }
 
-}
+

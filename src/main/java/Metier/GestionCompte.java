@@ -24,9 +24,16 @@ public class GestionCompte {
        this.compte = scene ;
    }
     
-   public List<Compte> AfficherCompte(HttpServletRequest request){
+   public List<Compte> AfficherCompte(HttpServletRequest request,boolean value){
        String login = ((UtilisateurCoBean)request.getSession(true).getAttribute("utilisateur")).getLogin();
-        return compte.creer(login) ;
-        
+        return compte.creer(login,value) ;     
     }
+   
+   
+   public void PayerReservations(HttpServletRequest request){
+       int numDossier = Integer.parseInt(request.getParameter("numDossier"));
+       compte.payer_reservation(numDossier);
+
+   }
+   
 }

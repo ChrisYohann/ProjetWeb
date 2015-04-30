@@ -14,6 +14,8 @@ import java.util.List;
  */
 public interface CompteDAO {
     
-        public List<Compte> creer(String login) throws DAOException;
+        public List<Compte> creer(String login, boolean value) throws DAOException;
+        
+        public void payer_reservation(int numDossier) throws DAOException;
 
 }

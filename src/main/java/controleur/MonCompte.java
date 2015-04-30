@@ -52,8 +52,10 @@ public class MonCompte extends HttpServlet {
         
         List<Compte> compte_list = new ArrayList();
         GestionCompte groupmanager = new GestionCompte(this.compte) ;
-        compte_list = groupmanager.AfficherCompte(request);
+        compte_list = groupmanager.AfficherCompte(request,true);
         request.getSession(true).setAttribute("liste_comptes", compte_list) ;
+        List<Compte> liste_achats = groupmanager.AfficherCompte(request,false);
+        request.getSession(true).setAttribute("liste_achats", liste_achats);
         request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
         }
     

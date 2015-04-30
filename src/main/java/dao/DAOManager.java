@@ -20,6 +20,8 @@ import java.util.Properties;
 
 
 
+
+
 public class DAOManager {
     
     //Classe qui va gérer la connexion à la BD via le JDBC
@@ -93,9 +95,7 @@ public class DAOManager {
         
         DAOManager manager = new DAOManager(url,identifiant,motdepasse);
         return manager ;
-              
-}
-
+    }
     //On se connecte à la BDD
     public Connection getConnection() throws SQLException{
         return DriverManager.getConnection(url,login,password);
