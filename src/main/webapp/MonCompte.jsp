@@ -19,6 +19,7 @@
                     <input type="checkbox" name="${cvar.getNumSpect()}" id="idspect" checked> 
                     <input  type="hidden" name="numDossier" value ="${cvar.getNumDossier()}"/>
                     <label for="nomspectacle">${cvar.getNomSpect()}</label>
+
  
                     <br>${cvar.afficherDate()} à ${cvar.getHeure()} heures en salle ${cvar.getNumSalle()} Nombre de places :
                     ${cvar.getnbrPlaceValide()}<br></artspect>

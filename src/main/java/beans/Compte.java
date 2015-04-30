@@ -5,7 +5,7 @@
  */
 package beans;
 
-import java.text.DateFormat;
+import java.text.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,30 +15,38 @@ import java.util.Locale;
  *
  * @author matylde
  */
-public class Compte {
 
-    private int nbrPlaceValide;
-    private int numSpect;
-    private int id;
-    private String login;
-    private List<Representation> repres;
-    private Date jour;
-    private int heure;
-    private int nbrPlace;
-    private int numDossier;
-    private int numRang;
-    private int numPlace;
-    private int numSalle;
-    private String nomSpect;
 
-    public int getnbrPlaceValide() {
+
+public class Compte{
+        private int nbrPlaceValide;
+        private int numSpect;
+        private String nomSpect;
+        private int id;
+        private String  login;
+        private List<Representation> repres;
+        private Date jour;
+        private int heure;
+        private int nbrPlace;
+        private int numDossier;
+        private int numRang;
+        private int numPlace;
+        private int numSalle;
+        
+        
+        public int getnbrPlaceValide() {
         return this.nbrPlaceValide;
     }
-
-    public void setnbrPlaceValide(int nbrPlaceValide) {
-        this.nbrPlaceValide = nbrPlaceValide;
-    }
+        
+        public void setnbrPlaceValide(int nbrPlaceValide) {
+              this.nbrPlaceValide=nbrPlaceValide;
+        }
+        
+        public void setNomSpect(String nom) {
+            this.nomSpect= nom;
+        }
     
+
     public String afficherDate(){
         String belle_date = null ;
         DateFormat dateformatFR = DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL, new Locale("FR","fr"));
@@ -51,8 +59,8 @@ public class Compte {
     public int getNumSalle() {
         return numSalle;
     }
-
-    public Date getJour() {
+        
+    public Date getJour(){
         return this.jour;
     }
 
@@ -144,7 +152,7 @@ public class Compte {
         this.numSpect = numSpect;
     }
     
-    public void setNomSpect(String nomSpect) {
-        this.nomSpect = nomSpect;
-    }
+  
+    
 }
+

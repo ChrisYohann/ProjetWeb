@@ -5,12 +5,11 @@
  */
 package controleur;
 
-import Metier.GestionNewRepres;
-import Metier.SetRepresentation;
-import beans.Representation;
-import dao.DAOException;
+import Metier.GestionCompte;
+import static controleur.PayRes.ATT_DAO_MANAGER;
+import dao.CompteDAO;
 import dao.DAOManager;
-import dao.ManagementRepresDao;
+import dao.PayerDao;
 import dao.RepresentationDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,23 +23,20 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author chris
  */
-@WebServlet(name = "SetNewRepresentation", urlPatterns = {"/SetNewRepresentation"})
-public class SetNewRepresentationCo extends HttpServlet {
-        private static final String ATT_DAO_MANAGER = "daomanager";
-        private static final String VUE_FAILED = "/SetNewRepresentation.jsp" ;    
-        private static final String VUE="/Complete.jsp" ;
-        private static final String ERREUR ="message_erreur" ;
-        private static final String REPRESENTATION = "representation2" ;
-    
-         private ManagementRepresDao representant ;
-         
+@WebServlet(name = "PasserCaisse", urlPatterns = {"/PasserCaisse"})
+public class PasserCaisse extends HttpServlet {
 
-    @Override
-    public void init(){
-               this.representant = ((DAOManager)this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getManagementRepresDao();
+    public static final String ATT_DAO_MANAGER = "daomanager";
+    public static final String VUE = "/reserver.jsp";
+    public static final String RETOUR = "/Panier.jsp";
     
+     private CompteDAO caissier ;
+
+    public void init() {
+        this.caissier = ((DAOManager) this.getServletContext().getAttribute(ATT_DAO_MANAGER)).getCompteDao();
     }
-            
+    
+    
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -53,29 +49,12 @@ public class SetNewRepresentationCo extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        GestionNewRepres metier = new GestionNewRepres(this.representant);
-        
-        Representation festival = metier.creer_representation(request);
-        
-       
-        if(festival==null || festival.getErreur() != null)
-        {   //request.getSession(true).setAttribute(REPRESENTATION, festival);
-            request.getServletContext().getRequestDispatcher(VUE_FAILED).forward(request,response) ;}
-        else{
-            if(!((String)request.getParameter("terminer")).equals("Terminer")) request.getServletContext().getRequestDispatcher(VUE_FAILED).forward(request,response);      
-            request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-            
-        }
+        GestionCompte comptable = new GestionCompte(this.caissier);
+        comptable.PayerReservations(request);
+        request.getServletContext().getRequestDispatcher(VUE).forward(request, response);
         
       
-    
-    
     }
-        
-        
-          
-        
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
