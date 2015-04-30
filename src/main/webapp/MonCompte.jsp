@@ -31,7 +31,7 @@
                 </form>
             
         </div>
-        <div class="col-md-offset-1 col-md-5">
+        <div class="col-md-offset-1 col-md-4">
 
         <h4>Vos achats :</h4>
                 <div class="row">
