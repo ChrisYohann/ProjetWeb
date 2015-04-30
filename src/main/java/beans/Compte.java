@@ -5,9 +5,12 @@
  */
 package beans;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  *
@@ -16,6 +19,7 @@ import java.util.List;
 public class Compte{
         private int nbrPlaceValide;
         private int numSpect;
+        private String nomSpect;
         private int id;
         private String  login;
         private List<Representation> repres;
@@ -28,18 +32,27 @@ public class Compte{
         private int numSalle;
         
         
-        public int getnbrPlacValide() {
+        public int getnbrPlaceValide() {
         return this.nbrPlaceValide;
     }
         
         public void setnbrPlaceValide(int nbrPlaceValide) {
               this.nbrPlaceValide=nbrPlaceValide;
         }
+        
+        public void setNomSpect(String nom) {
+            this.nomSpect= nom;
+        }
 
         public int getNumSalle(){
             return numSalle;
         }
     
+        public String getNomSpect () {
+            return this.nomSpect;
+        }
+        
+        
     public Date getJour(){
         return this.jour;
     }
@@ -116,5 +129,14 @@ public class Compte{
     }
     public void setNumSpect(int numSpect){
         this.numSpect=numSpect;
+    }
+    
+    public String afficherDate(){
+        String belle_date = null ;
+        DateFormat dateformatFR = DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL, new Locale("FR","fr"));
+        belle_date = dateformatFR.format(jour);
+        belle_date = belle_date.substring(0,belle_date.length()-12);
+        return belle_date ;
+
     }
 }

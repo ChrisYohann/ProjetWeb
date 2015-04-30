@@ -26,6 +26,7 @@ import java.util.*;
  */
 public class CompteDAOImpl implements CompteDAO{
   
+    private static String SPECT_FIND = "SELECT nomSpect from spectacle where numSpect=?";
     private static String SQL_TICKET = "select distinct a.login,a.numDossier, a.jour, a.numSpect, a.heure, a.numSalle, a.numRang, a.numPLace, count(*) as NbResa from reservation a group by numDossier ";
     private DAOManager manager;
 
@@ -40,14 +41,16 @@ public class CompteDAOImpl implements CompteDAO{
       Connection connexion = null ;
       PreparedStatement preparedStatement = null;
       ResultSet resultSet = null;
+      ResultSet resulta = null;
       int i=0;
+      Compte comptable = new Compte();
        
       try { connexion = manager.getConnection() ;
             preparedStatement = initRequete(connexion, SQL_TICKET, false);
             resultSet = preparedStatement.executeQuery();
             
             while(resultSet.next()) {
-                Compte comptable = new Compte();
+                
                 comptable.setLogin(resultSet.getString(1));
                 comptable.setNumDossier(resultSet.getInt(2));
                 comptable.setJour(resultSet.getDate(3));
@@ -58,7 +61,14 @@ public class CompteDAOImpl implements CompteDAO{
                 comptable.setNumPlace(resultSet.getInt(8));
                 comptable.setnbrPlaceValide(resultSet.getInt(9));
                 compte.add(comptable);
-            }                
+            }     
+             preparedStatement = initRequete(connexion, SPECT_FIND, true,comptable.getNumSpect());
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                 comptable.setNomSpect(resultSet.getString("nomSpect"));
+            }
+            
+            
             } catch (SQLException e) {
             throw new DAOException(e);
         } finally {

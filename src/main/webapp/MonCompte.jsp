@@ -17,9 +17,9 @@
                     <input type="checkbox" name="${cvar.getNumSpect()}" id="idspect" checked> 
 
                     <label for="nomspectacle">${cvar.getNomSpect()}</label>
-                    <br>Représentation du ${cvar.getJour()} à ${cvar.getHeure()} en salle ${cvar.getNumSalle()} vous avez commandé 
-                    ${cvar.getnbrPlaceValide()}}<br></artspect>
-                    <input class="btn btn-primary" type="submit" name="${cvar.getNumSpect()}" value="Suppr" />
+                    <br>Représentation du ${cvar.afficherDate()} à ${cvar.getHeure()}h en salle ${cvar.getNumSalle()} vous avez commandé 
+                    ${cvar.getnbrPlaceValide()} place(s)<br></artspect>
+                    <input class="btn btn-primary" type="submit" name="${cvar.getNumSpect()}" value="Suppr" /><br>
  
                 </c:forEach>
                 <%--
